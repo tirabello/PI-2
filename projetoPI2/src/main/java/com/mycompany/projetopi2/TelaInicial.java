@@ -54,6 +54,8 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,7 +75,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 98, 469, 200));
 
         jTextField1.setText("PESQUISAR");
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 16, 407, 48));
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 16, 407, 40));
 
         jLabel1.setText("PRODUTOS SIMILARES:");
 
@@ -154,9 +156,9 @@ public class TelaInicial extends javax.swing.JFrame {
         jButton4.setText("Adicionar");
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 500, 108, -1));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/search_icon.png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673694_ic_fluent_search_filled_icon.png"))); // NOI18N
         jLabel7.setAlignmentY(0.0F);
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 16, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
 
         jLabel8.setText("jLabel8");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, -1, -1));
@@ -166,6 +168,11 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673597_ic_fluent_person_add_filled_icon.png"))); // NOI18N
         jMenuItem1.setText("Add Cliente");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673477_ic_fluent_people_search_filled_icon.png"))); // NOI18N
@@ -179,10 +186,31 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/6989154_pill_pharmacy_medicine_medical_painkiller_icon.png"))); // NOI18N
         jMenu2.setText("PRODUTOS");
+
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/6549572_capsule_drug_medical_medication_medicine_icon.png"))); // NOI18N
+        jMenuItem3.setText("Adicinar Produto");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem3);
+
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673694_ic_fluent_search_filled_icon.png"))); // NOI18N
+        jMenuItem4.setText("Consultar Produto");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem4);
+
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("VENDAS");
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/1564531_chart_business_graph_statistics_icon.png"))); // NOI18N
+        jMenu3.setText("RELATORIO");
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -202,12 +230,28 @@ public class TelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        ConsultaClientes cc = new ConsultaClientes();
+        CLI_ConsultaClientes cc = new CLI_ConsultaClientes();
         cc.setVisible(true);
         cc.setLocationRelativeTo(null);
-
-
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        PRO_ConsultaProdutos cp = new PRO_ConsultaProdutos();
+        cp.setVisible(true);
+        cp.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        PRO_AdicionarProdutos proAdd = new PRO_AdicionarProdutos();
+        proAdd.setVisible(true);
+        proAdd.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+       CLI_AdicionarCliente cliAdd = new CLI_AdicionarCliente();
+       cliAdd.setVisible(true);
+       cliAdd.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -263,6 +307,8 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
