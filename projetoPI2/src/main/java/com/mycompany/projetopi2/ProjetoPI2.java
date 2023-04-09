@@ -5,13 +5,34 @@
 
 package com.mycompany.projetopi2;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UnsupportedLookAndFeelException;
+
 /**
  *
  * @author tiago.rbraz
  */
+
 public class ProjetoPI2 {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+
+        //Define o padrão das janelas
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                    try {
+                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                        break;
+                    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+                        Logger.getLogger(ProjetoPI2.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+        }
+        
+        TelaInicial tela = new TelaInicial();
+        // tela.setExtendedState(tela.MAXIMIZED_BOTH);
+        tela.setLocationRelativeTo(null);
+        tela.setVisible(true);
     }
 }
