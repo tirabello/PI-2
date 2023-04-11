@@ -32,7 +32,7 @@ public class Cliente extends javax.swing.JFrame {
         bgGenero = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblClientes = new javax.swing.JTable();
+        tblClientesh = new javax.swing.JTable();
         btnAdicionar = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
@@ -58,7 +58,7 @@ public class Cliente extends javax.swing.JFrame {
             }
         });
 
-        tblClientes.setModel(new javax.swing.table.DefaultTableModel(
+        tblClientesh.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -66,7 +66,7 @@ public class Cliente extends javax.swing.JFrame {
                 "Nome", "CPF", "Lograduro", "E-mail", "Sexo"
             }
         ));
-        jScrollPane1.setViewportView(tblClientes);
+        jScrollPane1.setViewportView(tblClientesh);
 
         btnAdicionar.setText("Adicionar");
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -234,16 +234,16 @@ public class Cliente extends javax.swing.JFrame {
         }
 
         //Adicionar à tabela
-        DefaultTableModel tabelaClientes = (DefaultTableModel) tblClientes.getModel();
+        DefaultTableModel tabelaClientes = (DefaultTableModel) tblClientesh.getModel();
 
         tabelaClientes.addRow(new String[]{nome, CPF, logradouro, email, sexo});
 
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) tblClientesh.getModel();
 
-        int linhaSelecionada = tblClientes.getSelectedRow();
+        int linhaSelecionada = tblClientesh.getSelectedRow();
         if (linhaSelecionada >= 0) {
             modelo.removeRow(linhaSelecionada);
         } else {
@@ -252,9 +252,9 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) tblClientesh.getModel();
 
-        int linhaSelecionada = tblClientes.getSelectedRow();
+        int linhaSelecionada = tblClientesh.getSelectedRow();
         
         
 
@@ -314,7 +314,7 @@ public class Cliente extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbnFeminino;
     private javax.swing.JRadioButton rbnMasculino;
     private javax.swing.JRadioButton rbnOutros;
-    private javax.swing.JTable tblClientes;
+    private javax.swing.JTable tblClientesh;
     private javax.swing.JTextField txtCPF;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtLogradouro;

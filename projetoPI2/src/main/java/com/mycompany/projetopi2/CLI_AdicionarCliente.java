@@ -4,6 +4,9 @@
  */
 package com.mycompany.projetopi2;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ldss1
@@ -26,6 +29,7 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         lblNome = new javax.swing.JLabel();
         lblCPF = new javax.swing.JLabel();
@@ -39,6 +43,7 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
         rbnFeminino = new javax.swing.JRadioButton();
         rbnOutros = new javax.swing.JRadioButton();
         btn_InserirCliente = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -56,14 +61,24 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(rbnMasculino);
         rbnMasculino.setText("Masculino");
 
+        buttonGroup1.add(rbnFeminino);
         rbnFeminino.setText("Feminino");
 
+        buttonGroup1.add(rbnOutros);
         rbnOutros.setText("Não-Binario");
 
         btn_InserirCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673597_ic_fluent_person_add_filled_icon.png"))); // NOI18N
         btn_InserirCliente.setText("Inserir");
+        btn_InserirCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_InserirClienteActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Sexo");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -73,6 +88,12 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
                 .addContainerGap(429, Short.MAX_VALUE)
                 .addComponent(btn_InserirCliente)
                 .addGap(154, 154, 154))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(jLabel1)
+                .addGap(56, 56, 56)
+                .addComponent(rbnMasculino)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(125, 125, 125)
@@ -95,9 +116,7 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(txtLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(0, 2, Short.MAX_VALUE)
-                            .addComponent(rbnMasculino)
-                            .addGap(70, 70, 70)
+                            .addGap(0, 190, Short.MAX_VALUE)
                             .addComponent(rbnFeminino)
                             .addGap(71, 71, 71)
                             .addComponent(rbnOutros)
@@ -107,7 +126,11 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(383, Short.MAX_VALUE)
+                .addContainerGap(329, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbnMasculino)
+                    .addComponent(jLabel1))
+                .addGap(40, 40, 40)
                 .addComponent(btn_InserirCliente)
                 .addGap(60, 60, 60))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +153,6 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
                         .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(36, 36, 36)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(rbnMasculino)
                         .addComponent(rbnFeminino)
                         .addComponent(rbnOutros))
                     .addContainerGap(119, Short.MAX_VALUE)))
@@ -157,6 +179,37 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
     private void txtLogradouroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLogradouroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLogradouroActionPerformed
+
+    private void btn_InserirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InserirClienteActionPerformed
+        String nome = txtNome.getText();
+
+        String CPF = txtCPF.getText();
+
+        String logradouro = txtLogradouro.getText();
+
+        String email = txtEmail.getText();
+
+        String sexo = "";
+        if (rbnFeminino.isSelected()) {
+            sexo = rbnFeminino.getText();
+        } else if (rbnMasculino.isSelected()) {
+            sexo = rbnMasculino.getText();
+        } else if (rbnOutros.isSelected()) {
+            sexo = rbnOutros.getText();
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um genero!");
+        }
+
+        //Adicionar à tabela
+        CLI_ConsultaClientes.addItemtblClientes(new Object[]{
+            nome, CPF, logradouro, email, sexo
+        });
+        
+        txtNome.setText("");
+        txtCPF.setText("");
+        txtLogradouro.setText("");
+        txtEmail.setText("");
+    }//GEN-LAST:event_btn_InserirClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,6 +248,8 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_InserirCliente;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblEmail;

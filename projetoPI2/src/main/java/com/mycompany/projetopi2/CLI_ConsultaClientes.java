@@ -4,6 +4,8 @@
  */
 package com.mycompany.projetopi2;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ldss1
@@ -42,7 +44,7 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Title 2", "Title 3", "Title 4"
+                "Nome", "CPF", "Logradouro", "E-mail", "Sexo"
             }
         ));
         jScrollPane1.setViewportView(tblClientes);
@@ -121,6 +123,10 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
         nCli.setVisible(true);
     }//GEN-LAST:event_btn_AdicionarClienteActionPerformed
 
+    public static void addItemtblClientes(Object[] dataRow) {
+        DefaultTableModel model = (DefaultTableModel) tblClientes.getModel();
+        model.addRow(dataRow);
+    }
     /**
      * @param args the command line arguments
      */
@@ -165,6 +171,6 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTable tblClientes;
+    private static javax.swing.JTable tblClientes;
     // End of variables declaration//GEN-END:variables
 }
