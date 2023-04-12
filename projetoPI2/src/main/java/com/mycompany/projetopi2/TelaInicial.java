@@ -211,6 +211,11 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/1564531_chart_business_graph_statistics_icon.png"))); // NOI18N
         jMenu3.setText("RELATORIO");
+        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu3ActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -252,6 +257,13 @@ public class TelaInicial extends javax.swing.JFrame {
        cliAdd.setVisible(true);
        cliAdd.setLocationRelativeTo(null);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+        // TODO add your handling code here:
+        REL_SINTETICO relSin = new REL_SINTETICO();
+        relSin.setVisible(true);
+        relSin.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jMenu3ActionPerformed
 
     /**
      * @param args the command line arguments
