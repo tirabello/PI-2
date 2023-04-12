@@ -57,6 +57,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -216,6 +217,16 @@ public class TelaInicial extends javax.swing.JFrame {
                 jMenu3ActionPerformed(evt);
             }
         });
+
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("Sintético");
+        jRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jRadioButtonMenuItem1);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -253,17 +264,22 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       CLI_AdicionarCliente cliAdd = new CLI_AdicionarCliente();
-       cliAdd.setVisible(true);
-       cliAdd.setLocationRelativeTo(null);
+        CLI_AdicionarCliente cliAdd = new CLI_AdicionarCliente();
+        cliAdd.setVisible(true);
+        cliAdd.setLocationRelativeTo(null);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
         // TODO add your handling code here:
+
+    }//GEN-LAST:event_jMenu3ActionPerformed
+
+    private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
+        // TODO add your handling code here:
         REL_SINTETICO relSin = new REL_SINTETICO();
         relSin.setVisible(true);
         relSin.setLocationRelativeTo(null);
-    }//GEN-LAST:event_jMenu3ActionPerformed
+    }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -323,6 +339,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
