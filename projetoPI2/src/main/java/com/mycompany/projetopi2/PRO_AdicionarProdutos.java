@@ -4,9 +4,11 @@
  */
 package com.mycompany.projetopi2;
 
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author ldss1
+ * @author joser
  */
 public class PRO_AdicionarProdutos extends javax.swing.JFrame {
 
@@ -26,21 +28,240 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtValor = new javax.swing.JTextField();
+        labDescricao = new javax.swing.JLabel();
+        txtQuantidade = new javax.swing.JTextField();
+        labValor = new javax.swing.JLabel();
+        labQuantidade = new javax.swing.JLabel();
+        pnlUnidadeVenda = new javax.swing.JPanel();
+        btnCaixa = new javax.swing.JRadioButton();
+        btnUnidade = new javax.swing.JRadioButton();
+        txtCodigoProduto = new javax.swing.JTextField();
+        labCodigoProduto = new javax.swing.JLabel();
+        pnlTipoProduto = new javax.swing.JPanel();
+        btnMedicamento = new javax.swing.JRadioButton();
+        btnHigiene = new javax.swing.JRadioButton();
+        btnCosmeticos = new javax.swing.JRadioButton();
+        btnAcessorios = new javax.swing.JRadioButton();
+        btnSuplementos = new javax.swing.JRadioButton();
+        btn_InserirCliente = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtDescricao = new javax.swing.JTextArea();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        labDescricao.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        labDescricao.setText("Descrição:");
+
+        labValor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        labValor.setText("Valor:");
+
+        labQuantidade.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        labQuantidade.setText("Quantidade:");
+
+        pnlUnidadeVenda.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Unidade de Venda\n", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 51))); // NOI18N
+        pnlUnidadeVenda.setForeground(new java.awt.Color(0, 0, 51));
+
+        btnCaixa.setText("Caixa");
+
+        btnUnidade.setText("Unidade");
+
+        javax.swing.GroupLayout pnlUnidadeVendaLayout = new javax.swing.GroupLayout(pnlUnidadeVenda);
+        pnlUnidadeVenda.setLayout(pnlUnidadeVendaLayout);
+        pnlUnidadeVendaLayout.setHorizontalGroup(
+            pnlUnidadeVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlUnidadeVendaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnUnidade)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCaixa)
+                .addGap(169, 169, 169))
+        );
+        pnlUnidadeVendaLayout.setVerticalGroup(
+            pnlUnidadeVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlUnidadeVendaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlUnidadeVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCaixa)
+                    .addComponent(btnUnidade))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        labCodigoProduto.setBackground(new java.awt.Color(182, 182, 255));
+        labCodigoProduto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        labCodigoProduto.setText("COD.:");
+        labCodigoProduto.setToolTipText("Código do Produto");
+
+        pnlTipoProduto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tipo de Produto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 51))); // NOI18N
+        pnlTipoProduto.setForeground(new java.awt.Color(0, 0, 51));
+
+        btnMedicamento.setText("Medicamento");
+        btnMedicamento.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        btnHigiene.setText("Higiene");
+
+        btnCosmeticos.setText("Cosméticos");
+
+        btnAcessorios.setText("Acessórios");
+
+        btnSuplementos.setText("Suplementos e Vitaminicos");
+
+        javax.swing.GroupLayout pnlTipoProdutoLayout = new javax.swing.GroupLayout(pnlTipoProduto);
+        pnlTipoProduto.setLayout(pnlTipoProdutoLayout);
+        pnlTipoProdutoLayout.setHorizontalGroup(
+            pnlTipoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTipoProdutoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlTipoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCosmeticos)
+                    .addGroup(pnlTipoProdutoLayout.createSequentialGroup()
+                        .addGroup(pnlTipoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnMedicamento)
+                            .addComponent(btnSuplementos))
+                        .addGap(124, 124, 124)
+                        .addGroup(pnlTipoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnHigiene)
+                            .addComponent(btnAcessorios))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlTipoProdutoLayout.setVerticalGroup(
+            pnlTipoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTipoProdutoLayout.createSequentialGroup()
+                .addContainerGap(8, Short.MAX_VALUE)
+                .addGroup(pnlTipoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMedicamento)
+                    .addComponent(btnAcessorios))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlTipoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSuplementos)
+                    .addComponent(btnHigiene))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCosmeticos))
+        );
+
+        btn_InserirCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673597_ic_fluent_person_add_filled_icon.png"))); // NOI18N
+        btn_InserirCliente.setText("Inserir");
+        btn_InserirCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_InserirClienteActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("NOME:");
+
+        txtDescricao.setColumns(20);
+        txtDescricao.setRows(5);
+        jScrollPane1.setViewportView(txtDescricao);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 731, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_InserirCliente))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(labDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(pnlUnidadeVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(labQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtQuantidade))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(labCodigoProduto))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtCodigoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(labValor, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtValor))
+                                    .addComponent(jTextField1)))
+                            .addComponent(pnlTipoProduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 449, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCodigoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labCodigoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labValor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(pnlUnidadeVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btn_InserirCliente)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_InserirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InserirClienteActionPerformed
+        String tipoProduto = "";
+        if (btnAcessorios.isSelected()) {
+            tipoProduto = btnAcessorios.getText();
+        } else if (btnCosmeticos.isSelected()) {
+            tipoProduto = btnCosmeticos.getText();
+        } else if (btnHigiene.isSelected()) {
+            tipoProduto = btnHigiene.getText();
+        } else if (btnMedicamento.isSelected()) {
+            tipoProduto = btnMedicamento.getText();
+        } else if (btnSuplementos.isSelected()) {
+            tipoProduto = btnSuplementos.getText();
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um tipo de produto!");
+        }
+
+        String tipoUnidadeVenda = "";
+        if (btnUnidade.isSelected()) {
+            tipoUnidadeVenda = btnUnidade.getText();
+        } else if (btnCaixa.isSelected()) {
+            tipoUnidadeVenda = btnCaixa.getText();
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione uma unidade de venda!");
+        }
+
+        String codigoProduto = txtCodigoProduto.getText();
+
+        String descricao = txtDescricao.getText();
+
+        String valor = txtValor.getText();
+
+        String quantidade = txtQuantidade.getText();
+    }//GEN-LAST:event_btn_InserirClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +299,26 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton btnAcessorios;
+    private javax.swing.JRadioButton btnCaixa;
+    private javax.swing.JRadioButton btnCosmeticos;
+    private javax.swing.JRadioButton btnHigiene;
+    private javax.swing.JRadioButton btnMedicamento;
+    private javax.swing.JRadioButton btnSuplementos;
+    private javax.swing.JRadioButton btnUnidade;
+    private javax.swing.JButton btn_InserirCliente;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel labCodigoProduto;
+    private javax.swing.JLabel labDescricao;
+    private javax.swing.JLabel labQuantidade;
+    private javax.swing.JLabel labValor;
+    private javax.swing.JPanel pnlTipoProduto;
+    private javax.swing.JPanel pnlUnidadeVenda;
+    private javax.swing.JTextField txtCodigoProduto;
+    private javax.swing.JTextArea txtDescricao;
+    private javax.swing.JTextField txtQuantidade;
+    private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 }

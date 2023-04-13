@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author ldss1
+ * @author tiago.rbraz
  */
 public class CLI_AdicionarCliente extends javax.swing.JFrame {
 

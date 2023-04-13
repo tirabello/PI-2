@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author ldss1
+ * @author tiago.rbraz
  */
 public class CLI_ConsultaClientes extends javax.swing.JFrame {
 
