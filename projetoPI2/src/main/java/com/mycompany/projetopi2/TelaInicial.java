@@ -28,27 +28,28 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        tbl_Produto = new javax.swing.JTable();
+        txt_BuscarProduto = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tbl_ProdutoSimilares = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tbl_Carrinho = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lbl_ValorTotal = new javax.swing.JLabel();
+        btn_FinalizarCompra = new javax.swing.JButton();
+        btn_LimparCarrinho = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
-        jButton4 = new javax.swing.JButton();
+        spn_QuantProduto = new javax.swing.JSpinner();
+        btn_AdicionarCarrinho = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        btn_SelecionarCliente = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -63,7 +64,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_Produto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -71,16 +72,16 @@ public class TelaInicial extends javax.swing.JFrame {
                 "PRODUTO", "PRECO UNI", "DISPONIVEL"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbl_Produto);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 98, 469, 200));
 
-        jTextField1.setText("PESQUISAR");
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 16, 407, 40));
+        txt_BuscarProduto.setText("PESQUISAR");
+        jPanel1.add(txt_BuscarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 16, 407, 40));
 
         jLabel1.setText("PRODUTOS SIMILARES:");
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_ProdutoSimilares.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -88,10 +89,10 @@ public class TelaInicial extends javax.swing.JFrame {
                 "PRODUTO", "GENÉRICO", "MARCA", "PREÇO"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
-        if (jTable3.getColumnModel().getColumnCount() > 0) {
-            jTable3.getColumnModel().getColumn(1).setResizable(false);
-            jTable3.getColumnModel().getColumn(1).setPreferredWidth(4);
+        jScrollPane3.setViewportView(tbl_ProdutoSimilares);
+        if (tbl_ProdutoSimilares.getColumnModel().getColumnCount() > 0) {
+            tbl_ProdutoSimilares.getColumnModel().getColumn(1).setResizable(false);
+            tbl_ProdutoSimilares.getColumnModel().getColumn(1).setPreferredWidth(4);
         }
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -110,14 +111,13 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 320, 469, 160));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1211, 30, -1, 502));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_Carrinho.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -125,44 +125,79 @@ public class TelaInicial extends javax.swing.JFrame {
                 "PRODUTO", "PREÇO UNI", "QNT.", "PREÇO TOTAL"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tbl_Carrinho);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(809, 107, 396, 271));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 130, 396, 260));
 
-        jLabel2.setText("jLabel2");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 390, 135, 36));
+        jLabel2.setText("VALOR TOTAL");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 390, 135, 36));
 
-        jLabel3.setText("jLabel3");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 390, 71, -1));
+        lbl_ValorTotal.setText("R$ 000,00");
+        jPanel1.add(lbl_ValorTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 400, 71, -1));
 
-        jButton1.setText("FINALIZAR COMPRA");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 430, 185, 34));
+        btn_FinalizarCompra.setText("FINALIZAR COMPRA");
+        jPanel1.add(btn_FinalizarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 440, 170, 35));
 
-        jButton2.setText("LIMPAR");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 430, 174, 34));
-
-        jButton3.setText("CLIENTE");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 60, -1, -1));
-
-        jLabel4.setText("jLabel4");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 50, 70, 26));
-
-        jLabel5.setText("jLabel5");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 60, -1, -1));
+        btn_LimparCarrinho.setText("LIMPAR");
+        jPanel1.add(btn_LimparCarrinho, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 440, 160, 35));
 
         jLabel6.setText("QUANT:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 500, 68, 22));
-        jPanel1.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 500, 86, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 120, 50, 22));
+        jPanel1.add(spn_QuantProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 110, 60, 35));
 
-        jButton4.setText("Adicionar");
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 500, 108, -1));
+        btn_AdicionarCarrinho.setText("Adicionar >>");
+        btn_AdicionarCarrinho.setToolTipText("Colocar no carrinho");
+        jPanel1.add(btn_AdicionarCarrinho, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 110, 110, 35));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673694_ic_fluent_search_filled_icon.png"))); // NOI18N
         jLabel7.setAlignmentY(0.0F);
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
 
-        jLabel8.setText("jLabel8");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, -1, -1));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("INFO"));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 250, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 297, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 260, 320));
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("CLIENTE"));
+
+        btn_SelecionarCliente.setText("CLIENTE");
+
+        jLabel3.setText("NOME");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
+                .addComponent(btn_SelecionarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_SelecionarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                    .addComponent(jLabel3))
+                .addContainerGap())
+        );
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 20, 390, 70));
+
+        jLabel4.setText("CARRINHO:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 100, -1, -1));
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673588_ic_fluent_people_team_filled_icon.png"))); // NOI18N
         jMenu1.setText("CLIENTES");
@@ -235,11 +270,14 @@ public class TelaInicial extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -317,18 +355,16 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btn_AdicionarCarrinho;
+    private javax.swing.JButton btn_FinalizarCompra;
+    private javax.swing.JButton btn_LimparCarrinho;
+    private javax.swing.JButton btn_SelecionarCliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -338,16 +374,19 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lbl_ValorTotal;
+    private javax.swing.JSpinner spn_QuantProduto;
+    private javax.swing.JTable tbl_Carrinho;
+    private javax.swing.JTable tbl_Produto;
+    private javax.swing.JTable tbl_ProdutoSimilares;
+    private javax.swing.JTextField txt_BuscarProduto;
     // End of variables declaration//GEN-END:variables
 }
