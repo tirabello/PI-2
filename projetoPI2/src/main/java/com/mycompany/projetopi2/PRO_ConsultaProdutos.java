@@ -4,6 +4,9 @@
  */
 package com.mycompany.projetopi2;
 
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+
 /**
  *
  * @author joser
@@ -15,6 +18,7 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
      */
     public PRO_ConsultaProdutos() {
         initComponents();
+        pnl_Descricao.setVisible(false);
     }
 
     /**
@@ -29,38 +33,49 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_ConsultaProduto = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txt_Pesquisar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbx_Categoria = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         btn_AdicionarProduto = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        btn_RemoverProduto = new javax.swing.JButton();
+        pnl_Descricao = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txt_Descricao = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tbl_ConsultaProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "COD.", "NOME", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7"
+                "COD.", "NOME", "TIPO", "VALOR", "QTD ESTOQUE"
             }
         ));
+        tbl_ConsultaProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_ConsultaProdutoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_ConsultaProduto);
+        if (tbl_ConsultaProduto.getColumnModel().getColumnCount() > 0) {
+            tbl_ConsultaProduto.getColumnModel().getColumn(0).setResizable(false);
+            tbl_ConsultaProduto.getColumnModel().getColumn(0).setPreferredWidth(25);
+            tbl_ConsultaProduto.getColumnModel().getColumn(1).setResizable(false);
+            tbl_ConsultaProduto.getColumnModel().getColumn(1).setPreferredWidth(100);
+        }
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Consultar"));
 
-        jTextField1.setText("jTextField1");
+        txt_Pesquisar.setToolTipText("");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673694_ic_fluent_search_filled_icon.png"))); // NOI18N
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbx_Categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Medicamento", "Higiene", "Cosméticos", "Acessórios", "Suplementos e Vitaminicos" }));
 
         jLabel2.setText("Categoria");
 
@@ -72,12 +87,12 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_Pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addComponent(cbx_Categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,8 +100,8 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_Pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbx_Categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2))
                     .addComponent(jLabel1))
                 .addContainerGap(17, Short.MAX_VALUE))
@@ -100,27 +115,27 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673137_ic_fluent_dismiss_filled_icon.png"))); // NOI18N
-        jButton2.setToolTipText("Remover");
+        btn_RemoverProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673137_ic_fluent_dismiss_filled_icon.png"))); // NOI18N
+        btn_RemoverProduto.setToolTipText("Remover");
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("DESCRIÇÃO"));
+        pnl_Descricao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DESCRIÇÃO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        txt_Descricao.setColumns(20);
+        txt_Descricao.setRows(5);
+        jScrollPane2.setViewportView(txt_Descricao);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnl_DescricaoLayout = new javax.swing.GroupLayout(pnl_Descricao);
+        pnl_Descricao.setLayout(pnl_DescricaoLayout);
+        pnl_DescricaoLayout.setHorizontalGroup(
+            pnl_DescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_DescricaoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2)
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        pnl_DescricaoLayout.setVerticalGroup(
+            pnl_DescricaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_DescricaoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
                 .addGap(7, 7, 7))
@@ -139,11 +154,11 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addComponent(btn_AdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_RemoverProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnl_Descricao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -156,12 +171,12 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                            .addComponent(btn_RemoverProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                             .addComponent(btn_AdicionarProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnl_Descricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -173,6 +188,19 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
         proAdd.setVisible(true);
         proAdd.setLocationRelativeTo(null);
     }//GEN-LAST:event_btn_AdicionarProdutoActionPerformed
+
+    private void tbl_ConsultaProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_ConsultaProdutoMouseClicked
+        // TODO add your handling code here:
+        pnl_Descricao.setVisible(true);
+        
+        
+//        JTable source = (JTable)evt.getSource();
+//            int row = source.rowAtPoint( evt.getPoint() );
+//            int column = source.columnAtPoint( evt.getPoint() );
+//        
+//
+//            JOptionPane.showMessageDialog(null, row + " " +column);
+    }//GEN-LAST:event_tbl_ConsultaProdutoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -211,16 +239,16 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_AdicionarProduto;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btn_RemoverProduto;
+    private javax.swing.JComboBox<String> cbx_Categoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPanel pnl_Descricao;
     private javax.swing.JTable tbl_ConsultaProduto;
+    private javax.swing.JTextArea txt_Descricao;
+    private javax.swing.JTextField txt_Pesquisar;
     // End of variables declaration//GEN-END:variables
 }

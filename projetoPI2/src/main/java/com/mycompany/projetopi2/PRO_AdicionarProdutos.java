@@ -56,7 +56,7 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
         labDescricao.setText("Descrição:");
 
         labValor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        labValor.setText("Valor:");
+        labValor.setText("VALOR:");
 
         labQuantidade.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         labQuantidade.setText("Quantidade:");
@@ -141,8 +141,9 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
                 .addComponent(btnCosmeticos))
         );
 
-        btn_InserirCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673597_ic_fluent_person_add_filled_icon.png"))); // NOI18N
-        btn_InserirCliente.setText("Inserir");
+        btn_InserirCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8672677_ic_fluent_add_filled_icon.png"))); // NOI18N
+        btn_InserirCliente.setText("Adicionar");
+        btn_InserirCliente.setToolTipText("Adicionar Produto");
         btn_InserirCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_InserirClienteActionPerformed(evt);
@@ -219,11 +220,13 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
                             .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 37, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(btn_InserirCliente)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
 
         pack();

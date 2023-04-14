@@ -49,8 +49,6 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblClientes);
 
-        jTextField1.setText("jTextField1");
-
         btn_AdicionarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673597_ic_fluent_person_add_filled_icon.png"))); // NOI18N
         btn_AdicionarCliente.setToolTipText("Adicionar Cliente");
         btn_AdicionarCliente.addActionListener(new java.awt.event.ActionListener() {

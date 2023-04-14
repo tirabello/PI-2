@@ -202,6 +202,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673588_ic_fluent_people_team_filled_icon.png"))); // NOI18N
         jMenu1.setText("CLIENTES");
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_DOWN_MASK));
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673597_ic_fluent_person_add_filled_icon.png"))); // NOI18N
         jMenuItem1.setText("Add Cliente");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -211,6 +212,7 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_DOWN_MASK));
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673477_ic_fluent_people_search_filled_icon.png"))); // NOI18N
         jMenuItem2.setText("Consultar Clientes");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -225,6 +227,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/6989154_pill_pharmacy_medicine_medical_painkiller_icon.png"))); // NOI18N
         jMenu2.setText("PRODUTOS");
 
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_DOWN_MASK));
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/6549572_capsule_drug_medical_medication_medicine_icon.png"))); // NOI18N
         jMenuItem3.setText("Adicinar Produto");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -234,6 +237,7 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem3);
 
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_DOWN_MASK));
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673694_ic_fluent_search_filled_icon.png"))); // NOI18N
         jMenuItem4.setText("Consultar Produto");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -253,6 +257,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
+        jRadioButtonMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_DOWN_MASK));
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("Sintético");
         jRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
