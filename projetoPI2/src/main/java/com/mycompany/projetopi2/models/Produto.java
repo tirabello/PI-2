@@ -13,6 +13,7 @@ package com.mycompany.projetopi2.models;
 public class Produto {
     private String nome;
 	private int cod_produto;
+	private int numItem;
 	private String categoria;
 	private double preco;
 	private String tipoProduto;
@@ -25,10 +26,11 @@ public class Produto {
 	}
 
 
-	public Produto(String nome, int cod_produto, String categoria, double preco, String tipoProduto,
+	public Produto(String nome, int cod_produto, int numItem, String categoria, double preco, String tipoProduto,
 			String unidadeVenda, int quantidade, String descricao) {
 		this.nome = nome;
 		this.cod_produto = cod_produto;
+		this.numItem = numItem;
 		this.categoria = categoria;
 		this.preco = preco;
 		this.tipoProduto = tipoProduto;
@@ -55,6 +57,16 @@ public class Produto {
 
 	public void setCod_produto(int cod_produto) {
 		this.cod_produto = cod_produto;
+	}
+
+
+	public int getNumItem() {
+		return numItem;
+	}
+
+
+	public void setNumItem(int numItem) {
+		this.numItem = numItem;
 	}
 
 
@@ -116,12 +128,5 @@ public class Produto {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
-	
-
-	
-
-
-
 
 }
