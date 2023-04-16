@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.projetopi2;
+package com.mycompany.projetopi2.views;
 
 import javax.swing.JOptionPane;
 
@@ -190,6 +190,8 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_InserirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InserirClienteActionPerformed
+        
+        
         String nome = txtNome.getText();
 
         String CPF = txtCPF.getText();
