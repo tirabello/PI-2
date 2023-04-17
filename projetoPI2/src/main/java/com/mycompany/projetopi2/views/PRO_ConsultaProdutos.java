@@ -80,7 +80,7 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
 
         jLabel2.setText("Categoria");
 
-        btn_Consulta.setText("jButton1");
+        btn_Consulta.setText("Buscar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

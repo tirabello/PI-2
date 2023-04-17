@@ -53,15 +53,15 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         labDescricao.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        labDescricao.setText("Descrição:");
+        labDescricao.setText("Descrição");
 
         labValor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        labValor.setText("VALOR:");
+        labValor.setText("VALOR *");
 
         labQuantidade.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        labQuantidade.setText("Quantidade:");
+        labQuantidade.setText("Quantidade *");
 
-        pnlUnidadeVenda.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Unidade de Venda\n", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 51))); // NOI18N
+        pnlUnidadeVenda.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Unidade de Venda *", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 51))); // NOI18N
         pnlUnidadeVenda.setForeground(new java.awt.Color(0, 0, 51));
 
         btnCaixa.setText("Caixa");
@@ -91,10 +91,10 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
 
         labCodigoProduto.setBackground(new java.awt.Color(182, 182, 255));
         labCodigoProduto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        labCodigoProduto.setText("COD.:");
+        labCodigoProduto.setText("COD *");
         labCodigoProduto.setToolTipText("Código do Produto");
 
-        pnlTipoProduto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tipo de Produto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 51))); // NOI18N
+        pnlTipoProduto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tipo de Produto *", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 51))); // NOI18N
         pnlTipoProduto.setForeground(new java.awt.Color(0, 0, 51));
 
         btnMedicamento.setText("Medicamento");
@@ -150,7 +150,8 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("NOME:");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setText("NOME *");
 
         txtDescricao.setColumns(20);
         txtDescricao.setRows(5);

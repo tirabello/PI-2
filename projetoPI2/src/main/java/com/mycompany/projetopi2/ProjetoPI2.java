@@ -5,6 +5,7 @@
 
 package com.mycompany.projetopi2;
 
+import com.mycompany.projetopi2.views.TelaInicial;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UnsupportedLookAndFeelException;
