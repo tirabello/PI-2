@@ -8,6 +8,9 @@ package com.mycompany.projetopi2;
 import com.mycompany.projetopi2.views.TelaInicial;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
@@ -30,10 +33,12 @@ public class ProjetoPI2 {
                     }
                 }
         }
-        
+//        ImageIcon icone = new ImageIcon(".//resources//134159_aid_hospital_room_emergency_first_icon.ico");
+
         TelaInicial tela = new TelaInicial();
         // tela.setExtendedState(tela.MAXIMIZED_BOTH);
         tela.setLocationRelativeTo(null);
+//         tela.setIconImage(icone.getImage());
         tela.setVisible(true);
     }
 }
