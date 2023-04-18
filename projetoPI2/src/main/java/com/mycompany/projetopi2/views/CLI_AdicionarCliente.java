@@ -45,18 +45,19 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
         txtCPF = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastar Cliente");
 
         lblNome.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblNome.setText("Nome *");
+        lblNome.setText("NOME *");
 
         lblCPF.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblCPF.setText("CPF *");
 
         lblEndereco.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblEndereco.setText("Endereço *");
+        lblEndereco.setText("ENDEREÇO *");
 
         lblEmail.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblEmail.setText("E-mail *");
+        lblEmail.setText("E-MAIL *");
 
         txtEndereco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,7 +83,7 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setText("Sexo *");
+        jLabel1.setText("SEXO *");
 
         try {
             txtCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
@@ -169,7 +170,7 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 695, Short.MAX_VALUE)
+            .addGap(0, 697, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -190,7 +191,36 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_InserirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InserirClienteActionPerformed
+                String nome = txtNome.getText();
 
+        String CPF = txtCPF.getText();
+
+        String logradouro = txtEndereco.getText();
+
+        String email = txtEmail.getText();
+
+        String sexo = "";
+        if (rbnFeminino.isSelected()) {
+            sexo = rbnFeminino.getText();
+        } else if (rbnMasculino.isSelected()) {
+            sexo = rbnMasculino.getText();
+        } else if (rbnOutros.isSelected()) {
+            sexo = rbnOutros.getText();
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um genero!");
+        }
+
+        //Adicionar à tabela -> iMPEMENTAR DAO
+        CLI_ConsultaClientes.addItemtblClientes(new Object[]{
+            nome, CPF, logradouro, email, sexo
+        });
+        
+        
+        // Apos de inserir no BD - LIMPE OS CAMPOS
+        txtNome.setText("");
+        txtCPF.setText("");
+        txtEndereco.setText("");
+        txtEmail.setText("");
 
     }//GEN-LAST:event_btn_InserirClienteActionPerformed
 

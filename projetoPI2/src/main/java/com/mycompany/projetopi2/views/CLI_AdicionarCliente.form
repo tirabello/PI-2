@@ -7,6 +7,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="title" type="java.lang.String" value="Cadastar Cliente"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -27,7 +28,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="695" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="697" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -153,7 +154,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Nome *"/>
+            <Property name="text" type="java.lang.String" value="NOME *"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblCPF">
@@ -169,7 +170,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Endere&#xe7;o *"/>
+            <Property name="text" type="java.lang.String" value="ENDERE&#xc7;O *"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblEmail">
@@ -177,7 +178,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="E-mail *"/>
+            <Property name="text" type="java.lang.String" value="E-MAIL *"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNome">
@@ -229,7 +230,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Sexo *"/>
+            <Property name="text" type="java.lang.String" value="SEXO *"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="txtCPF">

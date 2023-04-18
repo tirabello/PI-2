@@ -37,9 +37,10 @@ public class REL_SINTETICO extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btn_AbrirRelatorioAnalitico = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Relatorio Sintetico");
 
         tbl_Sintetico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -139,7 +140,12 @@ public class REL_SINTETICO extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton2.setText("Visualizar Analítico");
+        btn_AbrirRelatorioAnalitico.setText("Visualizar Analítico");
+        btn_AbrirRelatorioAnalitico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AbrirRelatorioAnaliticoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -152,7 +158,7 @@ public class REL_SINTETICO extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_AbrirRelatorioAnalitico, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -165,7 +171,7 @@ public class REL_SINTETICO extends javax.swing.JFrame {
                         .addGap(18, 18, 18))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_AbrirRelatorioAnalitico, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(11, Short.MAX_VALUE))
@@ -181,6 +187,14 @@ public class REL_SINTETICO extends javax.swing.JFrame {
             jPanel2.setVisible(false);
         }
     }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void btn_AbrirRelatorioAnaliticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AbrirRelatorioAnaliticoActionPerformed
+        // TODO add your handling code here:
+        // checar se tem item selecionado
+        REL_ANALITICO rel = new REL_ANALITICO();
+        rel.setVisible(true);
+        rel.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btn_AbrirRelatorioAnaliticoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,8 +233,8 @@ public class REL_SINTETICO extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_AbrirRelatorioAnalitico;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextField2;

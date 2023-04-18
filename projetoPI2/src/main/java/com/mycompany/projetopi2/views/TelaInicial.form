@@ -110,6 +110,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="FARM&#xc1;CIA"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
@@ -180,6 +181,10 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="PESQUISAR"/>
           </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_BuscarProdutoFocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_BuscarProdutoFocusLost"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="113" y="16" width="407" height="40"/>
@@ -328,6 +333,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="FINALIZAR COMPRA"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_FinalizarCompraActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="1020" y="440" width="170" height="35"/>
@@ -338,6 +346,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="LIMPAR"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_LimparCarrinhoActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="820" y="440" width="160" height="35"/>
@@ -355,6 +366,11 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JSpinner" name="spn_QuantProduto">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="1" maximum="10" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="590" y="110" width="60" height="35"/>
@@ -363,12 +379,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="btn_AdicionarCarrinho">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Adicionar &gt;&gt;"/>
+            <Property name="text" type="java.lang.String" value="ADICIONAR &gt;&gt;"/>
             <Property name="toolTipText" type="java.lang.String" value="Colocar no carrinho"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="670" y="110" width="110" height="35"/>
+              <AbsoluteConstraints x="660" y="110" width="120" height="35"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -455,6 +471,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="CLIENTE"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_SelecionarClienteActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>

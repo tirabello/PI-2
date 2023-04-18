@@ -4,6 +4,8 @@
  */
 package com.mycompany.projetopi2.views;
 
+import com.mycompany.projetopi2.models.Produto;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,6 +19,7 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
      */
     public PRO_AdicionarProdutos() {
         initComponents();
+     
     }
 
     /**
@@ -30,7 +33,6 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
 
         txtValor = new javax.swing.JTextField();
         labDescricao = new javax.swing.JLabel();
-        txtQuantidade = new javax.swing.JTextField();
         labValor = new javax.swing.JLabel();
         labQuantidade = new javax.swing.JLabel();
         pnlUnidadeVenda = new javax.swing.JPanel();
@@ -46,20 +48,34 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
         btnSuplementos = new javax.swing.JRadioButton();
         btn_InserirCliente = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txt_Nome = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescricao = new javax.swing.JTextArea();
+        lbl_Alerta = new javax.swing.JLabel();
+        spn_Quantidade = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Adicionar Produto");
+
+        txtValor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtValorFocusLost(evt);
+            }
+        });
+        txtValor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtValorKeyTyped(evt);
+            }
+        });
 
         labDescricao.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        labDescricao.setText("Descrição");
+        labDescricao.setText("DESCRIÇÃO");
 
         labValor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         labValor.setText("VALOR *");
 
         labQuantidade.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        labQuantidade.setText("Quantidade *");
+        labQuantidade.setText("QUANTIDADE *");
 
         pnlUnidadeVenda.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Unidade de Venda *", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 51))); // NOI18N
         pnlUnidadeVenda.setForeground(new java.awt.Color(0, 0, 51));
@@ -88,6 +104,17 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
                     .addComponent(btnUnidade))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        txtCodigoProduto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCodigoProdutoFocusLost(evt);
+            }
+        });
+        txtCodigoProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigoProdutoKeyTyped(evt);
+            }
+        });
 
         labCodigoProduto.setBackground(new java.awt.Color(182, 182, 255));
         labCodigoProduto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -120,7 +147,7 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
                         .addGroup(pnlTipoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnMedicamento)
                             .addComponent(btnSuplementos))
-                        .addGap(124, 124, 124)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pnlTipoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnHigiene)
                             .addComponent(btnAcessorios))))
@@ -157,15 +184,16 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
         txtDescricao.setRows(5);
         jScrollPane1.setViewportView(txtDescricao);
 
+        lbl_Alerta.setForeground(java.awt.Color.red);
+
+        spn_Quantidade.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_InserirCliente))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -178,7 +206,7 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(labQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtQuantidade))
+                                .addComponent(spn_Quantidade))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
@@ -191,9 +219,14 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
                                         .addComponent(labValor, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtValor))
-                                    .addComponent(jTextField1)))
-                            .addComponent(pnlTipoProduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(28, Short.MAX_VALUE))
+                                    .addComponent(txt_Nome)))
+                            .addComponent(pnlTipoProduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(lbl_Alerta, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_InserirCliente)))
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,7 +234,7 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCodigoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -210,23 +243,24 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
                     .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlUnidadeVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(pnlUnidadeVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
+                        .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(spn_Quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 37, Short.MAX_VALUE))
+                        .addGap(0, 43, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(btn_InserirCliente)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btn_InserirCliente)
+                    .addComponent(lbl_Alerta, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23))
         );
 
@@ -258,14 +292,54 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Selecione uma unidade de venda!");
         }
 
-        String codigoProduto = txtCodigoProduto.getText();
+        
+        String nome = txt_Nome.getText();
+        
+        int codigoProduto = Integer.parseInt(txtCodigoProduto.getText());
 
         String descricao = txtDescricao.getText();
 
-        String valor = txtValor.getText();
+        double valor = Double.parseDouble(txtValor.getText());
 
-        String quantidade = txtQuantidade.getText();
+        int quantidade = (int) spn_Quantidade.getValue();
+
+
+        // Inserir no BD - FALTAR IMPLEMENTAR
+        Produto novoProduto = new Produto(nome, codigoProduto, tipoProduto, valor, tipoUnidadeVenda, quantidade, descricao);
+        
+        
+        // Apos de inserir no BD - LIMPE OS CAMPOS
+        txt_Nome.setText("");
+        txtCodigoProduto.setText("");
+        txtDescricao.setText("");
+        txtValor.setText("");
+        spn_Quantidade.setValue(0);
+        
     }//GEN-LAST:event_btn_InserirClienteActionPerformed
+
+    private void txtCodigoProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoProdutoKeyTyped
+        char c = evt.getKeyChar();
+        if (((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+            this.lbl_Alerta.setText("Somente números no Campo Codigo!");
+        }
+    }//GEN-LAST:event_txtCodigoProdutoKeyTyped
+
+    private void txtCodigoProdutoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCodigoProdutoFocusLost
+        this.lbl_Alerta.setText("");
+    }//GEN-LAST:event_txtCodigoProdutoFocusLost
+
+    private void txtValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorKeyTyped
+         char c = evt.getKeyChar();
+        if (((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE) && (c != KeyEvent.VK_COMMA)) {
+            evt.consume();
+            this.lbl_Alerta.setText("Somente números no Campo Valor!");
+        }
+    }//GEN-LAST:event_txtValorKeyTyped
+
+    private void txtValorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtValorFocusLost
+        this.lbl_Alerta.setText("");
+    }//GEN-LAST:event_txtValorFocusLost
 
     /**
      * @param args the command line arguments
@@ -313,16 +387,17 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
     private javax.swing.JButton btn_InserirCliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labCodigoProduto;
     private javax.swing.JLabel labDescricao;
     private javax.swing.JLabel labQuantidade;
     private javax.swing.JLabel labValor;
+    private javax.swing.JLabel lbl_Alerta;
     private javax.swing.JPanel pnlTipoProduto;
     private javax.swing.JPanel pnlUnidadeVenda;
+    private javax.swing.JSpinner spn_Quantidade;
     private javax.swing.JTextField txtCodigoProduto;
     private javax.swing.JTextArea txtDescricao;
-    private javax.swing.JTextField txtQuantidade;
     private javax.swing.JTextField txtValor;
+    private javax.swing.JTextField txt_Nome;
     // End of variables declaration//GEN-END:variables
 }

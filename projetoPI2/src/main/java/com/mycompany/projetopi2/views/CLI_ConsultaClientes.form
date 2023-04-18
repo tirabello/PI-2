@@ -11,6 +11,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="title" type="java.lang.String" value="Consultar Cliente"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -57,9 +58,7 @@
                   <Component id="btn_AdicionarCliente" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="106" max="-2" attributes="0"/>
-                  <EmptySpace pref="181" max="32767" attributes="0"/>
+                  <EmptySpace pref="305" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
@@ -80,7 +79,6 @@
                       <Component id="btn_AdicionarCliente" alignment="0" pref="0" max="32767" attributes="0"/>
                       <Component id="jButton2" alignment="0" pref="0" max="32767" attributes="0"/>
                       <Component id="jTextField1" max="32767" attributes="0"/>
-                      <Component id="jButton1" max="32767" attributes="0"/>
                       <Component id="jButton3" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -104,7 +102,7 @@
                   <Table columnCount="5" rowCount="0">
                     <Column editable="true" title="Nome" type="java.lang.Object"/>
                     <Column editable="true" title="CPF" type="java.lang.Object"/>
-                    <Column editable="true" title="Logradouro" type="java.lang.Object"/>
+                    <Column editable="true" title="Endereco" type="java.lang.Object"/>
                     <Column editable="true" title="E-mail" type="java.lang.Object"/>
                     <Column editable="true" title="Sexo" type="java.lang.Object"/>
                   </Table>
@@ -149,6 +147,9 @@
           </SubComponents>
         </Container>
         <Component class="javax.swing.JTextField" name="jTextField1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Digite o CPF ou Informe o Nome"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btn_AdicionarCliente">
           <Properties>
@@ -174,11 +175,6 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/8673694_ic_fluent_search_filled_icon.png"/>
             </Property>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="relatorio ?"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton3">

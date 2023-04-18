@@ -45,6 +45,7 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
         txt_Descricao = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Consultar Produto");
 
         tbl_ConsultaProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

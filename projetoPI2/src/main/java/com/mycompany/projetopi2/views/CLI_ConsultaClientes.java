@@ -36,20 +36,22 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
         btn_AdicionarCliente = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Consultar Cliente");
 
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nome", "CPF", "Logradouro", "E-mail", "Sexo"
+                "Nome", "CPF", "Endereco", "E-mail", "Sexo"
             }
         ));
         jScrollPane1.setViewportView(tblClientes);
+
+        jTextField1.setText("Digite o CPF ou Informe o Nome");
 
         btn_AdicionarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673597_ic_fluent_person_add_filled_icon.png"))); // NOI18N
         btn_AdicionarCliente.setToolTipText("Adicionar Cliente");
@@ -63,8 +65,6 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
         jButton2.setToolTipText("Remover Cliente");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673694_ic_fluent_search_filled_icon.png"))); // NOI18N
-
-        jButton1.setText("relatorio ?");
 
         jButton3.setText("BUSCAR");
 
@@ -83,9 +83,7 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
                 .addComponent(btn_AdicionarCliente)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addContainerGap(305, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
@@ -102,7 +100,6 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
                     .addComponent(btn_AdicionarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jTextField1)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -170,7 +167,6 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_AdicionarCliente;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;

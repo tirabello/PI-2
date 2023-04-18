@@ -4,6 +4,9 @@
  */
 package com.mycompany.projetopi2.views;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ldss1
@@ -61,6 +64,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("FARMÁCIA");
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -77,6 +81,14 @@ public class TelaInicial extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 98, 469, 200));
 
         txt_BuscarProduto.setText("PESQUISAR");
+        txt_BuscarProduto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_BuscarProdutoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_BuscarProdutoFocusLost(evt);
+            }
+        });
         jPanel1.add(txt_BuscarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 16, 407, 40));
 
         jLabel1.setText("PRODUTOS SIMILARES:");
@@ -136,18 +148,30 @@ public class TelaInicial extends javax.swing.JFrame {
         jPanel1.add(lbl_ValorTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 400, 71, -1));
 
         btn_FinalizarCompra.setText("FINALIZAR COMPRA");
+        btn_FinalizarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_FinalizarCompraActionPerformed(evt);
+            }
+        });
         jPanel1.add(btn_FinalizarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 440, 170, 35));
 
         btn_LimparCarrinho.setText("LIMPAR");
+        btn_LimparCarrinho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_LimparCarrinhoActionPerformed(evt);
+            }
+        });
         jPanel1.add(btn_LimparCarrinho, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 440, 160, 35));
 
         jLabel6.setText("QUANT:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 120, 50, 22));
+
+        spn_QuantProduto.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
         jPanel1.add(spn_QuantProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 110, 60, 35));
 
-        btn_AdicionarCarrinho.setText("Adicionar >>");
+        btn_AdicionarCarrinho.setText("ADICIONAR >>");
         btn_AdicionarCarrinho.setToolTipText("Colocar no carrinho");
-        jPanel1.add(btn_AdicionarCarrinho, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 110, 110, 35));
+        jPanel1.add(btn_AdicionarCarrinho, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 110, 120, 35));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673694_ic_fluent_search_filled_icon.png"))); // NOI18N
         jLabel7.setAlignmentY(0.0F);
@@ -171,6 +195,11 @@ public class TelaInicial extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("CLIENTE"));
 
         btn_SelecionarCliente.setText("CLIENTE");
+        btn_SelecionarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SelecionarClienteActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("NOME");
 
@@ -323,6 +352,34 @@ public class TelaInicial extends javax.swing.JFrame {
         relSin.setVisible(true);
         relSin.setLocationRelativeTo(null);
     }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
+
+    private void txt_BuscarProdutoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_BuscarProdutoFocusLost
+        
+    }//GEN-LAST:event_txt_BuscarProdutoFocusLost
+
+    private void txt_BuscarProdutoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_BuscarProdutoFocusGained
+        
+    }//GEN-LAST:event_txt_BuscarProdutoFocusGained
+
+    private void btn_LimparCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LimparCarrinhoActionPerformed
+        // limpa a tabela
+        DefaultTableModel model = (DefaultTableModel) tbl_Carrinho.getModel();
+        model.setRowCount(0);
+    }//GEN-LAST:event_btn_LimparCarrinhoActionPerformed
+
+    private void btn_FinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_FinalizarCompraActionPerformed
+        // TODO VERIFICAR SE O CARRINHO ESTA VAZIO
+        if(tbl_Carrinho.getRowCount() == 0){
+            JOptionPane.showMessageDialog(null, "Carrinho vazio!");
+        }else{
+    
+
+        }
+    }//GEN-LAST:event_btn_FinalizarCompraActionPerformed
+
+    private void btn_SelecionarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SelecionarClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_SelecionarClienteActionPerformed
 
     /**
      * @param args the command line arguments
