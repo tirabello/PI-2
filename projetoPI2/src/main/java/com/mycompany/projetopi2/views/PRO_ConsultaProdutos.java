@@ -46,13 +46,11 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consultar Produto");
+        setAlwaysOnTop(true);
 
         tbl_ConsultaProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "COD.", "NOME", "TIPO", "VALOR", "QTD ESTOQUE"

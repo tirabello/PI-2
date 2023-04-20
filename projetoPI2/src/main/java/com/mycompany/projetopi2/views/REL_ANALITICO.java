@@ -38,6 +38,7 @@ public class REL_ANALITICO extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Relatorio Analitico");
+        setAlwaysOnTop(true);
 
         tbl_Analitico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
