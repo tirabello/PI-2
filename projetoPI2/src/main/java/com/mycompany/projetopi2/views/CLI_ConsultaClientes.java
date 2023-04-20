@@ -40,6 +40,7 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consultar Cliente");
+        setAlwaysOnTop(true);
 
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -123,6 +124,8 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
     private void btn_AdicionarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AdicionarClienteActionPerformed
         CLI_AdicionarCliente nCli = new CLI_AdicionarCliente();
         nCli.setVisible(true);
+        nCli.setLocationRelativeTo(null);
+        nCli.setAlwaysOnTop(true);
     }//GEN-LAST:event_btn_AdicionarClienteActionPerformed
 
     public static void addItemtblClientes(Object[] dataRow) {
