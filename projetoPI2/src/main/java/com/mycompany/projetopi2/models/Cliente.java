@@ -4,25 +4,44 @@
  */
 package com.mycompany.projetopi2.models;
 
+import java.util.Date;
+
 /**
  *
  * @author ldss1
  */
 public class Cliente {
-    private String nome;
-	private String cpf;
-	private String endereco;
-	private String email;
 	private int id_cliente;
+    private String nome;
+	private String sexo;
+	private Date dataNascimento;
+	private String estadoCivil;
+	private String cpf;
+	private String celular;
+	private String email;
+	private String endereco;
 
 	public Cliente() {
 	}
 
-	public Cliente(String nome, String cpf, String endereco, String email, int id_cliente) {
+	public Cliente(int id_cliente, String nome, String sexo, Date dataNascimento, String estadoCivil, String cpf,
+			String celular, String email, String endereco) {
+		this.id_cliente = id_cliente;
 		this.nome = nome;
+		this.sexo = sexo;
+		this.dataNascimento = dataNascimento;
+		this.estadoCivil = estadoCivil;
 		this.cpf = cpf;
-		this.endereco = endereco;
+		this.celular = celular;
 		this.email = email;
+		this.endereco = endereco;
+	}
+
+	public int getId_cliente() {
+		return id_cliente;
+	}
+
+	public void setId_cliente(int id_cliente) {
 		this.id_cliente = id_cliente;
 	}
 
@@ -34,6 +53,30 @@ public class Cliente {
 		this.nome = nome;
 	}
 
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public String getEstadoCivil() {
+		return estadoCivil;
+	}
+
+	public void setEstadoCivil(String estadoCivil) {
+		this.estadoCivil = estadoCivil;
+	}
+
 	public String getCpf() {
 		return cpf;
 	}
@@ -42,12 +85,12 @@ public class Cliente {
 		this.cpf = cpf;
 	}
 
-	public String getEndereco() {
-		return endereco;
+	public String getCelular() {
+		return celular;
 	}
 
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+	public void setCelular(String celular) {
+		this.celular = celular;
 	}
 
 	public String getEmail() {
@@ -58,15 +101,13 @@ public class Cliente {
 		this.email = email;
 	}
 
-	public int getId_cliente() {
-		return id_cliente;
+	public String getEndereco() {
+		return endereco;
 	}
 
-	public void setId_cliente(int id_cliente) {
-		this.id_cliente = id_cliente;
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 
-	
 
-	
 }
