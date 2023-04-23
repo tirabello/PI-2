@@ -17,7 +17,7 @@ public class Cliente {
 	private Date dataNascimento;
 	private String estadoCivil;
 	private String cpf;
-	private String celular;
+	private String telefone;
 	private String email;
 	private String endereco;
 
@@ -25,14 +25,14 @@ public class Cliente {
 	}
 
 	public Cliente(int id_cliente, String nome, String sexo, Date dataNascimento, String estadoCivil, String cpf,
-			String celular, String email, String endereco) {
+			String telefone, String email, String endereco) {
 		this.id_cliente = id_cliente;
 		this.nome = nome;
 		this.sexo = sexo;
 		this.dataNascimento = dataNascimento;
 		this.estadoCivil = estadoCivil;
 		this.cpf = cpf;
-		this.celular = celular;
+		this.telefone = telefone;
 		this.email = email;
 		this.endereco = endereco;
 	}
@@ -85,12 +85,12 @@ public class Cliente {
 		this.cpf = cpf;
 	}
 
-	public String getCelular() {
-		return celular;
+	public String getTelefone() {
+		return telefone;
 	}
 
-	public void setCelular(String celular) {
-		this.celular = celular;
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 	public String getEmail() {
