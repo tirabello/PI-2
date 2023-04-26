@@ -4,6 +4,11 @@
  */
 package com.mycompany.projetopi2.views;
 
+import com.mycompany.projetopi2.dao.ClienteDAO;
+import com.mycompany.projetopi2.models.Cliente;
+
+import java.util.Date;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -12,11 +17,38 @@ import javax.swing.JOptionPane;
  */
 public class CLI_AdicionarCliente extends javax.swing.JFrame {
 
+    Cliente objCli;
+    
     /**
      * Creates new form CLI_AdicionarCliente
      */
     public CLI_AdicionarCliente() {
         initComponents();
+    }
+    
+        /**
+     * Creates new form CLI_AdicionarCliente
+     */
+    public CLI_AdicionarCliente(Cliente objCli) {
+        initComponents();
+        
+        txtNome.setText(String.valueOf(objCli.getNome()));
+        txtCPF.setText(String.valueOf(objCli.getCpf()));
+        // txt_DataNasc.setText(String.valueOf(objCli.getDataNasc()));
+        txtTelefone.setText(String.valueOf(objCli.getTelefone()));
+        txtEmail.setText(String.valueOf(objCli.getEmail()));
+        txtEndereco.setText(String.valueOf(objCli.getEndereco()));
+        cmb_EstadoCivil.setSelectedItem(String.valueOf(objCli.getEstadoCivil()));
+        if (objCli.getSexo().equals("M")) {
+            rbnMasculino.setSelected(true);
+        } else if (objCli.getSexo().equals("F")) {
+            rbnFeminino.setSelected(true);
+        } else {
+            rbnOutros.setSelected(true);
+        }
+
+        this.objCli = objCli;
+    
     }
 
     /**
@@ -35,7 +67,6 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
         btn_InserirCliente = new javax.swing.JButton();
         cmb_EstadoCivil = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        txt_DataNasc = new javax.swing.JFormattedTextField();
         lblNome1 = new javax.swing.JLabel();
         txtCPF = new javax.swing.JFormattedTextField();
         lblCPF = new javax.swing.JLabel();
@@ -50,6 +81,7 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
         txtEndereco = new javax.swing.JTextField();
         lblEndereco = new javax.swing.JLabel();
         lbl_Alerta = new javax.swing.JLabel();
+        jdc_DataNascimento = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastar Cliente");
@@ -70,8 +102,6 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("ESTADO CIVIL *");
-
-        txt_DataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
 
         lblNome1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblNome1.setText("DATA NASC. *");
@@ -140,8 +170,8 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
                     .addComponent(txtNome)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_DataNasc, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                            .addComponent(txtCPF))
+                            .addComponent(txtCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                            .addComponent(jdc_DataNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -168,19 +198,12 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_InserirCliente))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel1))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(lblNome1))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(lblCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(lblCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNome1))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -206,8 +229,8 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmb_EstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
-                            .addComponent(txt_DataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jdc_DataNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -249,29 +272,81 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_InserirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InserirClienteActionPerformed
-                String nome = txtNome.getText();
+        
+        if (objCli == null) {
 
-        String CPF = txtCPF.getText();
+            String nome = txtNome.getText();
+            String CPF = txtCPF.getText();
+            String logradouro = txtEndereco.getText();
+            Date dataNascimento = jdc_DataNascimento.getDate();// (Date) -> CAST (CONVERTER)
+            String estadoCivil = cmb_EstadoCivil.getSelectedItem().toString();
+            String telefone = txtTelefone.getText();
+            String endereco = txtEndereco.getText();
+            String email = txtEmail.getText();
+            String sexo = "";
+            if (rbnFeminino.isSelected()) {
+                sexo = rbnFeminino.getText();
+            } else if (rbnMasculino.isSelected()) {
+                sexo = rbnMasculino.getText();
+            } else if (rbnOutros.isSelected()) {
+                sexo = rbnOutros.getText();
+            } else {
+                JOptionPane.showMessageDialog(this, "Selecione um genero!");
+            }
 
-        String logradouro = txtEndereco.getText();
+            
+            Cliente objCli = new Cliente(nome, sexo, dataNascimento, estadoCivil, CPF, telefone, email, endereco);
+    
+            //Adicionar à tabela -> iMPEMENTAR DAO
+            boolean retorno = ClienteDAO.adicionarCliente(objCli);
+    
+            if(retorno){
+                JOptionPane.showMessageDialog(rootPane, "Sucesso!");
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Falha!");
+            }
 
-        String email = txtEmail.getText();
+        } else if (objCli != null && objCli.getId_cliente() > 0) {
 
-        String sexo = "";
-        if (rbnFeminino.isSelected()) {
-            sexo = rbnFeminino.getText();
-        } else if (rbnMasculino.isSelected()) {
-            sexo = rbnMasculino.getText();
-        } else if (rbnOutros.isSelected()) {
-            sexo = rbnOutros.getText();
-        } else {
-            JOptionPane.showMessageDialog(this, "Selecione um genero!");
+            String nome = txtNome.getText();
+            String CPF = txtCPF.getText();
+            String logradouro = txtEndereco.getText();
+            Date dataNascimento = jdc_DataNascimento.getDate(); // (Date) -> CAST (CONVERTER)
+            String estadoCivil = cmb_EstadoCivil.getSelectedItem().toString();
+            String telefone = txtTelefone.getText();
+            String endereco = txtEndereco.getText();
+            String email = txtEmail.getText();
+            String sexo = "";
+            if (rbnFeminino.isSelected()) {
+                sexo = rbnFeminino.getText();
+            } else if (rbnMasculino.isSelected()) {
+                sexo = rbnMasculino.getText();
+            } else if (rbnOutros.isSelected()) {
+                sexo = rbnOutros.getText();
+            }
+
+            objCli.setNome(nome);
+            objCli.setSexo(sexo);
+            objCli.setDataNascimento(dataNascimento);
+            objCli.setEstadoCivil(estadoCivil);
+            objCli.setCpf(CPF);
+            objCli.setTelefone(telefone);
+            objCli.setEndereco(endereco);
+            objCli.setEmail(email);
+
+            //Adicionar à tabela -> iMPEMENTAR DAO
+            boolean retorno = ClienteDAO.atualizarCliente(objCli);
+
+            if (retorno) {
+                JOptionPane.showMessageDialog(rootPane, "Sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Falha!");
+            }
         }
 
-        //Adicionar à tabela -> iMPEMENTAR DAO
-        CLI_ConsultaClientes.addItemtblClientes(new Object[]{
-            nome, CPF, logradouro, email, sexo
-        });
+        
+
+
         
         
         // Apos de inserir no BD - LIMPE OS CAMPOS
@@ -345,6 +420,7 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private com.toedter.calendar.JDateChooser jdc_DataNascimento;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblEndereco;
@@ -359,6 +435,5 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtEndereco;
     private javax.swing.JTextField txtNome;
     private javax.swing.JFormattedTextField txtTelefone;
-    private javax.swing.JFormattedTextField txt_DataNasc;
     // End of variables declaration//GEN-END:variables
 }
