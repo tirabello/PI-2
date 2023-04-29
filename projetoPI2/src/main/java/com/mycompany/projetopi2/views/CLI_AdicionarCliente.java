@@ -4,12 +4,15 @@
  */
 package com.mycompany.projetopi2.views;
 
-import com.mycompany.projetopi2.dao.ClienteDAO;
-import com.mycompany.projetopi2.models.Cliente;
-
+import java.awt.Color;
 import java.util.Date;
 
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+
+import com.mycompany.projetopi2.dao.ClienteDAO;
+import com.mycompany.projetopi2.models.Cliente;
 
 /**
  *
@@ -18,20 +21,20 @@ import javax.swing.JOptionPane;
 public class CLI_AdicionarCliente extends javax.swing.JFrame {
 
     Cliente objCli;
-    
+
     /**
      * Creates new form CLI_AdicionarCliente
      */
     public CLI_AdicionarCliente() {
         initComponents();
     }
-    
-        /**
+
+    /**
      * Creates new form CLI_AdicionarCliente
      */
     public CLI_AdicionarCliente(Cliente objCli) {
         initComponents();
-        
+
         txtNome.setText(String.valueOf(objCli.getNome()));
         txtCPF.setText(String.valueOf(objCli.getCpf()));
         // txt_DataNasc.setText(String.valueOf(objCli.getDataNasc()));
@@ -48,7 +51,7 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
         }
 
         this.objCli = objCli;
-    
+
     }
 
     /**
@@ -90,6 +93,15 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
         lblNome.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblNome.setText("NOME *");
 
+        txtNome.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                CLI_AdicionarCliente.this.focusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                CLI_AdicionarCliente.this.focusLost(evt);
+            }
+        });
+
         btn_InserirCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673597_ic_fluent_person_add_filled_icon.png"))); // NOI18N
         btn_InserirCliente.setText("Inserir");
         btn_InserirCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +110,15 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
             }
         });
 
-        cmb_EstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SOLTEIRO", "CASADO", "SEPARADO", "DIVORCIADO", "VIÚVO" }));
+        cmb_EstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE", "SOLTEIRO", "CASADO", "SEPARADO", "DIVORCIADO", "VIÚVO" }));
+        cmb_EstadoCivil.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                CLI_AdicionarCliente.this.focusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                CLI_AdicionarCliente.this.focusLost(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("ESTADO CIVIL *");
@@ -112,10 +132,19 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtCPF.setText("");
+        txtCPF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                CLI_AdicionarCliente.this.focusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                CLI_AdicionarCliente.this.focusLost(evt);
+            }
+        });
 
         lblCPF.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblCPF.setText("CPF *");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("CELULAR *");
 
         try {
@@ -123,9 +152,26 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtTelefone.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                CLI_AdicionarCliente.this.focusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                CLI_AdicionarCliente.this.focusLost(evt);
+            }
+        });
         txtTelefone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTelefoneActionPerformed(evt);
+            }
+        });
+
+        txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                CLI_AdicionarCliente.this.focusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                CLI_AdicionarCliente.this.focusLost(evt);
             }
         });
 
@@ -134,16 +180,51 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
 
         buttonGroup1.add(rbnOutros);
         rbnOutros.setText("Não-Binario");
+        rbnOutros.setBorderPainted(true);
+        rbnOutros.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                CLI_AdicionarCliente.this.focusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                CLI_AdicionarCliente.this.focusLost(evt);
+            }
+        });
 
         buttonGroup1.add(rbnFeminino);
         rbnFeminino.setText("Feminino");
+        rbnFeminino.setBorderPainted(true);
+        rbnFeminino.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                CLI_AdicionarCliente.this.focusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                CLI_AdicionarCliente.this.focusLost(evt);
+            }
+        });
 
         buttonGroup1.add(rbnMasculino);
         rbnMasculino.setText("Masculino");
+        rbnMasculino.setBorderPainted(true);
+        rbnMasculino.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                CLI_AdicionarCliente.this.focusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                CLI_AdicionarCliente.this.focusLost(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("SEXO *");
 
+        txtEndereco.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                CLI_AdicionarCliente.this.focusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                CLI_AdicionarCliente.this.focusLost(evt);
+            }
+        });
         txtEndereco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEnderecoActionPerformed(evt);
@@ -153,7 +234,18 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
         lblEndereco.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblEndereco.setText("ENDEREÇO *");
 
+        lbl_Alerta.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         lbl_Alerta.setForeground(java.awt.Color.red);
+
+        jdc_DataNascimento.setDateFormatString("dd/MM/yyyy");
+        jdc_DataNascimento.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                CLI_AdicionarCliente.this.focusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                CLI_AdicionarCliente.this.focusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -272,18 +364,24 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_InserirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InserirClienteActionPerformed
-        
+
+        boolean validacao = false;
+        boolean retorno = false;
+
         if (objCli == null) {
 
             String nome = txtNome.getText();
-            String CPF = txtCPF.getText();
-            String logradouro = txtEndereco.getText();
+            String CPF = txtCPF.getText().replace(".", "").replace("-", "");
+
             Date dataNascimento = jdc_DataNascimento.getDate();// (Date) -> CAST (CONVERTER)
             String estadoCivil = cmb_EstadoCivil.getSelectedItem().toString();
-            String telefone = txtTelefone.getText();
+            String telefone = txtTelefone.getText().replace("(", "").replace(")", "").replace("-", "").replace(" ", "");
             String endereco = txtEndereco.getText();
             String email = txtEmail.getText();
             String sexo = "";
+
+            System.out.println(telefone);
+
             if (rbnFeminino.isSelected()) {
                 sexo = rbnFeminino.getText();
             } else if (rbnMasculino.isSelected()) {
@@ -291,26 +389,67 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
             } else if (rbnOutros.isSelected()) {
                 sexo = rbnOutros.getText();
             } else {
-                JOptionPane.showMessageDialog(this, "Selecione um genero!");
+                rbnFeminino.setBorder(javax.swing.BorderFactory.createLineBorder(Color.red));
+                rbnMasculino.setBorder(javax.swing.BorderFactory.createLineBorder(Color.red));
+                rbnOutros.setBorder(javax.swing.BorderFactory.createLineBorder(Color.red));
+                validacao = true;
             }
 
-            
-            Cliente objCli = new Cliente(nome, sexo, dataNascimento, estadoCivil, CPF, telefone, email, endereco);
-    
-            //Adicionar à tabela -> iMPEMENTAR DAO
-            boolean retorno = ClienteDAO.adicionarCliente(objCli);
-    
-            if(retorno){
-                JOptionPane.showMessageDialog(rootPane, "Sucesso!");
-            }else{
-                JOptionPane.showMessageDialog(rootPane, "Falha!");
+            if ("".equals(nome)) {
+                txtNome.setBorder(BorderFactory.createLineBorder(Color.red));
+                validacao = true;
+            }
+
+            if (CPF.isBlank()) {
+                txtCPF.setBorder(javax.swing.BorderFactory.createLineBorder(Color.red));
+                validacao = true;
+            }
+
+            if ("".equals(endereco)) {
+                txtEndereco.setBorder(javax.swing.BorderFactory.createLineBorder(Color.red));
+                validacao = true;
+            }
+
+            if (telefone.isBlank()) {
+                txtTelefone.setBorder(javax.swing.BorderFactory.createLineBorder(Color.red));
+                validacao = true;
+            }
+
+            if ("".equals(email)) {
+                txtEmail.setBorder(javax.swing.BorderFactory.createLineBorder(Color.red));
+                validacao = true;
+            }
+
+            if (estadoCivil == "SELECIONE") {
+                cmb_EstadoCivil.setBorder(javax.swing.BorderFactory.createLineBorder(Color.red));
+                validacao = true;
+            }
+
+            if (dataNascimento == null) {
+                jdc_DataNascimento.setBorder(BorderFactory.createLineBorder(Color.red));
+                validacao = true;
+            }
+
+            if (validacao) {
+                lbl_Alerta.setText("Verifique os campos em vermelho!");
+            } else {
+                lbl_Alerta.setText("");
+                Cliente objCli = new Cliente(nome, sexo, dataNascimento, estadoCivil, CPF, telefone, email, endereco);
+
+                //Adicionar à tabela -> iMPEMENTAR DAO
+                retorno = ClienteDAO.adicionarCliente(objCli);
+
+                if (retorno) {
+                    JOptionPane.showMessageDialog(rootPane, "Sucesso!");
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Falha!");
+                }
             }
 
         } else if (objCli != null && objCli.getId_cliente() > 0) {
 
             String nome = txtNome.getText();
             String CPF = txtCPF.getText();
-            String logradouro = txtEndereco.getText();
             Date dataNascimento = jdc_DataNascimento.getDate(); // (Date) -> CAST (CONVERTER)
             String estadoCivil = cmb_EstadoCivil.getSelectedItem().toString();
             String telefone = txtTelefone.getText();
@@ -335,7 +474,7 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
             objCli.setEmail(email);
 
             //Adicionar à tabela -> iMPEMENTAR DAO
-            boolean retorno = ClienteDAO.atualizarCliente(objCli);
+            retorno = ClienteDAO.atualizarCliente(objCli);
 
             if (retorno) {
                 JOptionPane.showMessageDialog(rootPane, "Sucesso!");
@@ -344,16 +483,15 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
             }
         }
 
-        
+        if (!validacao || retorno) {
+            // Apos de inserir no BD - LIMPE OS CAMPOS
+            txtNome.setText("");
+            txtCPF.setText("");
+            txtEndereco.setText("");
+            txtEmail.setText("");
 
+        }
 
-        
-        
-        // Apos de inserir no BD - LIMPE OS CAMPOS
-        txtNome.setText("");
-        txtCPF.setText("");
-        txtEndereco.setText("");
-        txtEmail.setText("");
 
     }//GEN-LAST:event_btn_InserirClienteActionPerformed
 
@@ -362,8 +500,17 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEnderecoActionPerformed
 
     private void txtTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefoneActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtTelefoneActionPerformed
+
+    private void focusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_focusGained
+        // TODO add your handling code here:
+        ((JComponent) evt.getComponent()).setBorder(javax.swing.BorderFactory.createLineBorder(Color.BLUE));
+    }//GEN-LAST:event_focusGained
+    
+    private void focusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_focusLost
+        // TODO add your handling code here:
+        ((JComponent) evt.getComponent()).setBorder(javax.swing.BorderFactory.createLineBorder(Color.GRAY));
+    }//GEN-LAST:event_focusLost
 
     /**
      * @param args the command line arguments
@@ -380,27 +527,23 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CLI_AdicionarCliente.class  
+            java.util.logging.Logger.getLogger(CLI_AdicionarCliente.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(CLI_AdicionarCliente.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CLI_AdicionarCliente.class  
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(CLI_AdicionarCliente.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CLI_AdicionarCliente.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CLI_AdicionarCliente.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(CLI_AdicionarCliente.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
