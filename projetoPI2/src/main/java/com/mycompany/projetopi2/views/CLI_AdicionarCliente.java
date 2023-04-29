@@ -35,16 +35,21 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
     public CLI_AdicionarCliente(Cliente objCli) {
         initComponents();
 
+        setTitle("Atualizar Cliente");
+        btn_InserirCliente.setText("Atualizar");
+        // btn_InserirCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-editar-20.png")));
+        btn_InserirCliente.setToolTipText("Atualizar Dados do Cliente");
+        
         txtNome.setText(String.valueOf(objCli.getNome()));
         txtCPF.setText(String.valueOf(objCli.getCpf()));
-        // txt_DataNasc.setText(String.valueOf(objCli.getDataNasc()));
+        jdc_DataNascimento.setDate(objCli.getDataNascimento());
         txtTelefone.setText(String.valueOf(objCli.getTelefone()));
         txtEmail.setText(String.valueOf(objCli.getEmail()));
         txtEndereco.setText(String.valueOf(objCli.getEndereco()));
         cmb_EstadoCivil.setSelectedItem(String.valueOf(objCli.getEstadoCivil()));
-        if (objCli.getSexo().equals("M")) {
+        if (objCli.getSexo().equals("Masculino")) {
             rbnMasculino.setSelected(true);
-        } else if (objCli.getSexo().equals("F")) {
+        } else if (objCli.getSexo().equals("Feminino")) {
             rbnFeminino.setSelected(true);
         } else {
             rbnOutros.setSelected(true);
@@ -449,10 +454,10 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
         } else if (objCli != null && objCli.getId_cliente() > 0) {
 
             String nome = txtNome.getText();
-            String CPF = txtCPF.getText();
+            String CPF = txtCPF.getText().replace(".", "").replace("-", "");
             Date dataNascimento = jdc_DataNascimento.getDate(); // (Date) -> CAST (CONVERTER)
             String estadoCivil = cmb_EstadoCivil.getSelectedItem().toString();
-            String telefone = txtTelefone.getText();
+            String telefone = txtTelefone.getText().replace("(", "").replace(")", "").replace("-", "").replace(" ", "");
             String endereco = txtEndereco.getText();
             String email = txtEmail.getText();
             String sexo = "";
@@ -472,12 +477,14 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
             objCli.setTelefone(telefone);
             objCli.setEndereco(endereco);
             objCli.setEmail(email);
-
+            
             //Adicionar à tabela -> iMPEMENTAR DAO
             retorno = ClienteDAO.atualizarCliente(objCli);
-
+            
             if (retorno) {
+                this.dispose();
                 JOptionPane.showMessageDialog(rootPane, "Sucesso!");
+                CLI_ConsultaClientes.carregarClientes();
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Falha!");
             }
@@ -489,6 +496,14 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
             txtCPF.setText("");
             txtEndereco.setText("");
             txtEmail.setText("");
+            txtTelefone.setText("");
+            jdc_DataNascimento.setDate(null);
+            cmb_EstadoCivil.setSelectedIndex(0);
+            rbnFeminino.setSelected(false);
+            rbnMasculino.setSelected(false);
+            rbnOutros.setSelected(false);
+            objCli = null;
+            lbl_Alerta.setText("");
 
         }
 
