@@ -6,6 +6,7 @@ package com.mycompany.projetopi2.views;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import com.mycompany.projetopi2.dao.ClienteDAO;
@@ -177,6 +178,22 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
 
     private void btn_RemoverClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RemoverClientesActionPerformed
         // TODO add your handling code here:
+        int linhaSelecionada = tblClientes.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) tblClientes.getModel();
+
+        //Remover do banco
+        int idCliente = Integer.parseInt(tblClientes.getValueAt(linhaSelecionada, 0).toString());
+
+        boolean removido = ClienteDAO.removerCliente(idCliente);
+
+        if (removido) {
+            //Remover da tabela
+            model.removeRow(linhaSelecionada);
+            JOptionPane.showMessageDialog(null, "Cliente removido com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Não foi possível remover o cliente", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_btn_RemoverClientesActionPerformed
 
 //    public static void addItemtblClientes(Object[] dataRow) {
