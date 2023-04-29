@@ -7,11 +7,14 @@ package com.mycompany.projetopi2.dao;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.ArrayList;
 
 import com.mycompany.projetopi2.models.Cliente;
 import com.mycompany.projetopi2.utils.GerenciadorConexao;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -97,10 +100,47 @@ public class ClienteDAO {
                 return status;
 	}
 
+	// Listar Cliente
+	public static ArrayList<Cliente> listarClientes() {
+                ArrayList<Cliente> listaClientes = new ArrayList<>();
+            try {
+                conexao = GerenciadorConexao.abrirConexao();
+
+				String query = "SELECT * FROM cliente";
+
+				instrucaoSQL = conexao.prepareStatement(query);
+
+				ResultSet rs = instrucaoSQL.executeQuery();
+
+				if (rs != null) {
+					while(rs.next()) {
+						Cliente objCli = new Cliente();
+						objCli.setId_cliente(rs.getInt("IDCliente"));
+						objCli.setNome(rs.getString("Nome"));
+						objCli.setSexo(rs.getString("Sexo"));
+						objCli.setDataNascimento(rs.getDate("DataNascimento"));
+						objCli.setEstadoCivil(rs.getString("EstadoCivil"));
+						objCli.setCpf(rs.getString("CPF"));
+						objCli.setTelefone(rs.getString("Telefone"));
+						objCli.setEmail(rs.getString("Email"));
+						objCli.setEndereco(rs.getString("Endereco"));
+
+						listaClientes.add(objCli);
+					}
+				}
+                
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+		return listaClientes;
+	}
+
 
 	// Excluir Cliente
 	// Buscar Cliente
-	// Listar Cliente
+
 
     
 }
