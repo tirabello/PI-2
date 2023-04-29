@@ -4,7 +4,12 @@
  */
 package com.mycompany.projetopi2.views;
 
+import java.util.ArrayList;
+
 import javax.swing.table.DefaultTableModel;
+
+import com.mycompany.projetopi2.dao.ClienteDAO;
+import com.mycompany.projetopi2.models.Cliente;
 
 /**
  *
@@ -17,6 +22,28 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
      */
     public CLI_ConsultaClientes() {
         initComponents();
+        carregarClientes();
+    }
+
+    private void carregarClientes() {
+
+        ArrayList<Cliente> clientes =  ClienteDAO.listarClientes();
+        DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
+        modelo.setNumRows(0);
+
+        for (Cliente cliente : clientes) {
+            modelo.addRow(new String[]{
+                String.valueOf(cliente.getId_cliente()),
+                String.valueOf(cliente.getNome()),
+                String.valueOf(cliente.getSexo()),
+                String.valueOf(cliente.getDataNascimento()),
+                String.valueOf(cliente.getEstadoCivil()),
+                String.valueOf(cliente.getCpf()),
+                String.valueOf(cliente.getTelefone()),
+                String.valueOf(cliente.getEndereco()),
+                String.valueOf(cliente.getEmail())
+            });
+        }
     }
 
     /**
@@ -34,9 +61,9 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
         tblClientes = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
         btn_AdicionarCliente = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btn_RemoverClientes = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        btn_Buscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consultar Cliente");
@@ -47,10 +74,25 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "CPF", "Endereco", "E-mail", "Sexo"
+                "ID", "NOME", "SEXO", "DATA NASCIMENTO", "ESTADO CIVIL", "CPF", "TELEFONE", "ENDEREÇO", "EMAIL"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true, true, true, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblClientes.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblClientes);
+        if (tblClientes.getColumnModel().getColumnCount() > 0) {
+            tblClientes.getColumnModel().getColumn(0).setResizable(false);
+            tblClientes.getColumnModel().getColumn(0).setPreferredWidth(5);
+            tblClientes.getColumnModel().getColumn(5).setResizable(false);
+            tblClientes.getColumnModel().getColumn(5).setPreferredWidth(25);
+        }
 
         jTextField1.setText("Digite o CPF ou Informe o Nome");
 
@@ -62,12 +104,17 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673507_ic_fluent_person_delete_filled_icon.png"))); // NOI18N
-        jButton2.setToolTipText("Remover Cliente");
+        btn_RemoverClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673507_ic_fluent_person_delete_filled_icon.png"))); // NOI18N
+        btn_RemoverClientes.setToolTipText("Remover Cliente");
+        btn_RemoverClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_RemoverClientesActionPerformed(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673694_ic_fluent_search_filled_icon.png"))); // NOI18N
 
-        jButton3.setText("BUSCAR");
+        btn_Buscar.setText("BUSCAR");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -79,11 +126,11 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
-                .addComponent(jButton3)
+                .addComponent(btn_Buscar)
                 .addGap(92, 92, 92)
                 .addComponent(btn_AdicionarCliente)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(btn_RemoverClientes)
                 .addContainerGap(305, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -99,9 +146,9 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
                         .addGap(5, 5, 5)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(btn_AdicionarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btn_RemoverClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jTextField1)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn_Buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9))
@@ -128,10 +175,14 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
         nCli.setAlwaysOnTop(true);
     }//GEN-LAST:event_btn_AdicionarClienteActionPerformed
 
-    public static void addItemtblClientes(Object[] dataRow) {
-        DefaultTableModel model = (DefaultTableModel) tblClientes.getModel();
-        model.addRow(dataRow);
-    }
+    private void btn_RemoverClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RemoverClientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_RemoverClientesActionPerformed
+
+//    public static void addItemtblClientes(Object[] dataRow) {
+//        DefaultTableModel model = (DefaultTableModel) tblClientes.getModel();
+//        model.addRow(dataRow);
+//    }
     /**
      * @param args the command line arguments
      */
@@ -170,8 +221,8 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_AdicionarCliente;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btn_Buscar;
+    private javax.swing.JButton btn_RemoverClientes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
