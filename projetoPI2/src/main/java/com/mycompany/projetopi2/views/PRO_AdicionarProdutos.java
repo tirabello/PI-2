@@ -5,6 +5,8 @@
 package com.mycompany.projetopi2.views;
 
 import com.mycompany.projetopi2.models.Produto;
+
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
@@ -17,9 +19,64 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
     /**
      * Creates new form PRO_AdicionarProdutos
      */
+
+    
+    Produto objPro;
     public PRO_AdicionarProdutos() {
         initComponents();
      
+    }
+
+    public PRO_AdicionarProdutos(Produto objPro) {
+        initComponents();
+
+        setTitle("Atualizar Produto");
+        btn_InserirProduto.setText("Atualizar");
+
+        txt_Nome.setText(objPro.getNome());
+        txtCodigoProduto.setText(String.valueOf(objPro.getCodProduto()));
+        txtValor.setText(String.valueOf(objPro.getPreco()));
+
+        switch (objPro.getCategoria()) {
+            case "Medicamento":
+                btnMedicamento.setSelected(true);
+                break;
+            case "Higiene":
+                btnHigiene.setSelected(true);
+                break;
+            case "Cosmeticos":
+                btnCosmeticos.setSelected(true);
+                break;
+            case "Acessorios":
+                btnAcessorios.setSelected(true);
+                break;
+            case "Suplementos":
+                btnSuplementos.setSelected(true);
+                break;
+        }
+
+        if (objPro.getUnidadeVenda().equals("Unidade")) {
+            btnUnidade.setSelected(true);
+        } else {
+            btnCaixa.setSelected(true);
+        }
+
+        spn_Quantidade.setValue(objPro.getQuantidade());
+        txtDescricao.setText(objPro.getDescricao());
+
+        this.objPro = objPro;
+     
+    }
+
+
+    public void limparCampos(){
+        txt_Nome.setText("");
+        txtCodigoProduto.setText("");
+        txtValor.setText("");
+        spn_Quantidade.setValue(0);
+        gup_Produto.clearSelection();
+        gup_Unidade.clearSelection();
+        txtDescricao.setText("");
     }
 
     /**
@@ -31,6 +88,8 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        gup_Produto = new javax.swing.ButtonGroup();
+        gup_Unidade = new javax.swing.ButtonGroup();
         txtValor = new javax.swing.JTextField();
         labDescricao = new javax.swing.JLabel();
         labValor = new javax.swing.JLabel();
@@ -46,7 +105,7 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
         btnCosmeticos = new javax.swing.JRadioButton();
         btnAcessorios = new javax.swing.JRadioButton();
         btnSuplementos = new javax.swing.JRadioButton();
-        btn_InserirCliente = new javax.swing.JButton();
+        btn_InserirProduto = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txt_Nome = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -81,8 +140,10 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
         pnlUnidadeVenda.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Unidade de Venda *", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 51))); // NOI18N
         pnlUnidadeVenda.setForeground(new java.awt.Color(0, 0, 51));
 
+        gup_Unidade.add(btnCaixa);
         btnCaixa.setText("Caixa");
 
+        gup_Unidade.add(btnUnidade);
         btnUnidade.setText("Unidade");
 
         javax.swing.GroupLayout pnlUnidadeVendaLayout = new javax.swing.GroupLayout(pnlUnidadeVenda);
@@ -125,15 +186,20 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
         pnlTipoProduto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tipo de Produto *", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 51))); // NOI18N
         pnlTipoProduto.setForeground(new java.awt.Color(0, 0, 51));
 
+        gup_Produto.add(btnMedicamento);
         btnMedicamento.setText("Medicamento");
         btnMedicamento.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        gup_Produto.add(btnHigiene);
         btnHigiene.setText("Higiene");
 
+        gup_Produto.add(btnCosmeticos);
         btnCosmeticos.setText("Cosméticos");
 
+        gup_Produto.add(btnAcessorios);
         btnAcessorios.setText("Acessórios");
 
+        gup_Produto.add(btnSuplementos);
         btnSuplementos.setText("Suplementos e Vitaminicos");
 
         javax.swing.GroupLayout pnlTipoProdutoLayout = new javax.swing.GroupLayout(pnlTipoProduto);
@@ -169,12 +235,12 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
                 .addComponent(btnCosmeticos))
         );
 
-        btn_InserirCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8672677_ic_fluent_add_filled_icon.png"))); // NOI18N
-        btn_InserirCliente.setText("Adicionar");
-        btn_InserirCliente.setToolTipText("Adicionar Produto");
-        btn_InserirCliente.addActionListener(new java.awt.event.ActionListener() {
+        btn_InserirProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8672677_ic_fluent_add_filled_icon.png"))); // NOI18N
+        btn_InserirProduto.setText("Adicionar");
+        btn_InserirProduto.setToolTipText("Adicionar Produto");
+        btn_InserirProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_InserirClienteActionPerformed(evt);
+                btn_InserirProdutoActionPerformed(evt);
             }
         });
 
@@ -226,7 +292,7 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
                         .addGap(25, 25, 25)
                         .addComponent(lbl_Alerta, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_InserirCliente)))
+                        .addComponent(btn_InserirProduto)))
                 .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
@@ -260,7 +326,7 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_InserirCliente)
+                    .addComponent(btn_InserirProduto)
                     .addComponent(lbl_Alerta, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23))
         );
@@ -268,55 +334,72 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_InserirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InserirClienteActionPerformed
-        String tipoProduto = "";
-        if (btnAcessorios.isSelected()) {
-            tipoProduto = btnAcessorios.getText();
-        } else if (btnCosmeticos.isSelected()) {
-            tipoProduto = btnCosmeticos.getText();
-        } else if (btnHigiene.isSelected()) {
-            tipoProduto = btnHigiene.getText();
-        } else if (btnMedicamento.isSelected()) {
-            tipoProduto = btnMedicamento.getText();
-        } else if (btnSuplementos.isSelected()) {
-            tipoProduto = btnSuplementos.getText();
-        } else {
-            JOptionPane.showMessageDialog(this, "Selecione um tipo de produto!");
+    private void btn_InserirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InserirProdutoActionPerformed
+        String aviso = "";
+        if(objPro == null){
+            
+            String nome = txt_Nome.getText();
+            if ("".equals(nome)) {
+                aviso = "Digite o nome do produto!\n";
+                txt_Nome.setBorder(javax.swing.BorderFactory.createLineBorder(Color.red));
+            }
+
+            String codigoProduto = txtCodigoProduto.getText();
+            if ("".equals(codigoProduto)) {
+                aviso += "Digite um código válido!\n";
+                txtCodigoProduto.setBorder(javax.swing.BorderFactory.createLineBorder(Color.red));
+            }
+
+            double valor = 0;
+            String txValor = txtValor.getText();
+            if ("".equals(txValor)) {
+                aviso += "Digite um valor válido!\n";
+                txtValor.setBorder(javax.swing.BorderFactory.createLineBorder(Color.red));
+            }else{
+                 valor = Double.parseDouble(txValor.replace(",", "."));
+            }
+
+            String tipoProduto = "";
+            if(gup_Produto.getSelection() == null){
+                aviso += "Selecione um tipo de produto!\n";
+            }else{
+                tipoProduto = gup_Produto.getSelection().getActionCommand();
+            }
+
+            String unidadeVenda = "";
+            if(gup_Unidade.getSelection() == null){
+                aviso += "Selecione uma unidade de venda!\n";
+            }else{
+                unidadeVenda = gup_Unidade.getSelection().getActionCommand();
+            }
+
+
+            int quantidade = (int) spn_Quantidade.getValue();
+            if (quantidade <= 0) {
+                aviso += "Digite uma quantidade válida!\n";
+                spn_Quantidade.setBorder(javax.swing.BorderFactory.createLineBorder(Color.red));
+            }
+            String descricao = txtDescricao.getText();
+
+            if (!"".equals(aviso)) {
+
+                JOptionPane.showMessageDialog(this, aviso, "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
+            }else{
+                Produto novoProduto = new Produto(nome, codigoProduto, valor, tipoProduto, unidadeVenda, quantidade, descricao);
+                // ProdutoDAO dao = new ProdutoDAO();
+                // dao.inserir(novoProduto);
+                // JOptionPane.showMessageDialog(this, "Produto inserido com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+            }
+
+        } else if (objPro != null && objPro.getIdProduto() > 0){
+
         }
-
-        String tipoUnidadeVenda = "";
-        if (btnUnidade.isSelected()) {
-            tipoUnidadeVenda = btnUnidade.getText();
-        } else if (btnCaixa.isSelected()) {
-            tipoUnidadeVenda = btnCaixa.getText();
-        } else {
-            JOptionPane.showMessageDialog(this, "Selecione uma unidade de venda!");
-        }
-
-        
-        String nome = txt_Nome.getText();
-        
-        int codigoProduto = Integer.parseInt(txtCodigoProduto.getText());
-
-        String descricao = txtDescricao.getText();
-
-        double valor = Double.parseDouble(txtValor.getText());
-
-        int quantidade = (int) spn_Quantidade.getValue();
-
-
-        // Inserir no BD - FALTAR IMPLEMENTAR
-        Produto novoProduto = new Produto(nome, codigoProduto, tipoProduto, valor, tipoUnidadeVenda, quantidade, descricao);
         
         
-        // Apos de inserir no BD - LIMPE OS CAMPOS
-        txt_Nome.setText("");
-        txtCodigoProduto.setText("");
-        txtDescricao.setText("");
-        txtValor.setText("");
-        spn_Quantidade.setValue(0);
         
-    }//GEN-LAST:event_btn_InserirClienteActionPerformed
+    }//GEN-LAST:event_btn_InserirProdutoActionPerformed
 
     private void txtCodigoProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoProdutoKeyTyped
         char c = evt.getKeyChar();
@@ -385,7 +468,9 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
     private javax.swing.JRadioButton btnMedicamento;
     private javax.swing.JRadioButton btnSuplementos;
     private javax.swing.JRadioButton btnUnidade;
-    private javax.swing.JButton btn_InserirCliente;
+    private javax.swing.JButton btn_InserirProduto;
+    private javax.swing.ButtonGroup gup_Produto;
+    private javax.swing.ButtonGroup gup_Unidade;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labCodigoProduto;

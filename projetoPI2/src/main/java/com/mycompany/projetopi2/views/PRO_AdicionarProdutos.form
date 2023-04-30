@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="gup_Produto">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="gup_Unidade">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="Adicionar Produto"/>
@@ -66,7 +72,7 @@
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="lbl_Alerta" min="-2" pref="271" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btn_InserirCliente" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_InserirProduto" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
@@ -111,7 +117,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="btn_InserirCliente" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_InserirProduto" min="-2" max="-2" attributes="0"/>
                   <Component id="lbl_Alerta" min="-2" pref="38" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
@@ -193,11 +199,17 @@
       <SubComponents>
         <Component class="javax.swing.JRadioButton" name="btnCaixa">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="gup_Unidade"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Caixa"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="btnUnidade">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="gup_Unidade"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Unidade"/>
           </Properties>
         </Component>
@@ -281,6 +293,9 @@
       <SubComponents>
         <Component class="javax.swing.JRadioButton" name="btnMedicamento">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="gup_Produto"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Medicamento"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Default Cursor"/>
@@ -289,27 +304,39 @@
         </Component>
         <Component class="javax.swing.JRadioButton" name="btnHigiene">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="gup_Produto"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Higiene"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="btnCosmeticos">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="gup_Produto"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Cosm&#xe9;ticos"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="btnAcessorios">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="gup_Produto"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Acess&#xf3;rios"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="btnSuplementos">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="gup_Produto"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Suplementos e Vitaminicos"/>
           </Properties>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btn_InserirCliente">
+    <Component class="javax.swing.JButton" name="btn_InserirProduto">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/8672677_ic_fluent_add_filled_icon.png"/>
@@ -318,7 +345,7 @@
         <Property name="toolTipText" type="java.lang.String" value="Adicionar Produto"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_InserirClienteActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_InserirProdutoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
