@@ -4,6 +4,7 @@
  */
 package com.mycompany.projetopi2.views;
 
+import com.mycompany.projetopi2.dao.ProdutoDAO;
 import com.mycompany.projetopi2.models.Produto;
 
 import java.awt.Color;
@@ -35,7 +36,7 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
 
         txt_Nome.setText(objPro.getNome());
         txtCodigoProduto.setText(String.valueOf(objPro.getCodProduto()));
-        txtValor.setText(String.valueOf(objPro.getPreco()));
+        txtValor.setText(String.valueOf(objPro.getvalor()));
 
         switch (objPro.getCategoria()) {
             case "Medicamento":
@@ -99,7 +100,7 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
         btnUnidade = new javax.swing.JRadioButton();
         txtCodigoProduto = new javax.swing.JTextField();
         labCodigoProduto = new javax.swing.JLabel();
-        pnlTipoProduto = new javax.swing.JPanel();
+        pnlCategoria = new javax.swing.JPanel();
         btnMedicamento = new javax.swing.JRadioButton();
         btnHigiene = new javax.swing.JRadioButton();
         btnCosmeticos = new javax.swing.JRadioButton();
@@ -183,8 +184,8 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
         labCodigoProduto.setText("COD *");
         labCodigoProduto.setToolTipText("Código do Produto");
 
-        pnlTipoProduto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tipo de Produto *", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 51))); // NOI18N
-        pnlTipoProduto.setForeground(new java.awt.Color(0, 0, 51));
+        pnlCategoria.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Categoria *", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 51))); // NOI18N
+        pnlCategoria.setForeground(new java.awt.Color(0, 0, 51));
 
         gup_Produto.add(btnMedicamento);
         btnMedicamento.setText("Medicamento");
@@ -202,33 +203,33 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
         gup_Produto.add(btnSuplementos);
         btnSuplementos.setText("Suplementos e Vitaminicos");
 
-        javax.swing.GroupLayout pnlTipoProdutoLayout = new javax.swing.GroupLayout(pnlTipoProduto);
-        pnlTipoProduto.setLayout(pnlTipoProdutoLayout);
-        pnlTipoProdutoLayout.setHorizontalGroup(
-            pnlTipoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTipoProdutoLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnlCategoriaLayout = new javax.swing.GroupLayout(pnlCategoria);
+        pnlCategoria.setLayout(pnlCategoriaLayout);
+        pnlCategoriaLayout.setHorizontalGroup(
+            pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCategoriaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlTipoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCosmeticos)
-                    .addGroup(pnlTipoProdutoLayout.createSequentialGroup()
-                        .addGroup(pnlTipoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlCategoriaLayout.createSequentialGroup()
+                        .addGroup(pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnMedicamento)
                             .addComponent(btnSuplementos))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(pnlTipoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnHigiene)
                             .addComponent(btnAcessorios))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        pnlTipoProdutoLayout.setVerticalGroup(
-            pnlTipoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTipoProdutoLayout.createSequentialGroup()
+        pnlCategoriaLayout.setVerticalGroup(
+            pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCategoriaLayout.createSequentialGroup()
                 .addContainerGap(8, Short.MAX_VALUE)
-                .addGroup(pnlTipoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMedicamento)
                     .addComponent(btnAcessorios))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlTipoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSuplementos)
                     .addComponent(btnHigiene))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -287,7 +288,7 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtValor))
                                     .addComponent(txt_Nome)))
-                            .addComponent(pnlTipoProduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(pnlCategoria, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(lbl_Alerta, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -309,7 +310,7 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
                     .addComponent(labValor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlUnidadeVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -336,6 +337,8 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
 
     private void btn_InserirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InserirProdutoActionPerformed
         String aviso = "";
+        Boolean retorno = false;
+
         if(objPro == null){
             
             String nome = txt_Nome.getText();
@@ -359,20 +362,21 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
                  valor = Double.parseDouble(txValor.replace(",", "."));
             }
 
-            String tipoProduto = "";
+            String categoria = "";
             if(gup_Produto.getSelection() == null){
                 aviso += "Selecione um tipo de produto!\n";
+                pnlCategoria.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(Color.red), "Categoria *", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 51)));
             }else{
-                tipoProduto = gup_Produto.getSelection().getActionCommand();
+                categoria = gup_Produto.getSelection().getActionCommand();
             }
-
+            
             String unidadeVenda = "";
             if(gup_Unidade.getSelection() == null){
                 aviso += "Selecione uma unidade de venda!\n";
+                pnlUnidadeVenda.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(Color.red), "Unidade de Venda *", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 51)));
             }else{
                 unidadeVenda = gup_Unidade.getSelection().getActionCommand();
             }
-
 
             int quantidade = (int) spn_Quantidade.getValue();
             if (quantidade <= 0) {
@@ -386,10 +390,16 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, aviso, "Aviso", JOptionPane.WARNING_MESSAGE);
                 return;
             }else{
-                Produto novoProduto = new Produto(nome, codigoProduto, valor, tipoProduto, unidadeVenda, quantidade, descricao);
-                // ProdutoDAO dao = new ProdutoDAO();
-                // dao.inserir(novoProduto);
-                // JOptionPane.showMessageDialog(this, "Produto inserido com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                Produto novoProduto = new Produto(nome, codigoProduto, valor, categoria, unidadeVenda, quantidade, descricao);
+
+                retorno = ProdutoDAO.inserir(novoProduto);
+
+                if (retorno) {
+                    JOptionPane.showMessageDialog(this, "Produto inserido com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    limparCampos();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Erro ao inserir produto!", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
                 this.dispose();
             }
 
@@ -478,7 +488,7 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
     private javax.swing.JLabel labQuantidade;
     private javax.swing.JLabel labValor;
     private javax.swing.JLabel lbl_Alerta;
-    private javax.swing.JPanel pnlTipoProduto;
+    private javax.swing.JPanel pnlCategoria;
     private javax.swing.JPanel pnlUnidadeVenda;
     private javax.swing.JSpinner spn_Quantidade;
     private javax.swing.JTextField txtCodigoProduto;

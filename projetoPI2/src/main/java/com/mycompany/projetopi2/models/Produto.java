@@ -16,7 +16,7 @@ public class Produto {
     private String nome;
 	private String codProduto;
 	private double valor;
-    private String tipoProduto;
+    private String categoria;
 	private String unidadeVenda;
 	private int quantidade;
 	private String descricao;
@@ -26,12 +26,12 @@ public class Produto {
 	}
 
 
-	public Produto(String nome, String codProduto, double valor, String tipoProduto,
+	public Produto(String nome, String codProduto, double valor, String categoria,
 			String unidadeVenda, int quantidade, String descricao) {
 		this.nome = nome;
 		this.codProduto = codProduto;
 		this.valor = valor;
-		this.tipoProduto = tipoProduto;
+		this.categoria = categoria;
 		this.unidadeVenda = unidadeVenda;
 		this.quantidade = quantidade;
 		this.descricao = descricao;
@@ -58,13 +58,22 @@ public class Produto {
 	}
 
 
-	public double getvalor() {
+	public double getValor() {
 		return valor;
 	}
 
 
-	public void setvalor(double valor) {
+	public void setValor(double valor) {
 		this.valor = valor;
+	}
+
+
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 
 

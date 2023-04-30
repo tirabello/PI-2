@@ -65,7 +65,7 @@
                                   <Component id="txt_Nome" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="pnlTipoProduto" alignment="0" max="32767" attributes="0"/>
+                          <Component id="pnlCategoria" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -95,7 +95,7 @@
                   <Component id="txtValor" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pnlTipoProduto" min="-2" max="-2" attributes="0"/>
+              <Component id="pnlCategoria" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="pnlUnidadeVenda" min="-2" max="-2" attributes="0"/>
@@ -233,11 +233,11 @@
         <Property name="toolTipText" type="java.lang.String" value="C&#xf3;digo do Produto"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JPanel" name="pnlTipoProduto">
+    <Container class="javax.swing.JPanel" name="pnlCategoria">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Tipo de Produto *">
+            <TitledBorder title="Categoria *">
               <Font PropertyName="font" name="Segoe UI" size="12" style="1"/>
               <Color PropertyName="color" blue="33" green="0" red="0" type="rgb"/>
             </TitledBorder>
