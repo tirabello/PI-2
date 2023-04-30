@@ -36,7 +36,7 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
 
         txt_Nome.setText(objPro.getNome());
         txtCodigoProduto.setText(String.valueOf(objPro.getCodProduto()));
-        txtValor.setText(String.valueOf(objPro.getvalor()));
+        txtValor.setText(String.valueOf(objPro.getValor()));
 
         switch (objPro.getCategoria()) {
             case "Medicamento":
@@ -363,11 +363,13 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
             }
 
             String categoria = "";
+            System.out.println(gup_Produto.getSelection().getActionCommand());
             if(gup_Produto.getSelection() == null){
                 aviso += "Selecione um tipo de produto!\n";
                 pnlCategoria.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(Color.red), "Categoria *", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 51)));
             }else{
                 categoria = gup_Produto.getSelection().getActionCommand();
+                System.out.println(categoria);
             }
             
             String unidadeVenda = "";
