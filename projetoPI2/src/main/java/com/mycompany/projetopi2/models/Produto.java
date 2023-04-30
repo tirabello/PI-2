@@ -11,10 +11,12 @@ package com.mycompany.projetopi2.models;
  * @author ldss1
  */
 public class Produto {
+
+	private int idProduto;
     private String nome;
-	private int cod_produto;
-	private String categoria;
-	private double preco;
+	private String codProduto;
+	private double valor;
+    private String tipoProduto;
 	private String unidadeVenda;
 	private int quantidade;
 	private String descricao;
@@ -24,18 +26,18 @@ public class Produto {
 	}
 
 
-	public Produto(String nome, int cod_produto,String categoria, double preco,
+	public Produto(String nome, String codProduto, double valor, String tipoProduto,
 			String unidadeVenda, int quantidade, String descricao) {
 		this.nome = nome;
-		this.cod_produto = cod_produto;
-		this.categoria = categoria;
-		this.preco = preco;
+		this.codProduto = codProduto;
+		this.valor = valor;
+		this.tipoProduto = tipoProduto;
 		this.unidadeVenda = unidadeVenda;
 		this.quantidade = quantidade;
 		this.descricao = descricao;
 	}
 
-
+	
 	public String getNome() {
 		return nome;
 	}
@@ -46,33 +48,23 @@ public class Produto {
 	}
 
 
-	public int getCod_produto() {
-		return cod_produto;
+	public String getCodProduto() {
+		return codProduto;
 	}
 
 
-	public void setCod_produto(int cod_produto) {
-		this.cod_produto = cod_produto;
+	public void setCodProduto(String codProduto) {
+		this.codProduto = codProduto;
 	}
 
 
-	public String getCategoria() {
-		return categoria;
+	public double getvalor() {
+		return valor;
 	}
 
 
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
-	}
-
-
-	public double getPreco() {
-		return preco;
-	}
-
-
-	public void setPreco(double preco) {
-		this.preco = preco;
+	public void setvalor(double valor) {
+		this.valor = valor;
 	}
 
 
@@ -103,6 +95,11 @@ public class Produto {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+
+	public int getIdProduto() {
+		return idProduto;
 	}
 
 }
