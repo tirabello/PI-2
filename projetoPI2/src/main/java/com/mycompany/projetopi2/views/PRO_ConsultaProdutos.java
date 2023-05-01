@@ -4,8 +4,14 @@
  */
 package com.mycompany.projetopi2.views;
 
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import com.mycompany.projetopi2.dao.ProdutoDAO;
+import com.mycompany.projetopi2.models.Produto;
 
 /**
  *
@@ -19,6 +25,26 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
     public PRO_ConsultaProdutos() {
         initComponents();
         pnl_Descricao.setVisible(false);
+        carregarProdutos();
+    }
+
+    private void carregarProdutos() {
+        ArrayList<Produto> produtos = ProdutoDAO.listarProdutos();
+
+        DefaultTableModel modelo = (DefaultTableModel) tbl_ConsultaProduto.getModel();
+        modelo.setNumRows(0);
+
+        for (Produto produto : produtos) {
+            modelo.addRow(new String[]{
+                produto.getCodProduto(),
+                produto.getNome(),
+                produto.getCategoria(),
+                produto.getUnidadeVenda(),
+                Double.toString(produto.getValor()),
+                Integer.toString(produto.getQuantidade())
+            });
+        }
+        
     }
 
     /**
@@ -53,9 +79,17 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "COD.", "NOME", "TIPO", "VALOR", "QTD ESTOQUE"
+                "COD.", "NOME", "CATEGORIA", "TIPO", "VALOR", "QTD ESTOQUE"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbl_ConsultaProduto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_ConsultaProdutoMouseClicked(evt);
@@ -75,7 +109,12 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673694_ic_fluent_search_filled_icon.png"))); // NOI18N
 
-        cbx_Categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Medicamento", "Higiene", "Cosméticos", "Acessórios", "Suplementos e Vitaminicos" }));
+        cbx_Categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todas", "Medicamento", "Higiene", "Cosméticos", "Acessórios", "Suplementos e Vitaminicos" }));
+        cbx_Categoria.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbx_CategoriaItemStateChanged(evt);
+            }
+        });
 
         jLabel2.setText("Categoria");
 
@@ -125,6 +164,7 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
 
         pnl_Descricao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DESCRIÇÃO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
+        txt_Descricao.setEditable(false);
         txt_Descricao.setColumns(20);
         txt_Descricao.setRows(5);
         jScrollPane2.setViewportView(txt_Descricao);
@@ -151,13 +191,13 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(pnl_Descricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_AdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGap(18, 18, 18)
                             .addComponent(btn_RemoverProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
@@ -191,16 +231,30 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
 
     private void tbl_ConsultaProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_ConsultaProdutoMouseClicked
         // TODO add your handling code here:
-        pnl_Descricao.setVisible(true);
-        
-        
-//        JTable source = (JTable)evt.getSource();
-//            int row = source.rowAtPoint( evt.getPoint() );
-//            int column = source.columnAtPoint( evt.getPoint() );
-//        
-//
-//            JOptionPane.showMessageDialog(null, row + " " +column);
+        exibirDescricao();
     }//GEN-LAST:event_tbl_ConsultaProdutoMouseClicked
+
+    private void cbx_CategoriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbx_CategoriaItemStateChanged
+        // TODO add your handling code here:
+        String categoria = cbx_Categoria.getSelectedItem().toString();
+        if (categoria.equals("Todos")) {
+            
+        } else {
+            
+        }
+    }//GEN-LAST:event_cbx_CategoriaItemStateChanged
+
+    private void exibirDescricao() {
+        pnl_Descricao.setVisible(true);
+
+        int linha = tbl_ConsultaProduto.getSelectedRow();
+        String codigo = tbl_ConsultaProduto.getValueAt(linha, 0).toString();
+
+        String descricao = ProdutoDAO.exibirDescricao(codigo);
+
+        txt_Descricao.setText(descricao);
+    }
+
 
     /**
      * @param args the command line arguments

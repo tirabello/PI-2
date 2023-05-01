@@ -29,13 +29,13 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="pnl_Descricao" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jScrollPane1" min="-2" pref="900" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="btn_AdicionarProduto" min="-2" pref="58" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btn_RemoverProduto" min="-2" pref="62" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -80,12 +80,13 @@
         <Component class="javax.swing.JTable" name="tbl_ConsultaProduto">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="5" rowCount="0">
-                <Column editable="true" title="COD." type="java.lang.Object"/>
-                <Column editable="true" title="NOME" type="java.lang.Object"/>
-                <Column editable="true" title="TIPO" type="java.lang.Object"/>
-                <Column editable="true" title="VALOR" type="java.lang.Object"/>
-                <Column editable="true" title="QTD ESTOQUE" type="java.lang.Object"/>
+              <Table columnCount="6" rowCount="0">
+                <Column editable="false" title="COD." type="java.lang.Object"/>
+                <Column editable="false" title="NOME" type="java.lang.Object"/>
+                <Column editable="false" title="CATEGORIA" type="java.lang.Object"/>
+                <Column editable="false" title="TIPO" type="java.lang.Object"/>
+                <Column editable="false" title="VALOR" type="java.lang.Object"/>
+                <Column editable="false" title="QTD ESTOQUE" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -96,6 +97,11 @@
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="100" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -188,15 +194,19 @@
         <Component class="javax.swing.JComboBox" name="cbx_Categoria">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="Medicamento"/>
-                <StringItem index="1" value="Higiene"/>
-                <StringItem index="2" value="Cosm&#xe9;ticos"/>
-                <StringItem index="3" value="Acess&#xf3;rios"/>
-                <StringItem index="4" value="Suplementos e Vitaminicos"/>
+              <StringArray count="6">
+                <StringItem index="0" value="Todas"/>
+                <StringItem index="1" value="Medicamento"/>
+                <StringItem index="2" value="Higiene"/>
+                <StringItem index="3" value="Cosm&#xe9;ticos"/>
+                <StringItem index="4" value="Acess&#xf3;rios"/>
+                <StringItem index="5" value="Suplementos e Vitaminicos"/>
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbx_CategoriaItemStateChanged"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
@@ -269,6 +279,7 @@
           <SubComponents>
             <Component class="javax.swing.JTextArea" name="txt_Descricao">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
               </Properties>

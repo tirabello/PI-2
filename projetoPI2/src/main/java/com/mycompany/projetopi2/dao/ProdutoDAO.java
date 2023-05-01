@@ -6,7 +6,9 @@ package com.mycompany.projetopi2.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.mycompany.projetopi2.models.Produto;
 import com.mycompany.projetopi2.utils.GerenciadorConexao;
@@ -59,6 +61,63 @@ public class ProdutoDAO {
 	// Editar Produto
 	// Excluir Produto
 	// Buscar Produto
+
 	// Listar Produto
+	public static ArrayList<Produto> listarProdutos() {
+		ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
+		try {
+			conexao = GerenciadorConexao.abrirConexao();
+			query = "SELECT * FROM Produto";
+			instrucaoSQL = conexao.prepareStatement(query);
+			ResultSet rs = instrucaoSQL.executeQuery();
+
+
+			while (rs.next()) {
+				Produto produto = new Produto();
+				produto.setNome(rs.getString("Nome"));
+				produto.setCodProduto(rs.getString("CodProduto"));
+				produto.setValor(rs.getDouble("Valor"));
+				produto.setCategoria(rs.getString("Categoria"));
+				produto.setUnidadeVenda(rs.getString("UnidadeVenda"));
+				produto.setQuantidade(rs.getInt("Quantidade"));
+				produto.setDescricao(rs.getString("Descricao"));
+
+				listaProdutos.add(produto);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return listaProdutos;
+	}
+
+	// Exibir Descrição do Produto
+
+	public static String exibirDescricao(String codProduto) {
+		String descricao = null;
+		try {
+			conexao = GerenciadorConexao.abrirConexao();
+			query = "SELECT Descricao FROM Produto WHERE CodProduto = ?";
+			instrucaoSQL = conexao.prepareStatement(query);
+			instrucaoSQL.setString(1, codProduto);
+			ResultSet rs = instrucaoSQL.executeQuery();
+
+			while (rs.next()) {
+				descricao = rs.getString("Descricao");
+			}
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+		}
+		return descricao;
+	}
     
 }
