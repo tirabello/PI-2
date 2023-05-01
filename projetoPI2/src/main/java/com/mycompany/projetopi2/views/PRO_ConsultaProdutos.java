@@ -25,11 +25,10 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
     public PRO_ConsultaProdutos() {
         initComponents();
         pnl_Descricao.setVisible(false);
-        carregarProdutos();
+        carregarProdutos(ProdutoDAO.listarProdutos());
     }
 
-    private void carregarProdutos() {
-        ArrayList<Produto> produtos = ProdutoDAO.listarProdutos();
+    private void carregarProdutos(ArrayList<Produto> produtos) {
 
         DefaultTableModel modelo = (DefaultTableModel) tbl_ConsultaProduto.getModel();
         modelo.setNumRows(0);
@@ -238,9 +237,13 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
         // TODO add your handling code here:
         String categoria = cbx_Categoria.getSelectedItem().toString();
         if (categoria.equals("Todos")) {
-            
+            carregarProdutos(ProdutoDAO.listarProdutos());
         } else {
+            ArrayList<Produto> listaProdutos = ProdutoDAO.pesquisarPorCategoria(categoria);
+            DefaultTableModel tmProduto = new DefaultTableModel();
             
+            carregarProdutos(listaProdutos);
+
         }
     }//GEN-LAST:event_cbx_CategoriaItemStateChanged
 

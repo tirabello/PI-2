@@ -119,5 +119,38 @@ public class ProdutoDAO {
 		}
 		return descricao;
 	}
+
+	public static ArrayList<Produto> pesquisarPorCategoria(String categoria) {
+		ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
+
+		try {
+			conexao = GerenciadorConexao.abrirConexao();
+			query = "SELECT * FROM Produto WHERE Categoria = ?";
+			instrucaoSQL = conexao.prepareStatement(query);
+			instrucaoSQL.setString(1, categoria);
+			ResultSet rs = instrucaoSQL.executeQuery();
+
+			while (rs.next()) {
+				Produto produto = new Produto();
+				produto.setNome(rs.getString("Nome"));
+				produto.setCodProduto(rs.getString("CodProduto"));
+				produto.setValor(rs.getDouble("Valor"));
+				produto.setCategoria(rs.getString("Categoria"));
+				produto.setUnidadeVenda(rs.getString("UnidadeVenda"));
+				produto.setQuantidade(rs.getInt("Quantidade"));
+				produto.setDescricao(rs.getString("Descricao"));
+
+				listaProdutos.add(produto);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+		}
+		return listaProdutos;
+	}
     
 }
