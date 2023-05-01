@@ -105,6 +105,11 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Consultar"));
 
         txt_Pesquisar.setToolTipText("");
+        txt_Pesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_PesquisarKeyTyped(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673694_ic_fluent_search_filled_icon.png"))); // NOI18N
 
@@ -160,6 +165,11 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
 
         btn_RemoverProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673137_ic_fluent_dismiss_filled_icon.png"))); // NOI18N
         btn_RemoverProduto.setToolTipText("Remover");
+        btn_RemoverProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_RemoverProdutoActionPerformed(evt);
+            }
+        });
 
         pnl_Descricao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DESCRIÇÃO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
@@ -235,17 +245,59 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
 
     private void cbx_CategoriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbx_CategoriaItemStateChanged
         // TODO add your handling code here:
+
         String categoria = cbx_Categoria.getSelectedItem().toString();
-        if (categoria.equals("Todos")) {
+
+        if (categoria.equals("Todas")) {
             carregarProdutos(ProdutoDAO.listarProdutos());
         } else {
-            ArrayList<Produto> listaProdutos = ProdutoDAO.pesquisarPorCategoria(categoria);
-            DefaultTableModel tmProduto = new DefaultTableModel();
-            
+            ArrayList<Produto> listaProdutos = ProdutoDAO.pesquisarPorCategoria(categoria);            
             carregarProdutos(listaProdutos);
-
         }
     }//GEN-LAST:event_cbx_CategoriaItemStateChanged
+
+    private void txt_PesquisarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PesquisarKeyTyped
+        // TODO add your handling code here:
+        String busca = txt_Pesquisar.getText();
+        String categoria = cbx_Categoria.getSelectedItem().toString();
+
+        if (categoria.equals("Todas")) {
+            ArrayList<Produto> listaProdutos = ProdutoDAO.pesquisarPorNome(busca);
+            carregarProdutos(listaProdutos);
+        } else {
+            ArrayList<Produto> listaProdutos = ProdutoDAO.pesquisarPorNomeECategoria(busca, categoria);
+            carregarProdutos(listaProdutos);
+        }
+
+    }//GEN-LAST:event_txt_PesquisarKeyTyped
+
+    private void btn_RemoverProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RemoverProdutoActionPerformed
+        // TODO add your handling code here:
+        int linha = tbl_ConsultaProduto.getSelectedRow();
+
+        if (linha == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione um produto para remover!");
+        } else {
+            String codigo = tbl_ConsultaProduto.getValueAt(linha, 0).toString();
+            String nome = tbl_ConsultaProduto.getValueAt(linha, 1).toString();
+
+            int opcao = JOptionPane.showConfirmDialog(this, "Deseja remover o produto " + nome + "?");
+
+            if (opcao == 0) {
+                boolean sucesso = ProdutoDAO.removerProduto(codigo);
+                if (sucesso) {
+                    JOptionPane.showMessageDialog(this, "Produto removido com sucesso!");
+                    carregarProdutos(ProdutoDAO.listarProdutos());
+                } else {
+                    JOptionPane.showMessageDialog(this, "Erro ao remover produto!");
+                }
+
+            }
+        }
+
+
+
+    }//GEN-LAST:event_btn_RemoverProdutoActionPerformed
 
     private void exibirDescricao() {
         pnl_Descricao.setVisible(true);

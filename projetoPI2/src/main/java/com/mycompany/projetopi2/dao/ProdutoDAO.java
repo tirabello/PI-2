@@ -152,5 +152,101 @@ public class ProdutoDAO {
 		}
 		return listaProdutos;
 	}
+
+	public static ArrayList<Produto> pesquisarPorNome(String busca) {
+
+		ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
+
+		try {
+			conexao = GerenciadorConexao.abrirConexao();
+			query = "SELECT * FROM Produto WHERE Nome LIKE ?";
+			instrucaoSQL = conexao.prepareStatement(query);
+			instrucaoSQL.setString(1, "%" + busca + "%");
+			ResultSet rs = instrucaoSQL.executeQuery();
+
+			while (rs.next()) {
+				Produto produto = new Produto();
+				produto.setNome(rs.getString("Nome"));
+				produto.setCodProduto(rs.getString("CodProduto"));
+				produto.setValor(rs.getDouble("Valor"));
+				produto.setCategoria(rs.getString("Categoria"));
+				produto.setUnidadeVenda(rs.getString("UnidadeVenda"));
+				produto.setQuantidade(rs.getInt("Quantidade"));
+				produto.setDescricao(rs.getString("Descricao"));
+
+				listaProdutos.add(produto);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+		}
+		return listaProdutos;
+
+	}
+
+	public static ArrayList<Produto> pesquisarPorNomeECategoria(String busca, String categoria) {
+	
+		ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
+
+		try {
+			conexao = GerenciadorConexao.abrirConexao();
+			query = "SELECT * FROM Produto WHERE Nome LIKE ? AND Categoria = ?";
+			instrucaoSQL = conexao.prepareStatement(query);
+			instrucaoSQL.setString(1, "%" + busca + "%");
+			instrucaoSQL.setString(2, categoria);
+			ResultSet rs = instrucaoSQL.executeQuery();
+
+			while (rs.next()) {
+				Produto produto = new Produto();
+				produto.setNome(rs.getString("Nome"));
+				produto.setCodProduto(rs.getString("CodProduto"));
+				produto.setValor(rs.getDouble("Valor"));
+				produto.setCategoria(rs.getString("Categoria"));
+				produto.setUnidadeVenda(rs.getString("UnidadeVenda"));
+				produto.setQuantidade(rs.getInt("Quantidade"));
+				produto.setDescricao(rs.getString("Descricao"));
+
+				listaProdutos.add(produto);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+		}
+		return listaProdutos;
+
+	}
+
+	public static boolean removerProduto(String codigo) {
+
+		try {
+			conexao = GerenciadorConexao.abrirConexao();
+			query = "DELETE FROM Produto WHERE CodProduto = ?";
+			instrucaoSQL = conexao.prepareStatement(query);
+			instrucaoSQL.setString(1, codigo);
+			
+			int linhasAfetadas = instrucaoSQL.executeUpdate();
+
+            if (linhasAfetadas > 0) {
+                status = true;
+            }
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+		}
+		return status;
+
+	}
     
 }
