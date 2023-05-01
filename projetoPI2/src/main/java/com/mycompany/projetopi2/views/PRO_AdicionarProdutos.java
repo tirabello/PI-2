@@ -468,6 +468,7 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
 
             if (retorno) {
                 this.dispose();
+                PRO_ConsultaProdutos.atualizarTabela();
                 JOptionPane.showMessageDialog(this, "Produto atualizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(this, "Erro ao atualizar produto!", "Erro", JOptionPane.ERROR_MESSAGE);

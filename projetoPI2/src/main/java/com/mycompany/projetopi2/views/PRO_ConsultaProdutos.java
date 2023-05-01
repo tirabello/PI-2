@@ -28,7 +28,7 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
         carregarProdutos(ProdutoDAO.listarProdutos());
     }
 
-    private void carregarProdutos(ArrayList<Produto> produtos) {
+    private static void carregarProdutos(ArrayList<Produto> produtos) {
 
         DefaultTableModel modelo = (DefaultTableModel) tbl_ConsultaProduto.getModel();
         modelo.setNumRows(0);
@@ -375,8 +375,11 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel pnl_Descricao;
-    private javax.swing.JTable tbl_ConsultaProduto;
+    private static javax.swing.JTable tbl_ConsultaProduto;
     private javax.swing.JTextArea txt_Descricao;
     private javax.swing.JTextField txt_Pesquisar;
     // End of variables declaration//GEN-END:variables
+    public static void atualizarTabela() {
+        carregarProdutos(ProdutoDAO.listarProdutos());
+    }
 }
