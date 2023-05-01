@@ -28,7 +28,7 @@ public class ProdutoDAO {
 		try {
 
 			conexao = GerenciadorConexao.abrirConexao();
-			query = "INSERT INTO produto (Nome, CodProduto, Valor, Categoria, UnidadeVenda, Quantidade, Descricao) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			query = "INSERT INTO Produto (Nome, CodProduto, Valor, Categoria, UnidadeVenda, Quantidade, Descricao) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 			instrucaoSQL = conexao.prepareStatement(query);
 

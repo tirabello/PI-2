@@ -40,26 +40,26 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
 
         switch (objPro.getCategoria()) {
             case "Medicamento":
-                btnMedicamento.setSelected(true);
+                rbo_Medicamento.setSelected(true);
                 break;
             case "Higiene":
-                btnHigiene.setSelected(true);
+                rbo_Higiene.setSelected(true);
                 break;
             case "Cosmeticos":
-                btnCosmeticos.setSelected(true);
+                rbo_Cosmeticos.setSelected(true);
                 break;
             case "Acessorios":
-                btnAcessorios.setSelected(true);
+                rbo_Acessorios.setSelected(true);
                 break;
             case "Suplementos":
-                btnSuplementos.setSelected(true);
+                rbo_Suplementos.setSelected(true);
                 break;
         }
 
         if (objPro.getUnidadeVenda().equals("Unidade")) {
-            btnUnidade.setSelected(true);
+            rbo_Unidade.setSelected(true);
         } else {
-            btnCaixa.setSelected(true);
+            rbo_Caixa.setSelected(true);
         }
 
         spn_Quantidade.setValue(objPro.getQuantidade());
@@ -96,16 +96,16 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
         labValor = new javax.swing.JLabel();
         labQuantidade = new javax.swing.JLabel();
         pnlUnidadeVenda = new javax.swing.JPanel();
-        btnCaixa = new javax.swing.JRadioButton();
-        btnUnidade = new javax.swing.JRadioButton();
+        rbo_Caixa = new javax.swing.JRadioButton();
+        rbo_Unidade = new javax.swing.JRadioButton();
         txtCodigoProduto = new javax.swing.JTextField();
         labCodigoProduto = new javax.swing.JLabel();
         pnlCategoria = new javax.swing.JPanel();
-        btnMedicamento = new javax.swing.JRadioButton();
-        btnHigiene = new javax.swing.JRadioButton();
-        btnCosmeticos = new javax.swing.JRadioButton();
-        btnAcessorios = new javax.swing.JRadioButton();
-        btnSuplementos = new javax.swing.JRadioButton();
+        rbo_Medicamento = new javax.swing.JRadioButton();
+        rbo_Higiene = new javax.swing.JRadioButton();
+        rbo_Cosmeticos = new javax.swing.JRadioButton();
+        rbo_Acessorios = new javax.swing.JRadioButton();
+        rbo_Suplementos = new javax.swing.JRadioButton();
         btn_InserirProduto = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txt_Nome = new javax.swing.JTextField();
@@ -141,11 +141,11 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
         pnlUnidadeVenda.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Unidade de Venda *", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 51))); // NOI18N
         pnlUnidadeVenda.setForeground(new java.awt.Color(0, 0, 51));
 
-        gup_Unidade.add(btnCaixa);
-        btnCaixa.setText("Caixa");
+        gup_Unidade.add(rbo_Caixa);
+        rbo_Caixa.setText("Caixa");
 
-        gup_Unidade.add(btnUnidade);
-        btnUnidade.setText("Unidade");
+        gup_Unidade.add(rbo_Unidade);
+        rbo_Unidade.setText("Unidade");
 
         javax.swing.GroupLayout pnlUnidadeVendaLayout = new javax.swing.GroupLayout(pnlUnidadeVenda);
         pnlUnidadeVenda.setLayout(pnlUnidadeVendaLayout);
@@ -153,9 +153,9 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
             pnlUnidadeVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlUnidadeVendaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnUnidade)
+                .addComponent(rbo_Unidade)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCaixa)
+                .addComponent(rbo_Caixa)
                 .addGap(169, 169, 169))
         );
         pnlUnidadeVendaLayout.setVerticalGroup(
@@ -163,8 +163,8 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
             .addGroup(pnlUnidadeVendaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlUnidadeVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCaixa)
-                    .addComponent(btnUnidade))
+                    .addComponent(rbo_Caixa)
+                    .addComponent(rbo_Unidade))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -187,21 +187,21 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
         pnlCategoria.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Categoria *", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 51))); // NOI18N
         pnlCategoria.setForeground(new java.awt.Color(0, 0, 51));
 
-        gup_Produto.add(btnMedicamento);
-        btnMedicamento.setText("Medicamento");
-        btnMedicamento.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        gup_Produto.add(rbo_Medicamento);
+        rbo_Medicamento.setText("Medicamento");
+        rbo_Medicamento.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        gup_Produto.add(btnHigiene);
-        btnHigiene.setText("Higiene");
+        gup_Produto.add(rbo_Higiene);
+        rbo_Higiene.setText("Higiene");
 
-        gup_Produto.add(btnCosmeticos);
-        btnCosmeticos.setText("Cosméticos");
+        gup_Produto.add(rbo_Cosmeticos);
+        rbo_Cosmeticos.setText("Cosméticos");
 
-        gup_Produto.add(btnAcessorios);
-        btnAcessorios.setText("Acessórios");
+        gup_Produto.add(rbo_Acessorios);
+        rbo_Acessorios.setText("Acessórios");
 
-        gup_Produto.add(btnSuplementos);
-        btnSuplementos.setText("Suplementos e Vitaminicos");
+        gup_Produto.add(rbo_Suplementos);
+        rbo_Suplementos.setText("Suplementos e Vitaminicos");
 
         javax.swing.GroupLayout pnlCategoriaLayout = new javax.swing.GroupLayout(pnlCategoria);
         pnlCategoria.setLayout(pnlCategoriaLayout);
@@ -210,30 +210,32 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
             .addGroup(pnlCategoriaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCosmeticos)
+                    .addGroup(pnlCategoriaLayout.createSequentialGroup()
+                        .addComponent(rbo_Cosmeticos)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnlCategoriaLayout.createSequentialGroup()
                         .addGroup(pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnMedicamento)
-                            .addComponent(btnSuplementos))
+                            .addComponent(rbo_Medicamento)
+                            .addComponent(rbo_Suplementos))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnHigiene)
-                            .addComponent(btnAcessorios))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(rbo_Acessorios)
+                            .addComponent(rbo_Higiene))
+                        .addGap(108, 108, 108))))
         );
         pnlCategoriaLayout.setVerticalGroup(
             pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCategoriaLayout.createSequentialGroup()
                 .addContainerGap(8, Short.MAX_VALUE)
                 .addGroup(pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnMedicamento)
-                    .addComponent(btnAcessorios))
+                    .addComponent(rbo_Medicamento)
+                    .addComponent(rbo_Acessorios))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSuplementos)
-                    .addComponent(btnHigiene))
+                    .addComponent(rbo_Suplementos)
+                    .addComponent(rbo_Higiene))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCosmeticos))
+                .addComponent(rbo_Cosmeticos))
         );
 
         btn_InserirProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8672677_ic_fluent_add_filled_icon.png"))); // NOI18N
@@ -363,22 +365,44 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
             }
 
             String categoria = "";
-            System.out.println(gup_Produto.getSelection().getActionCommand());
-            if(gup_Produto.getSelection() == null){
+            if(rbo_Medicamento.isSelected()){
+                categoria = rbo_Medicamento.getActionCommand();
+            }else if(rbo_Suplementos.isSelected()){
+                categoria = rbo_Suplementos.getActionCommand();
+            }else if(rbo_Cosmeticos.isSelected()){
+                categoria = rbo_Cosmeticos.getActionCommand();
+            }else if(rbo_Acessorios.isSelected()){
+                categoria = rbo_Acessorios.getActionCommand();
+            }else if(rbo_Higiene.isSelected()){
+                categoria = rbo_Higiene.getActionCommand();
+            }else{
                 aviso += "Selecione um tipo de produto!\n";
                 pnlCategoria.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(Color.red), "Categoria *", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 51)));
-            }else{
-                categoria = gup_Produto.getSelection().getActionCommand();
-                System.out.println(categoria);
             }
+            // categoria = gup_Produto.getSelection().getActionCommand();
+            // if(gup_Produto.getSelection() == null){
+            //     aviso += "Selecione um tipo de produto!\n";
+            //     pnlCategoria.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(Color.red), "Categoria *", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 51)));
+            // }else{
+            //     categoria = gup_Produto.getSelection().getActionCommand();
+            // }
             
             String unidadeVenda = "";
-            if(gup_Unidade.getSelection() == null){
+            if(rbo_Unidade.isSelected()){
+                unidadeVenda = rbo_Unidade.getActionCommand();
+            }else if(rbo_Caixa.isSelected()){
+                unidadeVenda = rbo_Caixa.getActionCommand();
+            }else{
                 aviso += "Selecione uma unidade de venda!\n";
                 pnlUnidadeVenda.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(Color.red), "Unidade de Venda *", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 51)));
-            }else{
-                unidadeVenda = gup_Unidade.getSelection().getActionCommand();
             }
+            // String unidadeVenda = gup_Unidade.getSelection().getActionCommand();
+            // if(gup_Unidade.getSelection() == null){
+            //     aviso += "Selecione uma unidade de venda!\n";
+            //     pnlUnidadeVenda.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(Color.red), "Unidade de Venda *", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 0, 51)));
+            // }else{
+            //     unidadeVenda = gup_Unidade.getSelection().getActionCommand();
+            // }
 
             int quantidade = (int) spn_Quantidade.getValue();
             if (quantidade <= 0) {
@@ -388,9 +412,7 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
             String descricao = txtDescricao.getText();
 
             if (!"".equals(aviso)) {
-
                 JOptionPane.showMessageDialog(this, aviso, "Aviso", JOptionPane.WARNING_MESSAGE);
-                return;
             }else{
                 Produto novoProduto = new Produto(nome, codigoProduto, valor, categoria, unidadeVenda, quantidade, descricao);
 
@@ -473,13 +495,6 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton btnAcessorios;
-    private javax.swing.JRadioButton btnCaixa;
-    private javax.swing.JRadioButton btnCosmeticos;
-    private javax.swing.JRadioButton btnHigiene;
-    private javax.swing.JRadioButton btnMedicamento;
-    private javax.swing.JRadioButton btnSuplementos;
-    private javax.swing.JRadioButton btnUnidade;
     private javax.swing.JButton btn_InserirProduto;
     private javax.swing.ButtonGroup gup_Produto;
     private javax.swing.ButtonGroup gup_Unidade;
@@ -492,6 +507,13 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_Alerta;
     private javax.swing.JPanel pnlCategoria;
     private javax.swing.JPanel pnlUnidadeVenda;
+    private javax.swing.JRadioButton rbo_Acessorios;
+    private javax.swing.JRadioButton rbo_Caixa;
+    private javax.swing.JRadioButton rbo_Cosmeticos;
+    private javax.swing.JRadioButton rbo_Higiene;
+    private javax.swing.JRadioButton rbo_Medicamento;
+    private javax.swing.JRadioButton rbo_Suplementos;
+    private javax.swing.JRadioButton rbo_Unidade;
     private javax.swing.JSpinner spn_Quantidade;
     private javax.swing.JTextField txtCodigoProduto;
     private javax.swing.JTextArea txtDescricao;

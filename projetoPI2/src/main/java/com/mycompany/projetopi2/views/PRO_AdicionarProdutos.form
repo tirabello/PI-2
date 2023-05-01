@@ -176,9 +176,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnUnidade" min="-2" max="-2" attributes="0"/>
+                  <Component id="rbo_Unidade" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="btnCaixa" min="-2" max="-2" attributes="0"/>
+                  <Component id="rbo_Caixa" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="169" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -188,8 +188,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnCaixa" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnUnidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbo_Caixa" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbo_Unidade" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -197,7 +197,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JRadioButton" name="btnCaixa">
+        <Component class="javax.swing.JRadioButton" name="rbo_Caixa">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="gup_Unidade"/>
@@ -205,7 +205,7 @@
             <Property name="text" type="java.lang.String" value="Caixa"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="btnUnidade">
+        <Component class="javax.swing.JRadioButton" name="rbo_Unidade">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="gup_Unidade"/>
@@ -254,20 +254,23 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnCosmeticos" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="rbo_Cosmeticos" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnMedicamento" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnSuplementos" min="-2" max="-2" attributes="0"/>
+                              <Component id="rbo_Medicamento" min="-2" max="-2" attributes="0"/>
+                              <Component id="rbo_Suplementos" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnHigiene" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnAcessorios" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="rbo_Acessorios" min="-2" max="-2" attributes="0"/>
+                              <Component id="rbo_Higiene" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -276,22 +279,22 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace pref="8" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnMedicamento" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnAcessorios" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbo_Medicamento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbo_Acessorios" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnSuplementos" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnHigiene" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbo_Suplementos" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbo_Higiene" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnCosmeticos" min="-2" max="-2" attributes="0"/>
+                  <Component id="rbo_Cosmeticos" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JRadioButton" name="btnMedicamento">
+        <Component class="javax.swing.JRadioButton" name="rbo_Medicamento">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="gup_Produto"/>
@@ -302,7 +305,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="btnHigiene">
+        <Component class="javax.swing.JRadioButton" name="rbo_Higiene">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="gup_Produto"/>
@@ -310,7 +313,7 @@
             <Property name="text" type="java.lang.String" value="Higiene"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="btnCosmeticos">
+        <Component class="javax.swing.JRadioButton" name="rbo_Cosmeticos">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="gup_Produto"/>
@@ -318,7 +321,7 @@
             <Property name="text" type="java.lang.String" value="Cosm&#xe9;ticos"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="btnAcessorios">
+        <Component class="javax.swing.JRadioButton" name="rbo_Acessorios">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="gup_Produto"/>
@@ -326,7 +329,7 @@
             <Property name="text" type="java.lang.String" value="Acess&#xf3;rios"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="btnSuplementos">
+        <Component class="javax.swing.JRadioButton" name="rbo_Suplementos">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="gup_Produto"/>
