@@ -241,6 +241,27 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
     private void tbl_ConsultaProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_ConsultaProdutoMouseClicked
         // TODO add your handling code here:
         exibirDescricao();
+        if (evt.getClickCount() == 2) {
+            int linha = tbl_ConsultaProduto.getSelectedRow();
+            
+            DefaultTableModel modelo = (DefaultTableModel) tbl_ConsultaProduto.getModel();
+            
+            String codigo = modelo.getValueAt(linha, 0).toString();
+            String nome = modelo.getValueAt(linha, 1).toString();
+            String categoria = modelo.getValueAt(linha, 2).toString();
+            String tipo = modelo.getValueAt(linha, 3).toString();
+            String preco = modelo.getValueAt(linha, 4).toString();
+            String quantidade = modelo.getValueAt(linha, 5).toString();
+            String descricao = txt_Descricao.getText();
+
+            Produto objPro = new Produto(nome, codigo, Double.parseDouble(preco), categoria, tipo, Integer.parseInt(quantidade), descricao);
+            PRO_AdicionarProdutos proAdd = new PRO_AdicionarProdutos(objPro);
+            proAdd.setVisible(true);
+            proAdd.setLocationRelativeTo(null);
+
+
+
+        }
     }//GEN-LAST:event_tbl_ConsultaProdutoMouseClicked
 
     private void cbx_CategoriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbx_CategoriaItemStateChanged
@@ -291,11 +312,8 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(this, "Erro ao remover produto!");
                 }
-
             }
         }
-
-
 
     }//GEN-LAST:event_btn_RemoverProdutoActionPerformed
 

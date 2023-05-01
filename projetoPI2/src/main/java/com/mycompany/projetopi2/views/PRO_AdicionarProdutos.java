@@ -45,13 +45,13 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
             case "Higiene":
                 rbo_Higiene.setSelected(true);
                 break;
-            case "Cosmeticos":
+            case "Cosméticos":
                 rbo_Cosmeticos.setSelected(true);
                 break;
-            case "Acessorios":
+            case "Acessórios":
                 rbo_Acessorios.setSelected(true);
                 break;
-            case "Suplementos":
+            case "Suplementos e Vitaminicos":
                 rbo_Suplementos.setSelected(true);
                 break;
         }
@@ -427,7 +427,51 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
                 this.dispose();
             }
 
-        } else if (objPro != null && objPro.getIdProduto() > 0){
+        } else if (objPro != null && objPro.getCodProduto() != null){
+
+            String codOriginal = objPro.getCodProduto();
+            String nome = txt_Nome.getText();
+            String codProduto = txtCodigoProduto.getText();
+            double valor = Double.parseDouble(txtValor.getText().replace(",", "."));
+            String categoria = "";
+            if(rbo_Medicamento.isSelected()){
+                categoria = rbo_Medicamento.getActionCommand();
+            }else if(rbo_Suplementos.isSelected()){
+                categoria = rbo_Suplementos.getActionCommand();
+            }else if(rbo_Cosmeticos.isSelected()){
+                categoria = rbo_Cosmeticos.getActionCommand();
+            }else if(rbo_Acessorios.isSelected()){
+                categoria = rbo_Acessorios.getActionCommand();
+            }else {
+                categoria = rbo_Higiene.getActionCommand();
+            }
+            String unidadeVenda = "";
+            if(rbo_Unidade.isSelected()){
+                unidadeVenda = rbo_Unidade.getActionCommand();
+            }else{
+                unidadeVenda = rbo_Caixa.getActionCommand();
+            }
+            int quantidade = (int) spn_Quantidade.getValue();
+            String descricao = txtDescricao.getText();
+
+            objPro.setNome(nome);
+            objPro.setCodProduto(codProduto);
+            objPro.setValor(valor);
+            objPro.setCategoria(categoria);
+            objPro.setUnidadeVenda(unidadeVenda);
+            objPro.setQuantidade(quantidade);
+            objPro.setDescricao(descricao);
+
+            System.out.println(codOriginal);
+
+            retorno = ProdutoDAO.atualizar(objPro, codOriginal);
+
+            if (retorno) {
+                this.dispose();
+                JOptionPane.showMessageDialog(this, "Produto atualizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao atualizar produto!", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
 
         }
         

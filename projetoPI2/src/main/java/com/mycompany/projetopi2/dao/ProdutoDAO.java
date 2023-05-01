@@ -248,5 +248,36 @@ public class ProdutoDAO {
 		return status;
 
 	}
+
+	public static Boolean atualizar(Produto objPro, String codOriginal) {
+		try {
+			conexao = GerenciadorConexao.abrirConexao();
+
+			query = "UPDATE Produto SET Nome = ?, CodProduto = ?, Valor = ?, Categoria = ?, UnidadeVenda = ?, Quantidade = ?, Descricao = ? WHERE CodProduto = ?";
+			instrucaoSQL = conexao.prepareStatement(query);
+			instrucaoSQL.setString(1, objPro.getNome());
+			instrucaoSQL.setString(2, objPro.getCodProduto());
+			instrucaoSQL.setDouble(3, objPro.getValor());
+			instrucaoSQL.setString(4, objPro.getCategoria());
+			instrucaoSQL.setString(5, objPro.getUnidadeVenda());
+			instrucaoSQL.setInt(6, objPro.getQuantidade());
+			instrucaoSQL.setString(7, objPro.getDescricao());
+			instrucaoSQL.setString(8, codOriginal);
+			
+			int linhasAfetadas = instrucaoSQL.executeUpdate();
+
+			if (linhasAfetadas > 0) {
+				status = true;
+			}
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+		}
+		return status;
+	}
     
 }
