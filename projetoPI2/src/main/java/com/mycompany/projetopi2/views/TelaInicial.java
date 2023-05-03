@@ -4,6 +4,10 @@
  */
 package com.mycompany.projetopi2.views;
 
+import com.mycompany.projetopi2.dao.ProdutoDAO;
+import com.mycompany.projetopi2.models.Cliente;
+import com.mycompany.projetopi2.models.Produto;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,13 +17,28 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TelaInicial extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TelaInicial
-     */
+    Cliente objCli;
+    
+    
     public TelaInicial() {
         initComponents();
     }
 
+    
+    // public TelaInicial(Cliente obj) {
+    //     initComponents();
+    //     this.objCli = obj;
+        
+    //     this.lbl_Cliente.setText(obj.getNome());
+        
+    // }
+    
+    // public void definirCliente(Cliente obj){
+    //     this.objCli = obj;
+        
+    //     this.lbl_Cliente.setText(obj.getNome());
+    // }    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,10 +52,6 @@ public class TelaInicial extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_Produto = new javax.swing.JTable();
         txt_BuscarProduto = new javax.swing.JTextField();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tbl_ProdutoSimilares = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_Carrinho = new javax.swing.JTable();
@@ -51,7 +66,9 @@ public class TelaInicial extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         btn_SelecionarCliente = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        lbl_Cliente = new javax.swing.JLabel();
+        lbl_ID = new javax.swing.JLabel();
+        lbl_CPF = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -78,7 +95,7 @@ public class TelaInicial extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tbl_Produto);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 98, 469, 200));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 68, 469, 410));
 
         txt_BuscarProduto.setText("PESQUISAR");
         txt_BuscarProduto.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -89,44 +106,12 @@ public class TelaInicial extends javax.swing.JFrame {
                 txt_BuscarProdutoFocusLost(evt);
             }
         });
-        jPanel1.add(txt_BuscarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 16, 407, 40));
-
-        jLabel1.setText("PRODUTOS SIMILARES:");
-
-        tbl_ProdutoSimilares.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "PRODUTO", "GENÉRICO", "MARCA", "PREÇO"
+        txt_BuscarProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_BuscarProdutoKeyTyped(evt);
             }
-        ));
-        jScrollPane3.setViewportView(tbl_ProdutoSimilares);
-        if (tbl_ProdutoSimilares.getColumnModel().getColumnCount() > 0) {
-            tbl_ProdutoSimilares.getColumnModel().getColumn(1).setResizable(false);
-            tbl_ProdutoSimilares.getColumnModel().getColumn(1).setPreferredWidth(4);
-        }
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 320, 469, 160));
+        });
+        jPanel1.add(txt_BuscarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 16, 407, 40));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1211, 30, -1, 502));
 
         tbl_Carrinho.setModel(new javax.swing.table.DefaultTableModel(
@@ -171,6 +156,11 @@ public class TelaInicial extends javax.swing.JFrame {
 
         btn_AdicionarCarrinho.setText("ADICIONAR >>");
         btn_AdicionarCarrinho.setToolTipText("Colocar no carrinho");
+        btn_AdicionarCarrinho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AdicionarCarrinhoActionPerformed(evt);
+            }
+        });
         jPanel1.add(btn_AdicionarCarrinho, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 110, 120, 35));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673694_ic_fluent_search_filled_icon.png"))); // NOI18N
@@ -194,41 +184,58 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("CLIENTE"));
 
-        btn_SelecionarCliente.setText("CLIENTE");
+        btn_SelecionarCliente.setText("SELECIONAR CLIENTE");
         btn_SelecionarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_SelecionarClienteActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("NOME");
+        lbl_Cliente.setText("NOME");
+
+        lbl_ID.setText("ID");
+
+        lbl_CPF.setText("CPF");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
-                .addComponent(btn_SelecionarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(lbl_CPF)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_Cliente)
+                            .addComponent(lbl_ID))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, Short.MAX_VALUE)
+                        .addComponent(btn_SelecionarCliente)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_SelecionarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                    .addComponent(jLabel3))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btn_SelecionarCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(lbl_ID)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_Cliente)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbl_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 20, 390, 70));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 20, 390, 80));
 
         jLabel4.setText("CARRINHO:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 100, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 110, -1, -1));
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673588_ic_fluent_people_team_filled_icon.png"))); // NOI18N
+        jMenu1.setMnemonic('c');
         jMenu1.setText("CLIENTES");
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_DOWN_MASK));
@@ -254,9 +261,10 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/6989154_pill_pharmacy_medicine_medical_painkiller_icon.png"))); // NOI18N
+        jMenu2.setMnemonic('p');
         jMenu2.setText("PRODUTOS");
 
-        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_DOWN_MASK));
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/6549572_capsule_drug_medical_medication_medicine_icon.png"))); // NOI18N
         jMenuItem3.setText("Adicinar Produto");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -266,7 +274,7 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem3);
 
-        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_DOWN_MASK));
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673694_ic_fluent_search_filled_icon.png"))); // NOI18N
         jMenuItem4.setText("Consultar Produto");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -279,6 +287,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/1564531_chart_business_graph_statistics_icon.png"))); // NOI18N
+        jMenu3.setMnemonic('r');
         jMenu3.setText("RELATORIO");
         jMenu3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -379,7 +388,30 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void btn_SelecionarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SelecionarClienteActionPerformed
         // TODO add your handling code here:
+        CLI_ConsultaClientes cli = new CLI_ConsultaClientes(objCli);
+        cli.setVisible(true);
+        cli.setLocationRelativeTo(null);
+
+
+        // Label para mostrar o nome do cliente selecionado
+        // lbl_Cliente.setText(objCli.getNome());
+        
     }//GEN-LAST:event_btn_SelecionarClienteActionPerformed
+
+    private void txt_BuscarProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_BuscarProdutoKeyTyped
+        // TODO add your handling code here:
+        String busca = txt_BuscarProduto.getText();
+        ArrayList<Produto> listaProdutos = ProdutoDAO.pesquisarPorNome(busca);
+        carregarProdutos(listaProdutos);
+    }//GEN-LAST:event_txt_BuscarProdutoKeyTyped
+
+    private void btn_AdicionarCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AdicionarCarrinhoActionPerformed
+        // TODO add your handling code here:
+
+        // Tele de consulta de cliente, selecionar o cliente e pegar o id do cliente
+        // Cliente cliente = new Cliente();
+
+    }//GEN-LAST:event_btn_AdicionarCarrinhoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -421,9 +453,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JButton btn_FinalizarCompra;
     private javax.swing.JButton btn_LimparCarrinho;
     private javax.swing.JButton btn_SelecionarCliente;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -438,17 +468,33 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
+    public static javax.swing.JLabel lbl_CPF;
+    public static javax.swing.JLabel lbl_Cliente;
+    public static javax.swing.JLabel lbl_ID;
     private javax.swing.JLabel lbl_ValorTotal;
     private javax.swing.JSpinner spn_QuantProduto;
     private javax.swing.JTable tbl_Carrinho;
     private javax.swing.JTable tbl_Produto;
-    private javax.swing.JTable tbl_ProdutoSimilares;
     private javax.swing.JTextField txt_BuscarProduto;
     // End of variables declaration//GEN-END:variables
+
+    private void carregarProdutos(ArrayList<Produto> produtos) {
+        DefaultTableModel modelo = (DefaultTableModel) tbl_Produto.getModel();
+        modelo.setNumRows(0);
+
+        for (Produto produto : produtos) {
+            modelo.addRow(new String[]{
+                produto.getCodProduto(),
+                produto.getNome(),
+                produto.getCategoria(),
+                produto.getUnidadeVenda(),
+                Double.toString(produto.getValor()),
+                Integer.toString(produto.getQuantidade())
+            });
+        }
+    }
 }
