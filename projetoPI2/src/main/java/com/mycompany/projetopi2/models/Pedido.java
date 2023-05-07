@@ -4,6 +4,11 @@
  */
 package com.mycompany.projetopi2.models;
 
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimeZone;
+
 /**
  *
  * @author ldss1
@@ -11,30 +16,42 @@ package com.mycompany.projetopi2.models;
 public class Pedido {
 
     private int numPedido;
-    private int numItem;
-    private String produto;
+    private int codProduto;
+    private int idCliente;
     private int quantidade;
     private double valorUnitario;
     private double valorTotal;
-    private String cliente;
-    private String data;
-    private String hora;
+    private Date data;
+    private Time hora;
+    private ArrayList<Produto> listaProdutos;
+
+    public ArrayList<Produto> getListaProdutos() {
+        return listaProdutos;
+    }
+
+    public void setListaProdutos(ArrayList<Produto> listaProdutos) {
+        this.listaProdutos = listaProdutos;
+    }
 
     public Pedido() {
     }
 
-    public Pedido(int numPedido, int numItem, String produto, int quantidade, double valorUnitario, double valorTotal, String cliente, String data, String hora) {
+    // Itens do Pedido
+    public Pedido(int numPedido, int codProduto, int quantidade, double valorUnitario, double valorTotal) {
         this.numPedido = numPedido;
-        this.numItem = numItem;
-        this.produto = produto;
+        this.codProduto = codProduto;
         this.quantidade = quantidade;
         this.valorUnitario = valorUnitario;
         this.valorTotal = valorTotal;
-        this.cliente = cliente;
+    }
+
+    // Pedido - Cliente
+    public Pedido(int numPedido, int idCliente, Date data, Time hora) {
+        this.numPedido = numPedido;
+        this.idCliente = idCliente;
         this.data = data;
         this.hora = hora;
     }
-
 
     public int getNumPedido() {
         return numPedido;
@@ -44,21 +61,20 @@ public class Pedido {
         this.numPedido = numPedido;
     }
 
-    public int getNumItem() {
-        return numItem;
+    public int getCodProduto() {
+        return codProduto;
     }
 
-    public void setNumItem(int numItem) {
-        this.numItem = numItem;
-    }
-    
-
-    public String getProduto() {
-        return produto;
+    public void setCodProduto(int codProduto) {
+        this.codProduto = codProduto;
     }
 
-    public void setProduto(String produto) {
-        this.produto = produto;
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
     public int getQuantidade() {
@@ -85,28 +101,21 @@ public class Pedido {
         this.valorTotal = valorTotal;
     }
 
-    public String getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(String cliente) {
-        this.cliente = cliente;
-    }
-
-    public String getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
-    public String getHora() {
+    public Time getHora() {
         return hora;
     }
 
-    public void setHora(String hora) {
-        this.hora = hora;
+    public void setHora(Time time) {
+        this.hora = time;
     }
+
 
 }

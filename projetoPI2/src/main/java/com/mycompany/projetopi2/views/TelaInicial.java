@@ -4,12 +4,17 @@
  */
 package com.mycompany.projetopi2.views;
 
+import com.mycompany.projetopi2.dao.PedidoDAO;
 import com.mycompany.projetopi2.dao.ProdutoDAO;
 import com.mycompany.projetopi2.models.Cliente;
+import com.mycompany.projetopi2.models.Pedido;
 import com.mycompany.projetopi2.models.Produto;
 
 import java.awt.Color;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -420,7 +425,47 @@ public class TelaInicial extends javax.swing.JFrame {
         } else if( lbl_ID.getText().equals("ID")){
             JOptionPane.showMessageDialog(this, "Selecione um cliente!", "Selecione um cliente!", JOptionPane.ERROR_MESSAGE);
         } else{
-    
+            
+            Pedido objPed = new Pedido();
+            objPed.setIdCliente(Integer.parseInt(lbl_ID.getText().toString()));
+            objPed.setValorTotal(Double.parseDouble(lbl_ValorTotal.getText().toString()));
+            objPed.setData(new Date());
+            objPed.setHora(new Time(new Date().getTime()));
+            objPed.setQuantidade(tbl_Carrinho.getRowCount());
+            objPed.setValorTotal(Double.parseDouble(lbl_ValorTotal.getText().toString()));
+
+            ArrayList<Produto> listaItem = new ArrayList<Produto>();
+
+            for (int i = 0; i < tbl_Carrinho.getRowCount(); i++) {
+
+                Produto objProd = new Produto();
+
+                objProd.setIdProduto(Integer.parseInt(tbl_Carrinho.getValueAt(i, 0).toString()));
+                objProd.setNome(tbl_Carrinho.getValueAt(i, 1).toString());
+                objProd.setValor(Double.parseDouble(tbl_Carrinho.getValueAt(i, 2).toString()));
+                objProd.setQuantidade(Integer.parseInt(tbl_Carrinho.getValueAt(i, 3).toString()));
+
+                listaItem.add(objProd);
+            }
+
+            objPed.setListaProdutos(listaItem);
+
+
+            // Salvar pedido no banco de dados
+            // boolean retorno = PedidoDAO.salvarPedido(objPed);
+
+            // if (retorno) {
+            //     JOptionPane.showMessageDialog(this, "Pedido salvo com sucesso!", "Pedido salvo!", JOptionPane.INFORMATION_MESSAGE);
+            //     // Limpar carrinho
+            //     DefaultTableModel model = (DefaultTableModel) tbl_Carrinho.getModel();
+            //     model.setRowCount(0);
+            //     lbl_ValorTotal.setText("0.0");
+            // } else {
+            //     JOptionPane.showMessageDialog(this, "Erro ao salvar pedido!", "Erro!", JOptionPane.ERROR_MESSAGE);
+            // }
+
+
+
 
         }
     }//GEN-LAST:event_btn_FinalizarCompraActionPerformed
