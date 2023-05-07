@@ -6,6 +6,8 @@ dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
+.vscode/
+target/
 
 # Class Files #
 *.class
