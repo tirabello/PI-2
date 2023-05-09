@@ -6,6 +6,7 @@ package com.mycompany.projetopi2.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import com.mycompany.projetopi2.models.Pedido;
 import com.mycompany.projetopi2.utils.GerenciadorConexao;
@@ -27,7 +28,7 @@ public class PedidoDAO {
 			conexao = GerenciadorConexao.abrirConexao();
 			query = "INSERT INTO Pedido (fk_IDCliente, DataPedido, HoraPedido, Quantidade, ValorTotal) VALUES (?, ?, ?, ?, ?)";
 
-			instrucaoSQL = conexao.prepareStatement(query);
+			instrucaoSQL = conexao.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
 			instrucaoSQL.setInt(1, objPed.getIdCliente());
 			instrucaoSQL.setString(2, new java.sql.Date(objPed.getData().getTime()).toString());
 			instrucaoSQL.setString(3, new java.sql.Time(objPed.getHora().getTime()).toString());
@@ -40,7 +41,9 @@ public class PedidoDAO {
 
 			if (linhasAfetadas > 0){
 
-				int IDVenda = instrucaoSQL.getGeneratedKeys().getInt(1);
+				ResultSet rs = instrucaoSQL.getGeneratedKeys();
+
+				int IDVenda = rs.getInt(1);
 				System.out.println("ID Venda: " + IDVenda);
 				
 				for (int i = 0; i < objPed.getListaProdutos().size(); i++) {

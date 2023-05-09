@@ -39,7 +39,7 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
         btn_InserirCliente.setText("Atualizar");
         // btn_InserirCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-editar-20.png")));
         btn_InserirCliente.setToolTipText("Atualizar Dados do Cliente");
-        
+
         txtNome.setText(String.valueOf(objCli.getNome()));
         txtCPF.setText(String.valueOf(objCli.getCpf()));
         jdc_DataNascimento.setDate(objCli.getDataNascimento());
@@ -477,10 +477,10 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
             objCli.setTelefone(telefone);
             objCli.setEndereco(endereco);
             objCli.setEmail(email);
-            
+
             //Adicionar à tabela -> iMPEMENTAR DAO
             retorno = ClienteDAO.atualizarCliente(objCli);
-            
+
             if (retorno) {
                 this.dispose();
                 JOptionPane.showMessageDialog(rootPane, "Sucesso!");
@@ -521,7 +521,7 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
         ((JComponent) evt.getComponent()).setBorder(javax.swing.BorderFactory.createLineBorder(Color.BLUE));
     }//GEN-LAST:event_focusGained
-    
+
     private void focusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_focusLost
         // TODO add your handling code here:
         ((JComponent) evt.getComponent()).setBorder(javax.swing.BorderFactory.createLineBorder(Color.GRAY));

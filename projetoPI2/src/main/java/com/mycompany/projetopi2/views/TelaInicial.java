@@ -452,17 +452,17 @@ public class TelaInicial extends javax.swing.JFrame {
 
 
             // Salvar pedido no banco de dados
-            // boolean retorno = PedidoDAO.salvarPedido(objPed);
+            boolean retorno = PedidoDAO.salvarPedido(objPed);
 
-            // if (retorno) {
-            //     JOptionPane.showMessageDialog(this, "Pedido salvo com sucesso!", "Pedido salvo!", JOptionPane.INFORMATION_MESSAGE);
-            //     // Limpar carrinho
-            //     DefaultTableModel model = (DefaultTableModel) tbl_Carrinho.getModel();
-            //     model.setRowCount(0);
-            //     lbl_ValorTotal.setText("0.0");
-            // } else {
-            //     JOptionPane.showMessageDialog(this, "Erro ao salvar pedido!", "Erro!", JOptionPane.ERROR_MESSAGE);
-            // }
+            if (retorno) {
+                JOptionPane.showMessageDialog(this, "Pedido salvo com sucesso!", "Pedido salvo!", JOptionPane.INFORMATION_MESSAGE);
+                // Limpar carrinho
+                DefaultTableModel model = (DefaultTableModel) tbl_Carrinho.getModel();
+                model.setRowCount(0);
+                lbl_ValorTotal.setText("0.0");
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao salvar pedido!", "Erro!", JOptionPane.ERROR_MESSAGE);
+            }
 
 
 

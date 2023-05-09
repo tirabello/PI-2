@@ -111,4 +111,9 @@ public class Produto {
 		return idProduto;
 	}
 
+
+	public void setIdProduto(int idProduto) {
+		this.idProduto = idProduto;
+	}
+
 }
