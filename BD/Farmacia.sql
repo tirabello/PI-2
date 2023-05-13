@@ -48,12 +48,12 @@ CREATE TABLE IF NOT EXISTS ItemVenda(
 	IDItemVenda INT NOT NULL AUTO_INCREMENT,
 	fk_IDVenda INT NOT NULL,
 	NumItem INT NOT NULL,
-	fk_IDProduto INT NOT NULL,
+	fk_CodProduto INT NOT NULL,
 	VlrUnitario DECIMAL(10,2) NOT NULL,
 	Quantidade INT NOT NULL,
 
 	PRIMARY KEY(IDItemVenda),
 	FOREIGN KEY(fk_IDVenda) REFERENCES Venda(IDVenda),
-	FOREIGN KEY(fk_IDProduto) REFERENCES Produto(IDProduto)
+	FOREIGN KEY(fk_CodProduto) REFERENCES Produto(CodProduto)
 
 );
