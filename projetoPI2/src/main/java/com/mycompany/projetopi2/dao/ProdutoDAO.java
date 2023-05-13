@@ -279,5 +279,35 @@ public class ProdutoDAO {
 		}
 		return status;
 	}
+
+	public Produto consultarProduto(int codProduto) {
+		Produto produto = new Produto();
+		try {
+			conexao = GerenciadorConexao.abrirConexao();
+			query = "SELECT * FROM Produto WHERE CodProduto = ?";
+			instrucaoSQL = conexao.prepareStatement(query);
+			instrucaoSQL.setInt(1, codProduto);
+			ResultSet rs = instrucaoSQL.executeQuery();
+
+			while (rs.next()) {
+				produto.setNome(rs.getString("Nome"));
+				produto.setCodProduto(rs.getString("CodProduto"));
+				produto.setValor(rs.getDouble("Valor"));
+				produto.setCategoria(rs.getString("Categoria"));
+				produto.setUnidadeVenda(rs.getString("UnidadeVenda"));
+				produto.setQuantidade(rs.getInt("Quantidade"));
+				produto.setDescricao(rs.getString("Descricao"));
+			}
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+		}
+
+		return produto;
+	}
     
 }
