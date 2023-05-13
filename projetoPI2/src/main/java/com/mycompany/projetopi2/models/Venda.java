@@ -4,69 +4,40 @@
  */
 package com.mycompany.projetopi2.models;
 
-import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.TimeZone;
 
 /**
  *
  * @author ldss1
  */
-public class Pedido {
+public class Venda {
 
-    private int numPedido;
-    private int codProduto;
+    private int idVenda;
     private int idCliente;
-    private int quantidade;
-    private double valorUnitario;
-    private double valorTotal;
-    private Date data;
-    private Time hora;
-    private ArrayList<Produto> listaProdutos;
+    private int qntItens;
+    private double vlrTotal;
+    private LocalDateTime DataHora;
+    private ArrayList<ItemVenda> listaProdutos;
 
-    public ArrayList<Produto> getListaProdutos() {
-        return listaProdutos;
+    public Venda() {
     }
 
-    public void setListaProdutos(ArrayList<Produto> listaProdutos) {
+    public Venda(int idVenda, int idProduto, int idCliente, int qntItens, double vlrTotal, LocalDateTime DataHora, ArrayList<ItemVenda> listaProdutos) {
+        this.idVenda = idVenda;
+        this.idCliente = idCliente;
+        this.qntItens = qntItens;
+        this.vlrTotal = vlrTotal;
+        this.DataHora = DataHora;
         this.listaProdutos = listaProdutos;
     }
 
-    public Pedido() {
+    public int getIdVenda() {
+        return idVenda;
     }
 
-    // Itens do Pedido
-    public Pedido(int numPedido, int codProduto, int quantidade, double valorUnitario, double valorTotal) {
-        this.numPedido = numPedido;
-        this.codProduto = codProduto;
-        this.quantidade = quantidade;
-        this.valorUnitario = valorUnitario;
-        this.valorTotal = valorTotal;
-    }
-
-    // Pedido - Cliente
-    public Pedido(int numPedido, int idCliente, Date data, Time hora) {
-        this.numPedido = numPedido;
-        this.idCliente = idCliente;
-        this.data = data;
-        this.hora = hora;
-    }
-
-    public int getNumPedido() {
-        return numPedido;
-    }
-
-    public void setNumPedido(int numPedido) {
-        this.numPedido = numPedido;
-    }
-
-    public int getCodProduto() {
-        return codProduto;
-    }
-
-    public void setCodProduto(int codProduto) {
-        this.codProduto = codProduto;
+    public void setIdVenda(int idVenda) {
+        this.idVenda = idVenda;
     }
 
     public int getIdCliente() {
@@ -77,45 +48,36 @@ public class Pedido {
         this.idCliente = idCliente;
     }
 
-    public int getQuantidade() {
-        return quantidade;
+    public int getQntItens() {
+        return qntItens;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public double getValorUnitario() {
-        return valorUnitario;
-    }
-
-    public void setValorUnitario(double valorUnitario) {
-        this.valorUnitario = valorUnitario;
+    public void setQntItens(int qntItens) {
+        this.qntItens = qntItens;
     }
 
     public double getValorTotal() {
-        return valorTotal;
+        return vlrTotal;
     }
 
-    public void setValorTotal(double valorTotal) {
-        this.valorTotal = valorTotal;
+    public void setValorTotal(double vlrTotal) {
+        this.vlrTotal = vlrTotal;
     }
 
-    public Date getData() {
-        return data;
+    public LocalDateTime getDataHora() {
+        return DataHora;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setDataHora(LocalDateTime DataHora) {
+        this.DataHora = DataHora;
     }
 
-    public Time getHora() {
-        return hora;
+    public ArrayList<ItemVenda> getListaProdutos() {
+        return listaProdutos;
     }
 
-    public void setHora(Time time) {
-        this.hora = time;
+    public void setListaProdutos(ArrayList<ItemVenda> listaProdutos) {
+        this.listaProdutos = listaProdutos;
     }
-
 
 }
