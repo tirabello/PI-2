@@ -478,7 +478,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
         // TODO add your handling code here:
-        REL_SINTETICO relSin = new REL_SINTETICO();
+        REL_Sintetico relSin = new REL_Sintetico();
         relSin.setVisible(true);
         relSin.setLocationRelativeTo(null);
     }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
