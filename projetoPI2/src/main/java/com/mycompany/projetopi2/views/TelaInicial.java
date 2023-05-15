@@ -4,16 +4,16 @@
  */
 package com.mycompany.projetopi2.views;
 
-import com.mycompany.projetopi2.dao.PedidoDAO;
 import com.mycompany.projetopi2.dao.ProdutoDAO;
+import com.mycompany.projetopi2.dao.VendaDAO;
 import com.mycompany.projetopi2.models.Cliente;
-import com.mycompany.projetopi2.models.Pedido;
+import com.mycompany.projetopi2.models.ItemVenda;
+import com.mycompany.projetopi2.models.Venda;
 import com.mycompany.projetopi2.models.Produto;
 
 import java.awt.Color;
-import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -26,27 +26,43 @@ public class TelaInicial extends javax.swing.JFrame {
 
     Cliente objCli;
     private double valorTotal = 0;
-    
-    
+
     public TelaInicial() {
         initComponents();
+        //pnl_Info.setVisible(false);
     }
 
-    
+    public void atualizarObjCliente(Cliente objCli) {
+        this.objCli = objCli;
+        this.lbl_Cliente.setText(objCli.getNome());
+        this.lbl_ID.setText(String.valueOf(objCli.getId_cliente()));
+    }
+
+    private void exibirInfo() {
+        // pnl_Info.setVisible(true);
+        int linha = tbl_Produtos.getSelectedRow();
+
+        int codProduto = Integer.parseInt(tbl_Produtos.getValueAt(linha, 0).toString());
+
+        Produto produto = new Produto();
+
+        produto = new ProdutoDAO().consultarProduto(codProduto);
+
+        lbl_Categoria.setText(produto.getCategoria());
+        txt_Descricao.setText(produto.getDescricao());
+        lbl_Unidade.setText(produto.getUnidadeVenda());
+
+    }
+
     // public TelaInicial(Cliente obj) {
     //     initComponents();
     //     this.objCli = obj;
-        
     //     this.lbl_Cliente.setText(obj.getNome());
-        
     // }
-    
     // public void definirCliente(Cliente obj){
     //     this.objCli = obj;
-        
     //     this.lbl_Cliente.setText(obj.getNome());
     // }    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,12 +87,20 @@ public class TelaInicial extends javax.swing.JFrame {
         spn_QuantProduto = new javax.swing.JSpinner();
         btn_AdicionarCarrinho = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        pnl_Info = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txt_Descricao = new javax.swing.JTextArea();
+        lbl_Categoria = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        lbl_Unidade = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btn_SelecionarCliente = new javax.swing.JButton();
         lbl_Cliente = new javax.swing.JLabel();
         lbl_ID = new javax.swing.JLabel();
-        lbl_CPF = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -98,7 +122,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "PRODUTO", "PRECO UNI", "DISPONIVEL"
+                "COD", "PRODUTO", "PRECO UNI", "DISPONIVEL"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -107,6 +131,16 @@ public class TelaInicial extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbl_Produtos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_ProdutosMouseClicked(evt);
+            }
+        });
+        tbl_Produtos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tbl_ProdutosKeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(tbl_Produtos);
@@ -118,7 +152,6 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 68, 510, 320));
 
-        txt_BuscarProduto.setText("Digite o nome do produto");
         txt_BuscarProduto.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txt_BuscarProdutoFocusGained(evt);
@@ -128,11 +161,17 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         txt_BuscarProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_BuscarProdutoKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_BuscarProdutoKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_BuscarProdutoKeyTyped(evt);
             }
         });
-        jPanel1.add(txt_BuscarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 16, 407, 40));
+        jPanel1.add(txt_BuscarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 16, 460, 40));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1211, 30, -1, 502));
 
         tbl_Carrinho.setModel(new javax.swing.table.DefaultTableModel(
@@ -140,7 +179,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "PRODUTO", "PREÇO UNI", "QNT.", "PREÇO TOTAL"
+                "COD", "PRODUTO", "PREÇO UNI", "QNT.", "PREÇO TOTAL"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -158,21 +197,22 @@ public class TelaInicial extends javax.swing.JFrame {
             tbl_Carrinho.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(536, 130, 670, 260));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, 670, 360));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("VALOR TOTAL");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 400, 135, 36));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 490, 135, 20));
 
         lbl_ValorTotal.setText("R$ 000,00");
-        jPanel1.add(lbl_ValorTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 410, 71, -1));
+        jPanel1.add(lbl_ValorTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 490, 71, -1));
 
-        btn_FinalizarCompra.setText("FINALIZAR COMPRA");
+        btn_FinalizarCompra.setText("FINALIZAR VENDA");
         btn_FinalizarCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_FinalizarCompraActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_FinalizarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 440, 170, 35));
+        jPanel1.add(btn_FinalizarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 90, 140, 35));
 
         btn_RemoverCarrinho.setText("REMOVER");
         btn_RemoverCarrinho.setToolTipText("Remover Item do Carrinho");
@@ -181,13 +221,14 @@ public class TelaInicial extends javax.swing.JFrame {
                 btn_RemoverCarrinhoActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_RemoverCarrinho, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 440, 100, 35));
+        jPanel1.add(btn_RemoverCarrinho, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 90, 120, 35));
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("QUANT:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, 50, 22));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 50, 50, 22));
 
         spn_QuantProduto.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
-        jPanel1.add(spn_QuantProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 60, 35));
+        jPanel1.add(spn_QuantProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, 50, 35));
 
         btn_AdicionarCarrinho.setText("ADICIONAR >>");
         btn_AdicionarCarrinho.setToolTipText("Colocar no carrinho");
@@ -196,26 +237,63 @@ public class TelaInicial extends javax.swing.JFrame {
                 btn_AdicionarCarrinhoActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_AdicionarCarrinho, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 70, 120, 35));
+        jPanel1.add(btn_AdicionarCarrinho, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 120, 35));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673694_ic_fluent_search_filled_icon.png"))); // NOI18N
         jLabel7.setAlignmentY(0.0F);
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("INFO"));
+        pnl_Info.setBorder(javax.swing.BorderFactory.createTitledBorder("INFO"));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setText("DESCRIÇÃO");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setText("CATEGORIA: ");
+
+        txt_Descricao.setEditable(false);
+        txt_Descricao.setColumns(20);
+        txt_Descricao.setRows(5);
+        jScrollPane3.setViewportView(txt_Descricao);
+
+        lbl_Categoria.setText("   ");
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setText("UNIDADE:");
+
+        lbl_Unidade.setText("    ");
+
+        javax.swing.GroupLayout pnl_InfoLayout = new javax.swing.GroupLayout(pnl_Info);
+        pnl_Info.setLayout(pnl_InfoLayout);
+        pnl_InfoLayout.setHorizontalGroup(
+            pnl_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_InfoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(83, 83, 83)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_Categoria, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_Unidade, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 67, Short.MAX_VALUE)
+        pnl_InfoLayout.setVerticalGroup(
+            pnl_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_InfoLayout.createSequentialGroup()
+                .addGroup(pnl_InfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3)
+                    .addComponent(lbl_Categoria)
+                    .addComponent(jLabel8)
+                    .addComponent(lbl_Unidade))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 510, 90));
+        jPanel1.add(pnl_Info, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 510, 110));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("CLIENTE"));
 
@@ -226,46 +304,54 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        lbl_Cliente.setText("NOME");
+        lbl_Cliente.setText("  ");
 
-        lbl_ID.setText("ID");
+        lbl_ID.setText("   ");
 
-        lbl_CPF.setText("CPF");
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setText("ID:");
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel9.setText("NOME:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(lbl_CPF)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_Cliente, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_Cliente)
-                            .addComponent(lbl_ID))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 249, Short.MAX_VALUE)
-                        .addComponent(btn_SelecionarCliente)))
+                        .addComponent(jLabel5)
+                        .addGap(30, 30, 30)
+                        .addComponent(lbl_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12)
+                .addComponent(btn_SelecionarCliente)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btn_SelecionarCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_SelecionarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(lbl_ID)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_Cliente)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lbl_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_ID)
+                            .addComponent(jLabel5))
+                        .addGap(3, 3, 3)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_Cliente)
+                            .addComponent(jLabel9))))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 460, 100));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 20, 430, 60));
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("CARRINHO:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 110, -1, 20));
 
@@ -333,6 +419,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jRadioButtonMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_DOWN_MASK));
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("Sintético");
+        jRadioButtonMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673704_ic_fluent_receipt_cube_filled_icon.png"))); // NOI18N
         jRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonMenuItem1ActionPerformed(evt);
@@ -348,11 +435,13 @@ public class TelaInicial extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(10, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 524, Short.MAX_VALUE)
         );
 
         pack();
@@ -415,44 +504,42 @@ public class TelaInicial extends javax.swing.JFrame {
         for (int i = 0; i < rows.length; i++) {
             model.removeRow(rows[i] - i);
         }
-        
+
     }//GEN-LAST:event_btn_RemoverCarrinhoActionPerformed
 
     private void btn_FinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_FinalizarCompraActionPerformed
         // TODO VERIFICAR SE O CARRINHO ESTA VAZIO
-        if(tbl_Carrinho.getRowCount() == 0){
+        if (tbl_Carrinho.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Carrinho vazio!");
-        } else if( lbl_ID.getText().equals("ID")){
+        } else if (lbl_ID.getText().equals("ID")) {
             JOptionPane.showMessageDialog(this, "Selecione um cliente!", "Selecione um cliente!", JOptionPane.ERROR_MESSAGE);
-        } else{
-            
-            Pedido objPed = new Pedido();
-            objPed.setIdCliente(Integer.parseInt(lbl_ID.getText().toString()));
-            objPed.setValorTotal(Double.parseDouble(lbl_ValorTotal.getText().toString()));
-            objPed.setData(new Date());
-            objPed.setHora(new Time(new Date().getTime()));
-            objPed.setQuantidade(tbl_Carrinho.getRowCount());
-            objPed.setValorTotal(Double.parseDouble(lbl_ValorTotal.getText().toString()));
+        } else {
 
-            ArrayList<Produto> listaItem = new ArrayList<Produto>();
+            Venda venda = new Venda();
+            venda.setIdCliente(Integer.parseInt(lbl_ID.getText().toString()));
+            venda.setValorTotal(Double.parseDouble(lbl_ValorTotal.getText().toString()));
+            venda.setDataHora(LocalDateTime.now());
+            venda.setQntItens(tbl_Carrinho.getRowCount());
+            venda.setValorTotal(Double.parseDouble(lbl_ValorTotal.getText().toString()));
+
+            ArrayList<ItemVenda> listaItem = new ArrayList<>();
 
             for (int i = 0; i < tbl_Carrinho.getRowCount(); i++) {
 
-                Produto objProd = new Produto();
+                ItemVenda item = new ItemVenda();
 
-                objProd.setIdProduto(Integer.parseInt(tbl_Carrinho.getValueAt(i, 0).toString()));
-                objProd.setNome(tbl_Carrinho.getValueAt(i, 1).toString());
-                objProd.setValor(Double.parseDouble(tbl_Carrinho.getValueAt(i, 2).toString()));
-                objProd.setQuantidade(Integer.parseInt(tbl_Carrinho.getValueAt(i, 3).toString()));
+                item.setNumItem(i + 1);
+                item.setCodProduto(Integer.parseInt(tbl_Carrinho.getValueAt(i, 0).toString()));
+                item.setVlrUnitario(Double.parseDouble(tbl_Carrinho.getValueAt(i, 2).toString()));
+                item.setQntProduto(Integer.parseInt(tbl_Carrinho.getValueAt(i, 3).toString()));
 
-                listaItem.add(objProd);
+                listaItem.add(item);
             }
 
-            objPed.setListaProdutos(listaItem);
-
+            venda.setListaProdutos(listaItem);
 
             // Salvar pedido no banco de dados
-            boolean retorno = PedidoDAO.salvarPedido(objPed);
+            boolean retorno = VendaDAO.finalizarVenda(venda);
 
             if (retorno) {
                 JOptionPane.showMessageDialog(this, "Pedido salvo com sucesso!", "Pedido salvo!", JOptionPane.INFORMATION_MESSAGE);
@@ -464,52 +551,68 @@ public class TelaInicial extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Erro ao salvar pedido!", "Erro!", JOptionPane.ERROR_MESSAGE);
             }
 
-
-
-
         }
     }//GEN-LAST:event_btn_FinalizarCompraActionPerformed
 
     private void btn_SelecionarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SelecionarClienteActionPerformed
         // TODO add your handling code here:
-        CLI_ConsultaClientes cli = new CLI_ConsultaClientes(objCli);
+        CLI_ConsultaClientes cli = new CLI_ConsultaClientes(this);
         cli.setVisible(true);
         cli.setLocationRelativeTo(null);
 
+        lbl_Cliente.setText(objCli.getNome());
+        lbl_ID.setText(String.valueOf(objCli.getIdCliente()));
 
         // Label para mostrar o nome do cliente selecionado
         // lbl_Cliente.setText(objCli.getNome());
-        
+
     }//GEN-LAST:event_btn_SelecionarClienteActionPerformed
 
     private void txt_BuscarProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_BuscarProdutoKeyTyped
         // TODO add your handling code here:
-        String busca = txt_BuscarProduto.getText();
-        ArrayList<Produto> listaProdutos = ProdutoDAO.pesquisarPorNome(busca);
-        carregarProdutos(listaProdutos);
+
     }//GEN-LAST:event_txt_BuscarProdutoKeyTyped
 
     private void btn_AdicionarCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AdicionarCarrinhoActionPerformed
         // TODO add your handling code here:
-        
+
         int linha = tbl_Produtos.getSelectedRow();
-        if(linha == -1){
+        if (linha == -1) {
             JOptionPane.showMessageDialog(this, "Selecione um produto!", "Carrinho vazio!", JOptionPane.ERROR_MESSAGE);
-        } else{
+        } else {
             DefaultTableModel model = (DefaultTableModel) tbl_Carrinho.getModel();
-            
+
             String id = tbl_Produtos.getValueAt(linha, 0).toString();
             String nome = tbl_Produtos.getValueAt(linha, 1).toString();
-            double preco =  Double.parseDouble(tbl_Produtos.getValueAt(linha, 2).toString());
+            double preco = Double.parseDouble(tbl_Produtos.getValueAt(linha, 2).toString());
             int quantidade = Integer.parseInt(spn_QuantProduto.getValue().toString());
             double subtotal = preco * quantidade;
 
             valorTotal += subtotal;
             lbl_ValorTotal.setText(String.valueOf(valorTotal));
 
-            model.addRow(new String []{id, nome, String.valueOf(preco), String.valueOf(quantidade), String.valueOf(subtotal)});
+            model.addRow(new String[]{id, nome, String.valueOf(preco), String.valueOf(quantidade), String.valueOf(subtotal)});
         }
     }//GEN-LAST:event_btn_AdicionarCarrinhoActionPerformed
+
+    private void tbl_ProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_ProdutosMouseClicked
+        exibirInfo();
+    }//GEN-LAST:event_tbl_ProdutosMouseClicked
+
+    private void tbl_ProdutosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbl_ProdutosKeyReleased
+        exibirInfo();
+    }//GEN-LAST:event_tbl_ProdutosKeyReleased
+
+    private void txt_BuscarProdutoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_BuscarProdutoKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_BuscarProdutoKeyPressed
+
+    private void txt_BuscarProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_BuscarProdutoKeyReleased
+        // TODO add your handling code here:
+        String busca = txt_BuscarProduto.getText();
+        ArrayList<Produto> listaProdutos = ProdutoDAO.pesquisarPorNome(busca);
+        carregarProdutos(listaProdutos);
+    }//GEN-LAST:event_txt_BuscarProdutoKeyReleased
 
     /**
      * @param args the command line arguments
@@ -551,10 +654,15 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JButton btn_FinalizarCompra;
     private javax.swing.JButton btn_RemoverCarrinho;
     private javax.swing.JButton btn_SelecionarCliente;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -564,20 +672,23 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
-    public static javax.swing.JLabel lbl_CPF;
+    private javax.swing.JLabel lbl_Categoria;
     public static javax.swing.JLabel lbl_Cliente;
     public static javax.swing.JLabel lbl_ID;
+    private javax.swing.JLabel lbl_Unidade;
     private javax.swing.JLabel lbl_ValorTotal;
+    private javax.swing.JPanel pnl_Info;
     private javax.swing.JSpinner spn_QuantProduto;
     private javax.swing.JTable tbl_Carrinho;
     private javax.swing.JTable tbl_Produtos;
     private javax.swing.JTextField txt_BuscarProduto;
+    private javax.swing.JTextArea txt_Descricao;
     // End of variables declaration//GEN-END:variables
 
     private void carregarProdutos(ArrayList<Produto> produtos) {
