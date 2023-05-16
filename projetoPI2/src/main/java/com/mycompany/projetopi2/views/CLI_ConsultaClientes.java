@@ -4,6 +4,7 @@
  */
 package com.mycompany.projetopi2.views;
 
+import java.awt.Color;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
     /**
      * Creates new form ConsultaClientes
      */
-    Cliente objCli;
+    TelaInicial objTelaInicial;
 
     public CLI_ConsultaClientes() {
         initComponents();
@@ -30,11 +31,12 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
         carregarClientes();
     }
 
-    public CLI_ConsultaClientes(Cliente objCli) {
+    public CLI_ConsultaClientes(TelaInicial objTela) {
         initComponents();
 //        this.obj = objCli;
         btn_Selecionado.setVisible(true);
         carregarClientes();
+        this.objTelaInicial = objTela;
 
     }
 
@@ -59,6 +61,33 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
         }
     }
 
+    public void editarCliente() {
+        int linhaSelecionada = tblClientes.getSelectedRow();
+        DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
+
+        if (linhaSelecionada == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione um cliente para editar!");
+            return;
+        } else {
+            int id = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
+            String nome = modelo.getValueAt(linhaSelecionada, 1).toString();
+            String sexo = modelo.getValueAt(linhaSelecionada, 2).toString();
+            Date dataNascimento = Date.valueOf(modelo.getValueAt(linhaSelecionada, 3).toString());
+            String estadoCivil = modelo.getValueAt(linhaSelecionada, 4).toString();
+            String cpf = modelo.getValueAt(linhaSelecionada, 5).toString();
+            String telefone = modelo.getValueAt(linhaSelecionada, 6).toString();
+            String endereco = modelo.getValueAt(linhaSelecionada, 7).toString();
+            String email = modelo.getValueAt(linhaSelecionada, 8).toString();
+
+            Cliente objCli = new Cliente(id, nome, sexo, dataNascimento, estadoCivil, cpf, telefone, email, endereco);
+
+            CLI_AdicionarCliente editarCliente = new CLI_AdicionarCliente(objCli);
+            editarCliente.setVisible(true);
+            editarCliente.setLocationRelativeTo(null);
+            editarCliente.setAlwaysOnTop(true);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,6 +107,7 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
         btn_RemoverClientes = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btn_Selecionado = new javax.swing.JButton();
+        btn_EditarCliente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consultar Cliente");
@@ -117,7 +147,14 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
             tblClientes.getColumnModel().getColumn(5).setPreferredWidth(10);
         }
 
-        txt_BuscarCliente.setText("Digite o CPF ou Informe o Nome");
+        txt_BuscarCliente.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_BuscarClienteFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_BuscarClienteFocusLost(evt);
+            }
+        });
         txt_BuscarCliente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_BuscarClienteKeyTyped(evt);
@@ -142,10 +179,19 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673694_ic_fluent_search_filled_icon.png"))); // NOI18N
 
-        btn_Selecionado.setText("OK");
+        btn_Selecionado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673492_ic_fluent_person_available_filled_icon.png"))); // NOI18N
+        btn_Selecionado.setToolTipText("Selecionar Cliente");
         btn_Selecionado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_SelecionadoActionPerformed(evt);
+            }
+        });
+
+        btn_EditarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673546_ic_fluent_person_edit_filled_icon.png"))); // NOI18N
+        btn_EditarCliente.setToolTipText("Editar Cliente");
+        btn_EditarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_EditarClienteActionPerformed(evt);
             }
         });
 
@@ -159,12 +205,14 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_BuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btn_AdicionarCliente)
+                .addComponent(btn_AdicionarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btn_RemoverClientes)
+                .addComponent(btn_RemoverClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btn_Selecionado)
-                .addContainerGap(241, Short.MAX_VALUE))
+                .addComponent(btn_EditarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_Selecionado, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(205, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
@@ -178,10 +226,12 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(btn_AdicionarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btn_RemoverClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btn_AdicionarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_RemoverClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_BuscarCliente)
-                    .addComponent(btn_Selecionado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btn_Selecionado, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_EditarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9))
@@ -204,27 +254,7 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
     private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
-
-            int linhaSelecionada = tblClientes.getSelectedRow();
-            DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
-
-            int id = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
-            String nome = modelo.getValueAt(linhaSelecionada, 1).toString();
-            String sexo = modelo.getValueAt(linhaSelecionada, 2).toString();
-            Date dataNascimento = Date.valueOf(modelo.getValueAt(linhaSelecionada, 3).toString());
-            String estadoCivil = modelo.getValueAt(linhaSelecionada, 4).toString();
-            String cpf = modelo.getValueAt(linhaSelecionada, 5).toString();
-            String telefone = modelo.getValueAt(linhaSelecionada, 6).toString();
-            String endereco = modelo.getValueAt(linhaSelecionada, 7).toString();
-            String email = modelo.getValueAt(linhaSelecionada, 8).toString();
-
-            Cliente objCli = new Cliente(id, nome, sexo, dataNascimento, estadoCivil, cpf, telefone, email, endereco);
-
-            CLI_AdicionarCliente editarCliente = new CLI_AdicionarCliente(objCli);
-            editarCliente.setVisible(true);
-            editarCliente.setLocationRelativeTo(null);
-            editarCliente.setAlwaysOnTop(true);
-
+            editarCliente();
         }
     }//GEN-LAST:event_tblClientesMouseClicked
 
@@ -247,13 +277,7 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
             obj.setNome(nome);
             obj.setCpf(cpf);
 
-
-            // RETORNA O CLIENTE SELECIONADO PARA A TELA DE VENDAS
-            TelaInicial.lbl_Cliente.setText(String.valueOf(obj.getNome()));
-            TelaInicial.lbl_CPF.setText(String.valueOf(obj.getCpf()));
-            TelaInicial.lbl_ID.setText(String.valueOf(obj.getId_cliente()));
-
-            this.objCli = obj;
+            objTelaInicial.atualizarObjCliente(obj);
 
             this.dispose();
 
@@ -262,6 +286,24 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btn_SelecionadoActionPerformed
+
+    private void btn_EditarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditarClienteActionPerformed
+        editarCliente();
+    }//GEN-LAST:event_btn_EditarClienteActionPerformed
+
+    private void txt_BuscarClienteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_BuscarClienteFocusGained
+        if (txt_BuscarCliente.getText().equals("Digite o CPF ou Informe o Nome do Cliente")) {
+            txt_BuscarCliente.setText("");
+            txt_BuscarCliente.setForeground(new Color(0, 0, 0));
+        }
+    }//GEN-LAST:event_txt_BuscarClienteFocusGained
+
+    private void txt_BuscarClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_BuscarClienteFocusLost
+        if (txt_BuscarCliente.getText().equals("")) {
+            txt_BuscarCliente.setText("Digite o CPF ou Informe o Nome do Cliente");
+            txt_BuscarCliente.setForeground(new Color(153, 153, 153));
+        }
+    }//GEN-LAST:event_txt_BuscarClienteFocusLost
 
     private void btn_AdicionarClienteActionPerformed(
             java.awt.event.ActionEvent evt
@@ -307,6 +349,7 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
 
     private void txt_BuscarClienteKeyTyped(java.awt.event.KeyEvent evt) { // GEN-FIRST:event_txt_BuscarClienteKeyTyped
         // TODO add your handling code here:
+
         String nome = txt_BuscarCliente.getText();
         DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
         modelo.setNumRows(0);
@@ -385,6 +428,7 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_AdicionarCliente;
+    private javax.swing.JButton btn_EditarCliente;
     private javax.swing.JButton btn_RemoverClientes;
     private javax.swing.JButton btn_Selecionado;
     private javax.swing.JLabel jLabel1;

@@ -376,11 +376,11 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
         if (objCli == null) {
 
             String nome = txtNome.getText();
-            String CPF = txtCPF.getText().replace(".", "").replace("-", "");
+            String CPF = txtCPF.getText();
 
             Date dataNascimento = jdc_DataNascimento.getDate();// (Date) -> CAST (CONVERTER)
             String estadoCivil = cmb_EstadoCivil.getSelectedItem().toString();
-            String telefone = txtTelefone.getText().replace("(", "").replace(")", "").replace("-", "").replace(" ", "");
+            String telefone = txtTelefone.getText();
             String endereco = txtEndereco.getText();
             String email = txtEmail.getText();
             String sexo = "";
@@ -454,10 +454,10 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
         } else if (objCli != null && objCli.getId_cliente() > 0) {
 
             String nome = txtNome.getText();
-            String CPF = txtCPF.getText().replace(".", "").replace("-", "");
+            String CPF = txtCPF.getText();
             Date dataNascimento = jdc_DataNascimento.getDate(); // (Date) -> CAST (CONVERTER)
             String estadoCivil = cmb_EstadoCivil.getSelectedItem().toString();
-            String telefone = txtTelefone.getText().replace("(", "").replace(")", "").replace("-", "").replace(" ", "");
+            String telefone = txtTelefone.getText();
             String endereco = txtEndereco.getText();
             String email = txtEmail.getText();
             String sexo = "";

@@ -54,12 +54,14 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="txt_BuscarCliente" min="-2" pref="555" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btn_AdicionarCliente" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_AdicionarCliente" min="-2" pref="35" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btn_RemoverClientes" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_RemoverClientes" min="-2" pref="35" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btn_Selecionado" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="241" max="32767" attributes="0"/>
+                  <Component id="btn_EditarCliente" min="-2" pref="35" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btn_Selecionado" min="-2" pref="35" max="-2" attributes="0"/>
+                  <EmptySpace pref="205" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
@@ -77,10 +79,13 @@
                           <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
                           <Component id="jLabel1" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="btn_AdicionarCliente" alignment="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="btn_RemoverClientes" alignment="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="btn_AdicionarCliente" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="btn_RemoverClientes" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="txt_BuscarCliente" max="32767" attributes="0"/>
-                      <Component id="btn_Selecionado" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btn_Selecionado" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="btn_EditarCliente" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
@@ -175,10 +180,9 @@
           </SubComponents>
         </Container>
         <Component class="javax.swing.JTextField" name="txt_BuscarCliente">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Digite o CPF ou Informe o Nome"/>
-          </Properties>
           <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_BuscarClienteFocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_BuscarClienteFocusLost"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_BuscarClienteKeyTyped"/>
           </Events>
         </Component>
@@ -213,10 +217,24 @@
         </Component>
         <Component class="javax.swing.JButton" name="btn_Selecionado">
           <Properties>
-            <Property name="text" type="java.lang.String" value="OK"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/8673492_ic_fluent_person_available_filled_icon.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Selecionar Cliente"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_SelecionadoActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btn_EditarCliente">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/8673546_ic_fluent_person_edit_filled_icon.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Editar Cliente"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_EditarClienteActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
