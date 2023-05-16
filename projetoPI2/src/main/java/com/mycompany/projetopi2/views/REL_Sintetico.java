@@ -4,55 +4,19 @@
  */
 package com.mycompany.projetopi2.views;
 
-import java.util.Date;
-
-import javax.swing.JOptionPane;
-
-import com.mycompany.projetopi2.dao.VendaDAO;
-import com.mycompany.projetopi2.models.ItemVenda;
-import com.mycompany.projetopi2.models.Venda;
-import java.util.ArrayList;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
-
 /**
  *
  * @author ldss1
  */
-public class REL_Sintetico extends javax.swing.JFrame {
+public class REL_SINTETICO extends javax.swing.JFrame {
 
     /**
      * Creates new form REL_
      */
-    public REL_Sintetico() {
+    public REL_SINTETICO() {
         initComponents();
         jPanel2.setVisible(false);
     }
-    
-
-    private void carregarVendas(ArrayList<Venda> vendas) {
-        DefaultTableModel modeloTabela = (DefaultTableModel) tbl_Sintetico.getModel();
-        modeloTabela.setNumRows(0);
-        
-        double vlrTotal = 0;
-
-        for (Venda venda : vendas) {
-            modeloTabela.addRow(new String[]{
-                String.valueOf(venda.getIdVenda()),
-                String.valueOf(venda.getDataHora()),
-                String.valueOf(venda.getIdCliente()),
-                String.valueOf(venda.getQntItens()),
-                String.valueOf(venda.getValorTotal())
-            });
-            vlrTotal +=  venda.getValorTotal();
-            
-        }
-        lbl_ValorTotal.setText(String.valueOf(vlrTotal));
-        lbl_QntVendas.setText(String.valueOf(vendas.size()));
-        
-    }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -66,13 +30,13 @@ public class REL_Sintetico extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_Sintetico = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        cmb_Periodo = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        btn_BuscarPeriodoPersonalizado = new javax.swing.JButton();
-        jdc_DataInicial = new com.toedter.calendar.JDateChooser();
-        jdc_DataFinal = new com.toedter.calendar.JDateChooser();
+        jButton1 = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
         btn_AbrirRelatorioAnalitico = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -88,26 +52,20 @@ public class REL_Sintetico extends javax.swing.JFrame {
 
             },
             new String [] {
-                "NUM VENDA", "DATA VENDA", "CLIENTE", "QUANTIDADE", "VALOR"
+                "N COMPRA", "DATA COMPRA", "CLIENTE", "VALOR"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                true, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tbl_Sintetico.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbl_SinteticoMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tbl_Sintetico);
         if (tbl_Sintetico.getColumnModel().getColumnCount() > 0) {
-            tbl_Sintetico.getColumnModel().getColumn(0).setResizable(false);
-            tbl_Sintetico.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tbl_Sintetico.getColumnModel().getColumn(0).setPreferredWidth(30);
             tbl_Sintetico.getColumnModel().getColumn(1).setResizable(false);
             tbl_Sintetico.getColumnModel().getColumn(1).setPreferredWidth(100);
         }
@@ -115,25 +73,18 @@ public class REL_Sintetico extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("PERIODO"));
         jPanel1.setPreferredSize(new java.awt.Dimension(585, 65));
 
-        cmb_Periodo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "HOJE", "ONTEM", "7 DIAS", "14 DIAS", "30 DIAS", "Customizado" }));
-        cmb_Periodo.addItemListener(new java.awt.event.ItemListener() {
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hoje", "Ontem", "7 dias", "14 dias", "30 dias", "Customizado" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmb_PeriodoItemStateChanged(evt);
+                jComboBox1ItemStateChanged(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Final");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Inicial");
 
-        btn_BuscarPeriodoPersonalizado.setText("Buscar");
-        btn_BuscarPeriodoPersonalizado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_BuscarPeriodoPersonalizadoActionPerformed(evt);
-            }
-        });
+        jButton1.setText("Buscar");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -143,13 +94,13 @@ public class REL_Sintetico extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jdc_DataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jdc_DataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btn_BuscarPeriodoPersonalizado)
+                .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -157,12 +108,12 @@ public class REL_Sintetico extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(8, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jdc_DataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jdc_DataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
                         .addComponent(jLabel2)
-                        .addComponent(btn_BuscarPeriodoPersonalizado)))
+                        .addComponent(jButton1)))
                 .addGap(7, 7, 7))
         );
 
@@ -172,10 +123,10 @@ public class REL_Sintetico extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cmb_Periodo, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,7 +135,7 @@ public class REL_Sintetico extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(cmb_Periodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -195,10 +146,8 @@ public class REL_Sintetico extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("QUANTIDADE DE VENDAS:");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("VALOR TOTAL:");
 
         lbl_ValorTotal.setPreferredSize(new java.awt.Dimension(125, 30));
@@ -249,75 +198,21 @@ public class REL_Sintetico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmb_PeriodoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmb_PeriodoItemStateChanged
-        if (cmb_Periodo.getSelectedIndex() == 5) {
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        if (jComboBox1.getSelectedIndex() == 5) {
             jPanel2.setVisible(true);
         } else {
             jPanel2.setVisible(false);
-            switch (cmb_Periodo.getSelectedItem().toString()){
-                case "HOJE":
-                    carregarVendas(VendaDAO.buscarVendas(0));
-                    break;
-                case "ONTEM":
-                    carregarVendas(VendaDAO.buscarVendas(1));    
-                    break;
-                case "7 DIAS":
-                    carregarVendas(VendaDAO.buscarVendas(7));
-                    break;
-                case "14 DIAS":
-                    carregarVendas(VendaDAO.buscarVendas(14));
-                    break;
-                case "30 DIAS":
-                    carregarVendas(VendaDAO.buscarVendas(30));
-                    break;
-            }
         }
-    }//GEN-LAST:event_cmb_PeriodoItemStateChanged
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     private void btn_AbrirRelatorioAnaliticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AbrirRelatorioAnaliticoActionPerformed
-        exibirRelatorioAnalitico();
+        // TODO add your handling code here:
+        // checar se tem item selecionado
+        REL_ANALITICO rel = new REL_ANALITICO();
+        rel.setVisible(true);
+        rel.setLocationRelativeTo(null);
     }//GEN-LAST:event_btn_AbrirRelatorioAnaliticoActionPerformed
-
-    private void btn_BuscarPeriodoPersonalizadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BuscarPeriodoPersonalizadoActionPerformed
-
-        if (jdc_DataInicial.getDate() == null || jdc_DataFinal.getDate() == null) {
-            JOptionPane.showMessageDialog(this, "Selecione as datas para realizar a busca!");
-            return;
-        }else if (jdc_DataInicial.getDate().after(jdc_DataFinal.getDate())) {
-            JOptionPane.showMessageDialog(this, "A data inicial não pode ser maior que a data final!");
-            return;
-        }else{
-
-            Date dataInicial = jdc_DataInicial.getDate();
-            Date dataFinal = jdc_DataFinal.getDate();
-            carregarVendas(VendaDAO.buscarVendas(dataInicial, dataFinal));
-        }
-
-    }//GEN-LAST:event_btn_BuscarPeriodoPersonalizadoActionPerformed
-
-    private void exibirRelatorioAnalitico(){
-        int linhaSelecionada = tbl_Sintetico.getSelectedRow();
-        if (linhaSelecionada == -1) {
-            JOptionPane.showMessageDialog(this, "Selecione uma venda para exibir o relatório!");
-            return;
-        }else{
-            int idVenda = Integer.parseInt(tbl_Sintetico.getValueAt(linhaSelecionada, 0).toString());
-            ArrayList<ItemVenda> itensVenda = VendaDAO.buscarItensVenda(idVenda);
-
-            REL_Analitico rel = new REL_Analitico(itensVenda);
-            rel.lbl_DataCompra.setText(tbl_Sintetico.getValueAt(linhaSelecionada, 1).toString());
-            rel.lbl_Cliente.setText(tbl_Sintetico.getValueAt(linhaSelecionada, 2).toString());
-            rel.lbl_ValorTotal.setText(tbl_Sintetico.getValueAt(linhaSelecionada, 4).toString());
-            rel.setVisible(true);
-            rel.setLocationRelativeTo(null);
-        }
-    }
-
-    private void tbl_SinteticoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_SinteticoMouseClicked
-        if (evt.getClickCount() == 2) {
-            exibirRelatorioAnalitico();
-        }
-    }//GEN-LAST:event_tbl_SinteticoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -336,31 +231,31 @@ public class REL_Sintetico extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(REL_Sintetico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(REL_SINTETICO.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(REL_Sintetico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(REL_SINTETICO.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(REL_Sintetico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(REL_SINTETICO.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(REL_Sintetico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(REL_SINTETICO.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new REL_Sintetico().setVisible(true);
+                new REL_SINTETICO().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_AbrirRelatorioAnalitico;
-    private javax.swing.JButton btn_BuscarPeriodoPersonalizado;
-    private javax.swing.JComboBox<String> cmb_Periodo;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -368,8 +263,6 @@ public class REL_Sintetico extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private com.toedter.calendar.JDateChooser jdc_DataFinal;
-    private com.toedter.calendar.JDateChooser jdc_DataInicial;
     private javax.swing.JLabel lbl_QntVendas;
     private javax.swing.JLabel lbl_ValorTotal;
     private javax.swing.JTable tbl_Sintetico;
