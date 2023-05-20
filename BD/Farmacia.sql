@@ -91,3 +91,7 @@ SELECT
 	(I.VlrUnitario * I.Quantidade)
 FROM ItemVenda AS I
 	INNER JOIN Produto AS P USING(CodProduto);
+
+CREATE TRIGGER tr_AtualizaQuantidade AFTER INSERT ON ItemVenda
+	FOR EACH ROW
+		UPDATE Produto SET Quantidade = Quantidade - NEW.Quantidade WHERE CodProduto = NEW.CodProduto;
