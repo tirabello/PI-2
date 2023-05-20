@@ -57,3 +57,37 @@ CREATE TABLE IF NOT EXISTS ItemVenda(
 	FOREIGN KEY(CodProduto) REFERENCES Produto(CodProduto)
 
 );
+
+CREATE VIEW Vendas(
+	NumVenda,
+	DataVenda,
+	NomeCliente,
+	QntItens,
+	VlrTotalVenda
+) AS
+SELECT
+	V.IDVenda,
+	V.DataHora,
+	C.Nome,
+	V.QntItens,
+	V.VlrTotal
+FROM Venda AS V
+	INNER JOIN Cliente AS C USING(IDCliente);
+
+CREATE VIEW ItensVenda(
+	NumVenda,
+	NumItem,
+	Produto,
+	VlrUnitario,
+	QntVendida,
+	VlrTotalProd
+) AS
+SELECT
+	I.IDVenda,
+	I.NumItem,
+	P.Nome,
+	I.VlrUnitario,
+	I.Quantidade,
+	(I.VlrUnitario * I.Quantidade)
+FROM ItemVenda AS I
+	INNER JOIN Produto AS P USING(CodProduto);
