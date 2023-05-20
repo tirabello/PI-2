@@ -4,8 +4,8 @@
  */
 package com.mycompany.projetopi2.models;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -17,18 +17,18 @@ public class Venda {
     private int idCliente;
     private int qntItens;
     private double vlrTotal;
-    private LocalDateTime DataHora;
+    private Date DataVenda;
     private ArrayList<ItemVenda> listaProdutos;
 
     public Venda() {
     }
 
-    public Venda(int idVenda, int idProduto, int idCliente, int qntItens, double vlrTotal, LocalDateTime DataHora, ArrayList<ItemVenda> listaProdutos) {
+    public Venda(int idVenda, int idProduto, int idCliente, int qntItens, double vlrTotal, Date DataVenda, ArrayList<ItemVenda> listaProdutos) {
         this.idVenda = idVenda;
         this.idCliente = idCliente;
         this.qntItens = qntItens;
         this.vlrTotal = vlrTotal;
-        this.DataHora = DataHora;
+        this.DataVenda = DataVenda;
         this.listaProdutos = listaProdutos;
     }
 
@@ -64,12 +64,12 @@ public class Venda {
         this.vlrTotal = vlrTotal;
     }
 
-    public LocalDateTime getDataHora() {
-        return DataHora;
+    public Date getDataVenda() {
+        return DataVenda;
     }
 
-    public void setDataHora(LocalDateTime DataHora) {
-        this.DataHora = DataHora;
+    public void setDataVenda(Date DataVenda) {
+        this.DataVenda = DataVenda;
     }
 
     public ArrayList<ItemVenda> getListaProdutos() {
