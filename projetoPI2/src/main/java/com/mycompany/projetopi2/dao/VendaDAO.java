@@ -12,6 +12,8 @@ import java.util.Date;
 
 import com.mycompany.projetopi2.models.Venda;
 import com.mycompany.projetopi2.models.ItemVenda;
+import com.mycompany.projetopi2.models.RelatorioAnalitico;
+import com.mycompany.projetopi2.models.RelatorioSintetico;
 import com.mycompany.projetopi2.utils.GerenciadorConexao;
 
 /**
@@ -34,7 +36,7 @@ public class VendaDAO {
 
             instrucaoSQL = conexao.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
             instrucaoSQL.setInt(1, venda.getIdCliente());
-            instrucaoSQL.setDate(2, java.sql.Date.valueOf(venda.getDataHora().toLocalDate()));
+            instrucaoSQL.setDate(2, new java.sql.Date(venda.getDataVenda().getTime()));
             instrucaoSQL.setInt(3, venda.getQntItens());
             instrucaoSQL.setDouble(4, venda.getValorTotal());
 
@@ -79,12 +81,12 @@ public class VendaDAO {
 
     
     // Buscar Venda por período (em Dias)
-	public static ArrayList<Venda> buscarVendas(int dia) {
-        ArrayList<Venda> listaVendas = new ArrayList<>();
+	public static ArrayList<RelatorioSintetico> buscarVendas(int dia) {
+        ArrayList<RelatorioSintetico> listaVendas = new ArrayList<>();
 
         try {
             conexao = GerenciadorConexao.abrirConexao();
-            query = "SELECT * FROM Venda WHERE DataHora BETWEEN DATE_SUB(NOW(), INTERVAL ? DAY) AND NOW()";
+            query = "SELECT * FROM Vendas WHERE DataVenda BETWEEN DATE_SUB(NOW(), INTERVAL ? DAY) AND NOW()";
 
             instrucaoSQL = conexao.prepareStatement(query);
             instrucaoSQL.setInt(1, (dia + 1 ));
@@ -92,13 +94,13 @@ public class VendaDAO {
             ResultSet rs = instrucaoSQL.executeQuery();
 
             while (rs.next()) {
-                Venda venda = new Venda();
+                RelatorioSintetico venda = new RelatorioSintetico();
 
-                venda.setIdVenda(rs.getInt("IDVenda"));
-                venda.setIdCliente(rs.getInt("IDCliente"));
-                venda.setQntItens(rs.getInt("QntItens"));
-                venda.setValorTotal(rs.getDouble("VlrTotal"));
-                venda.setDataHora(rs.getTimestamp("DataHora").toLocalDateTime());
+                venda.setNumVenda(rs.getInt("NumVenda"));
+                venda.setDataVenda(rs.getDate("DataVenda"));
+                venda.setNomeCliente(rs.getString("NomeCliente"));
+                venda.setQtdProdutos(rs.getInt("QntItens"));
+                venda.setVlrTotal(rs.getDouble("VlrTotalVenda"));
 
                 listaVendas.add(venda);
             }
@@ -110,11 +112,9 @@ public class VendaDAO {
         return listaVendas;
     }
     
-    
-    
     // Buscar Venda por período (Data Inicial e Data Final)
-    public static ArrayList<Venda> buscarVendas(Date dataInicial, Date dataFinal) {
-        ArrayList<Venda> listaVendas = new ArrayList<>();
+    public static ArrayList<RelatorioSintetico> buscarVendas(Date dataInicial, Date dataFinal) {
+        ArrayList<RelatorioSintetico> listaVendas = new ArrayList<>();
 
         try {
             conexao = GerenciadorConexao.abrirConexao();
@@ -127,15 +127,16 @@ public class VendaDAO {
             ResultSet rs = instrucaoSQL.executeQuery();
 
             while (rs.next()) {
-                Venda venda = new Venda();
+                RelatorioSintetico venda = new RelatorioSintetico();
 
-                venda.setIdVenda(rs.getInt("IDVenda"));
-                venda.setIdCliente(rs.getInt("IDCliente"));
-                venda.setQntItens(rs.getInt("QntItens"));
-                venda.setValorTotal(rs.getDouble("VlrTotal"));
-                venda.setDataHora(rs.getTimestamp("DataHora").toLocalDateTime());
+                venda.setNumVenda(rs.getInt("NumVenda"));
+                venda.setDataVenda(rs.getDate("DataVenda"));
+                venda.setNomeCliente(rs.getString("NomeCliente"));
+                venda.setQtdProdutos(rs.getInt("QntItens"));
+                venda.setVlrTotal(rs.getDouble("VlrTotalVenda"));
 
                 listaVendas.add(venda);
+
             }
 
         } catch (Exception e){
@@ -145,25 +146,26 @@ public class VendaDAO {
 	}
     
     // Listar Venda
-	public static ArrayList<ItemVenda> buscarItensVenda(int idVenda) {
-        ArrayList<ItemVenda> listaItensVenda = new ArrayList<>();
+	public static ArrayList<RelatorioAnalitico> buscarItensVenda(int NumVenda) {
+        ArrayList<RelatorioAnalitico> listaItensVenda = new ArrayList<>();
 
         try {
             conexao = GerenciadorConexao.abrirConexao();
-            query = "SELECT * FROM ItemVenda WHERE IDVenda = ?";
+            query = "SELECT * FROM ItensVenda WHERE NumVenda = ?";
 
             instrucaoSQL = conexao.prepareStatement(query);
-            instrucaoSQL.setInt(1, idVenda);
+            instrucaoSQL.setInt(1, NumVenda);
 
             ResultSet rs = instrucaoSQL.executeQuery();
 
             while (rs.next()) {
-                ItemVenda itemVenda = new ItemVenda();
+                RelatorioAnalitico itemVenda = new RelatorioAnalitico();
 
                 itemVenda.setNumItem(rs.getInt("NumItem"));
-                itemVenda.setCodProduto(rs.getInt("CodProduto"));
+                itemVenda.setProduto(rs.getString("Produto"));
                 itemVenda.setVlrUnitario(rs.getDouble("VlrUnitario"));
-                itemVenda.setQntProduto(rs.getInt("Quantidade"));
+                itemVenda.setQtdVendida(rs.getInt("QntVendida"));
+                itemVenda.setVlrTotal(rs.getDouble("VlrTotalProd"));
 
                 listaItensVenda.add(itemVenda);
             }
