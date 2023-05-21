@@ -12,9 +12,10 @@ import com.mycompany.projetopi2.models.Venda;
 import com.mycompany.projetopi2.models.Produto;
 
 import java.awt.Color;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,9 +28,14 @@ public class TelaInicial extends javax.swing.JFrame {
     Cliente objCli;
     private double valorTotal = 0;
 
+    /**
+     * Creates new form TelaInicial
+     */
     public TelaInicial() {
         initComponents();
-        //pnl_Info.setVisible(false);
+        btn_SelecionarCliente.requestFocus();
+        ImageIcon icone = new ImageIcon(getClass().getResource("/134159_aid_hospital_room_emergency_first_icon.png"));
+        this.setIconImage(icone.getImage());
     }
 
     public void atualizarObjCliente(Cliente objCli) {
@@ -43,6 +49,20 @@ public class TelaInicial extends javax.swing.JFrame {
         int linha = tbl_Produtos.getSelectedRow();
 
         int codProduto = Integer.parseInt(tbl_Produtos.getValueAt(linha, 0).toString());
+        int qntMax = Integer.parseInt(tbl_Produtos.getValueAt(linha, 3).toString());
+        if (qntMax > 0) {
+            spn_QuantProduto.setEnabled(true);
+            btn_AdicionarCarrinho.setEnabled(true);
+            btn_AdicionarCarrinho.setToolTipText("Colocar no carrinho");
+
+            
+
+            this.spn_QuantProduto.setModel(new javax.swing.SpinnerNumberModel(1, 1, qntMax, 1));
+        } else {
+            spn_QuantProduto.setEnabled(false);
+            btn_AdicionarCarrinho.setEnabled(false);
+            btn_AdicionarCarrinho.setToolTipText("Produto Indisponivel");
+        }
 
         Produto produto = new Produto();
 
@@ -54,15 +74,6 @@ public class TelaInicial extends javax.swing.JFrame {
 
     }
 
-    // public TelaInicial(Cliente obj) {
-    //     initComponents();
-    //     this.objCli = obj;
-    //     this.lbl_Cliente.setText(obj.getNome());
-    // }
-    // public void definirCliente(Cliente obj){
-    //     this.objCli = obj;
-    //     this.lbl_Cliente.setText(obj.getNome());
-    // }    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -115,8 +126,6 @@ public class TelaInicial extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FARMÁCIA");
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         tbl_Produtos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -150,8 +159,8 @@ public class TelaInicial extends javax.swing.JFrame {
             tbl_Produtos.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 68, 510, 320));
-
+        txt_BuscarProduto.setForeground(new java.awt.Color(153, 153, 153));
+        txt_BuscarProduto.setText("Digite o nome do produto");
         txt_BuscarProduto.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txt_BuscarProdutoFocusGained(evt);
@@ -171,8 +180,6 @@ public class TelaInicial extends javax.swing.JFrame {
                 txt_BuscarProdutoKeyTyped(evt);
             }
         });
-        jPanel1.add(txt_BuscarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 16, 460, 40));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1211, 30, -1, 502));
 
         tbl_Carrinho.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -197,14 +204,11 @@ public class TelaInicial extends javax.swing.JFrame {
             tbl_Carrinho.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, 670, 360));
-
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("VALOR TOTAL");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 490, 135, 20));
 
+        lbl_ValorTotal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_ValorTotal.setText("R$ 000,00");
-        jPanel1.add(lbl_ValorTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 490, 71, -1));
 
         btn_FinalizarCompra.setText("FINALIZAR VENDA");
         btn_FinalizarCompra.addActionListener(new java.awt.event.ActionListener() {
@@ -212,7 +216,6 @@ public class TelaInicial extends javax.swing.JFrame {
                 btn_FinalizarCompraActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_FinalizarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 90, 140, 35));
 
         btn_RemoverCarrinho.setText("REMOVER");
         btn_RemoverCarrinho.setToolTipText("Remover Item do Carrinho");
@@ -221,14 +224,11 @@ public class TelaInicial extends javax.swing.JFrame {
                 btn_RemoverCarrinhoActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_RemoverCarrinho, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 90, 120, 35));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("QUANT:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 50, 50, 22));
 
         spn_QuantProduto.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
-        jPanel1.add(spn_QuantProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, 50, 35));
 
         btn_AdicionarCarrinho.setText("ADICIONAR >>");
         btn_AdicionarCarrinho.setToolTipText("Colocar no carrinho");
@@ -237,11 +237,9 @@ public class TelaInicial extends javax.swing.JFrame {
                 btn_AdicionarCarrinhoActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_AdicionarCarrinho, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 120, 35));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673694_ic_fluent_search_filled_icon.png"))); // NOI18N
         jLabel7.setAlignmentY(0.0F);
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         pnl_Info.setBorder(javax.swing.BorderFactory.createTitledBorder("INFO"));
 
@@ -292,8 +290,6 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE))
         );
-
-        jPanel1.add(pnl_Info, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 510, 110));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("CLIENTE"));
 
@@ -346,14 +342,89 @@ public class TelaInicial extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_Cliente)
                             .addComponent(jLabel9))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 2, Short.MAX_VALUE))
         );
-
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 20, 430, 60));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("CARRINHO:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 110, -1, 20));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel7)
+                        .addGap(8, 8, 8)
+                        .addComponent(txt_BuscarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnl_Info, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(spn_QuantProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btn_AdicionarCarrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(325, 325, 325)
+                        .addComponent(btn_RemoverCarrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btn_FinalizarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(430, 430, 430)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(110, 110, 110)
+                                .addComponent(lbl_ValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel7))
+                    .addComponent(txt_BuscarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(pnl_Info, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(spn_QuantProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(btn_AdicionarCarrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_RemoverCarrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_FinalizarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_ValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673588_ic_fluent_people_team_filled_icon.png"))); // NOI18N
         jMenu1.setMnemonic('c');
@@ -361,7 +432,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_DOWN_MASK));
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8673597_ic_fluent_person_add_filled_icon.png"))); // NOI18N
-        jMenuItem1.setText("Add Cliente");
+        jMenuItem1.setText("Cadastrar Cliente");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -437,11 +508,11 @@ public class TelaInicial extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 524, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -499,12 +570,24 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void btn_RemoverCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RemoverCarrinhoActionPerformed
         // limpa a tabela
-        DefaultTableModel model = (DefaultTableModel) tbl_Carrinho.getModel();
+        double vlrCarrinho = 0;
+        DefaultTableModel dtm_Carrinho = (DefaultTableModel) tbl_Carrinho.getModel();
         int[] rows = tbl_Carrinho.getSelectedRows();
-        for (int i = 0; i < rows.length; i++) {
-            model.removeRow(rows[i] - i);
+        if (tbl_Carrinho.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Adicione um produto antes !!!", "Carro vazio!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (rows.length == 0) {
+                JOptionPane.showMessageDialog(this, "Selecione um produto para remover !!!", "Selecione um produto!", JOptionPane.ERROR_MESSAGE);
+            } else {
+                for (int i = 0; i < rows.length; i++) {
+                    dtm_Carrinho.removeRow(rows[i] - i);
+                }
+                for (int i = 0; i < tbl_Carrinho.getRowCount(); i++) {
+                    vlrCarrinho += Double.parseDouble(tbl_Carrinho.getValueAt(i, 4).toString());
+                }
+                lbl_ValorTotal.setText(String.valueOf(vlrCarrinho));
+            }
         }
-
     }//GEN-LAST:event_btn_RemoverCarrinhoActionPerformed
 
     private void btn_FinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_FinalizarCompraActionPerformed
@@ -516,11 +599,11 @@ public class TelaInicial extends javax.swing.JFrame {
         } else {
 
             Venda venda = new Venda();
-            venda.setIdCliente(Integer.parseInt(lbl_ID.getText().toString()));
-            venda.setValorTotal(Double.parseDouble(lbl_ValorTotal.getText().toString()));
-            venda.setDataHora(LocalDateTime.now());
+            venda.setIdCliente(Integer.parseInt(lbl_ID.getText()));
+            venda.setValorTotal(Double.parseDouble(lbl_ValorTotal.getText()));
+            venda.setDataVenda(new Date());
             venda.setQntItens(tbl_Carrinho.getRowCount());
-            venda.setValorTotal(Double.parseDouble(lbl_ValorTotal.getText().toString()));
+            venda.setValorTotal(Double.parseDouble(lbl_ValorTotal.getText()));
 
             ArrayList<ItemVenda> listaItem = new ArrayList<>();
 
@@ -544,8 +627,11 @@ public class TelaInicial extends javax.swing.JFrame {
             if (retorno) {
                 JOptionPane.showMessageDialog(this, "Pedido salvo com sucesso!", "Pedido salvo!", JOptionPane.INFORMATION_MESSAGE);
                 // Limpar carrinho
-                DefaultTableModel model = (DefaultTableModel) tbl_Carrinho.getModel();
-                model.setRowCount(0);
+                DefaultTableModel dtm_Carrinho = (DefaultTableModel) tbl_Carrinho.getModel();
+                dtm_Carrinho.setRowCount(0);
+                DefaultTableModel dtm_Produtos = (DefaultTableModel) tbl_Produtos.getModel();
+                dtm_Produtos.setRowCount(0);
+
                 lbl_ValorTotal.setText("0.0");
             } else {
                 JOptionPane.showMessageDialog(this, "Erro ao salvar pedido!", "Erro!", JOptionPane.ERROR_MESSAGE);
@@ -559,13 +645,6 @@ public class TelaInicial extends javax.swing.JFrame {
         CLI_ConsultaClientes cli = new CLI_ConsultaClientes(this);
         cli.setVisible(true);
         cli.setLocationRelativeTo(null);
-
-        lbl_Cliente.setText(objCli.getNome());
-        lbl_ID.setText(String.valueOf(objCli.getIdCliente()));
-
-        // Label para mostrar o nome do cliente selecionado
-        // lbl_Cliente.setText(objCli.getNome());
-
     }//GEN-LAST:event_btn_SelecionarClienteActionPerformed
 
     private void txt_BuscarProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_BuscarProdutoKeyTyped
@@ -577,21 +656,38 @@ public class TelaInicial extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         int linha = tbl_Produtos.getSelectedRow();
+        int qnt = 0;
         if (linha == -1) {
-            JOptionPane.showMessageDialog(this, "Selecione um produto!", "Carrinho vazio!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Não ha nenhum produto selecionado", "Selecione um produto!", JOptionPane.ERROR_MESSAGE);
         } else {
-            DefaultTableModel model = (DefaultTableModel) tbl_Carrinho.getModel();
+            double valorTotal = 0;
+            for (int i = 0; i < tbl_Carrinho.getRowCount(); i++) {
+                valorTotal += Double.parseDouble(tbl_Carrinho.getValueAt(i, 4).toString());
+                if (tbl_Carrinho.getValueAt(i, 0).equals(tbl_Produtos.getValueAt(linha, 0))) {
+                    qnt = Integer.parseInt(tbl_Carrinho.getValueAt(i, 3).toString());
+                }
+            }
 
-            String id = tbl_Produtos.getValueAt(linha, 0).toString();
-            String nome = tbl_Produtos.getValueAt(linha, 1).toString();
-            double preco = Double.parseDouble(tbl_Produtos.getValueAt(linha, 2).toString());
-            int quantidade = Integer.parseInt(spn_QuantProduto.getValue().toString());
-            double subtotal = preco * quantidade;
+            if (Integer.parseInt(spn_QuantProduto.getValue().toString()) > (Integer.parseInt(tbl_Produtos.getValueAt(linha, 3).toString()) - qnt)) {
+                JOptionPane.showMessageDialog(this, "Quantidade indisponivel no estoque", "Quantidade indisponivel!", JOptionPane.ERROR_MESSAGE);
+                spn_QuantProduto.setValue((Integer.parseInt(tbl_Produtos.getValueAt(linha, 3).toString()) - qnt));
+            } else {
 
-            valorTotal += subtotal;
-            lbl_ValorTotal.setText(String.valueOf(valorTotal));
+                DefaultTableModel model = (DefaultTableModel) tbl_Carrinho.getModel();
 
-            model.addRow(new String[]{id, nome, String.valueOf(preco), String.valueOf(quantidade), String.valueOf(subtotal)});
+
+                String id = tbl_Produtos.getValueAt(linha, 0).toString();
+                String nome = tbl_Produtos.getValueAt(linha, 1).toString();
+                double preco = Double.parseDouble(tbl_Produtos.getValueAt(linha, 2).toString());
+                int quantidade = Integer.parseInt(spn_QuantProduto.getValue().toString());
+                double subtotal = preco * quantidade;
+
+                model.addRow(new String[]{id, nome, String.valueOf(preco), String.valueOf(quantidade), String.format("%.2f", subtotal)});
+
+                lbl_ValorTotal.setText(String.format("%.2f", valorTotal + subtotal));
+                spn_QuantProduto.setValue(0);
+
+            }
         }
     }//GEN-LAST:event_btn_AdicionarCarrinhoActionPerformed
 
@@ -614,9 +710,6 @@ public class TelaInicial extends javax.swing.JFrame {
         carregarProdutos(listaProdutos);
     }//GEN-LAST:event_txt_BuscarProdutoKeyReleased
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
