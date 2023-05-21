@@ -4,8 +4,6 @@
  */
 package com.mycompany.projetopi2.dao;
 
-import com.mycompany.projetopi2.models.Cliente;
-import com.mycompany.projetopi2.utils.GerenciadorConexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,9 +12,13 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.mycompany.projetopi2.models.Cliente;
+import com.mycompany.projetopi2.utils.GerenciadorConexao;
+
 /**
- *
- * @author ldss1
+ * @see com.mycompany.projetopi2.models.Cliente
+ * @see com.mycompany.projetopi2.utils.GerenciadorConexao
+ * @version 1.0
  */
 public class ClienteDAO {
 
@@ -26,6 +28,11 @@ public class ClienteDAO {
     private static String query;
 
     // Adicionar Cliente
+    /**
+     *
+     * @param objCli - Objeto Cliente com os atributos a serem inseridos no BD
+     * @return boolean - true: sucesso , false:falha
+     */
     public static boolean adicionarCliente(Cliente objCli) {
         try {
             conexao = GerenciadorConexao.abrirConexao();
@@ -63,6 +70,11 @@ public class ClienteDAO {
     }
 
     // Editar Cliente
+    /**
+     *
+     * @param objCli - Objeto Cliente com os atributos a serem alterados no BD
+     * @return boolean - true: sucesso , false:falha
+     */
     public static boolean atualizarCliente(Cliente objCli) {
         try {
             conexao = GerenciadorConexao.abrirConexao();
@@ -97,6 +109,11 @@ public class ClienteDAO {
     }
 
     // Listar Cliente
+    /**
+     *
+     * @return ArrayList - Lista de Clientes com todos Clientes cadastrados no
+     * BD
+     */
     public static ArrayList<Cliente> listarClientes() {
         ArrayList<Cliente> listaClientes = new ArrayList<>();
         try {
@@ -133,6 +150,11 @@ public class ClienteDAO {
     }
 
     // Excluir Cliente
+    /**
+     *
+     * @param idCliente - ID do Cliente a ser excluído do BD
+     * @return boolean - true: sucesso , false:falha
+     */
     public static boolean removerCliente(int idCliente) {
         try {
             conexao = GerenciadorConexao.abrirConexao();
@@ -157,6 +179,11 @@ public class ClienteDAO {
     }
 
     // Buscar Cliente por CPF / NOME
+    /**
+     *
+     * @param busca - String contendo o nome ou cpf a ser buscado no BD
+     * @return ArrayList - Lista de Clientes do tipo Cliente encontrados no BD
+     */
     public static ArrayList<Cliente> buscarCliente(String busca) {
         ArrayList<Cliente> listaClientes = new ArrayList<>();
 
@@ -198,7 +225,4 @@ public class ClienteDAO {
 
         return listaClientes;
     }
-    // Buscar Cliente por CPF
-
-    // Buscar Cliente por NOME
 }
