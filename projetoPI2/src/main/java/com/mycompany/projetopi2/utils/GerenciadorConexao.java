@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+
 public class GerenciadorConexao {
 
     private static String status = "Não conectado...";
@@ -15,6 +16,13 @@ public class GerenciadorConexao {
     private static Connection conexao = null;
 
     // Abre a conexão com o banco de dados
+
+    /**
+     *
+     * @return Connection - Objeto do tipo Connection
+     * @throws ClassNotFoundException - caso a classe do driver não seja encontrada
+     * @throws SQLException - caso ocorra algum erro na conexão
+     */
     public static Connection abrirConexao()
             throws ClassNotFoundException, SQLException {
         // Verifica se a conexão existe
