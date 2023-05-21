@@ -1,21 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.projetopi2.models;
 
-/**
- *
- * @author ldss1
- */
 public class ItemVenda {
-    
+
     private int idVenda;
     private int numItem;
     private int codProduto;
     private int qntProduto;
-    
-    
+    private double vlrUnitario;
+
     public ItemVenda() {
     }
 
@@ -66,6 +58,5 @@ public class ItemVenda {
     public void setVlrUnitario(double vlrUnitario) {
         this.vlrUnitario = vlrUnitario;
     }
-    private double vlrUnitario;
 
 }
