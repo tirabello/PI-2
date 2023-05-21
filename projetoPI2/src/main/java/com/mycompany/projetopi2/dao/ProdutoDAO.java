@@ -15,7 +15,9 @@ import com.mycompany.projetopi2.utils.GerenciadorConexao;
 
 /**
  *
- * @author ldss1
+ * @see com.mycompany.projetopi2.models.Produto
+ * @see com.mycompany.projetopi2.utils.GerenciadorConexao
+ * 
  */
 public class ProdutoDAO {
 
@@ -25,6 +27,12 @@ public class ProdutoDAO {
 	private static String query;
 
 	// Adicionar Produto
+
+    /**
+     *
+     * @param novoProduto - Objeto Produto com os dados a serem inseridos
+     * @return Boolean - true: sucesso , false:falha
+     */
 	public static Boolean inserir(Produto novoProduto) {
 
 		try {
@@ -63,6 +71,11 @@ public class ProdutoDAO {
 	// Buscar Produto
 
 	// Listar Produto
+
+    /**
+     *
+     * @return ArrayList com todos os produtos cadastrados
+     */
 	public static ArrayList<Produto> listarProdutos() {
 		ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
 		try {
@@ -97,6 +110,12 @@ public class ProdutoDAO {
 
 	// Exibir Descrição do Produto
 
+    /**
+     *
+     * @param codProduto - String com o código do produto
+     * @return String com a descrição do produto
+     */
+
 	public static String exibirDescricao(String codProduto) {
 		String descricao = null;
 		try {
@@ -120,7 +139,12 @@ public class ProdutoDAO {
 		return descricao;
 	}
 
-	public static ArrayList<Produto> pesquisarPorCategoria(String categoria) {
+    /**
+     *
+     * @param categoria - String com a categoria do produto
+     * @return ArrayList com os produtos da categoria informada
+     */
+    public static ArrayList<Produto> pesquisarPorCategoria(String categoria) {
 		ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
 
 		try {
@@ -153,7 +177,12 @@ public class ProdutoDAO {
 		return listaProdutos;
 	}
 
-	public static ArrayList<Produto> pesquisarPorNome(String busca) {
+    /**
+     *
+     * @param busca - String com o nome do produto a ser pesquisado
+     * @return ArrayList com os produtos que contém a String informada
+     */
+    public static ArrayList<Produto> pesquisarPorNome(String busca) {
 
 		ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
 
@@ -188,7 +217,13 @@ public class ProdutoDAO {
 
 	}
 
-	public static ArrayList<Produto> pesquisarPorNomeECategoria(String busca, String categoria) {
+    /**
+     *
+     * @param busca - String com o nome do produto a ser pesquisado
+     * @param categoria - String com a categoria do produto a ser pesquisado
+     * @return ArrayList com os produtos que contém a String informada e que pertencem a categoria informada
+     */
+    public static ArrayList<Produto> pesquisarPorNomeECategoria(String busca, String categoria) {
 	
 		ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
 
@@ -224,7 +259,12 @@ public class ProdutoDAO {
 
 	}
 
-	public static boolean removerProduto(String codigo) {
+    /**
+     *
+     * @param codigo - String com o código do produto a ser pesquisado
+     * @return Boolean false se falhar e true se for bem sucedido
+	 */
+    public static boolean removerProduto(String codigo) {
 
 		try {
 			conexao = GerenciadorConexao.abrirConexao();
@@ -249,7 +289,13 @@ public class ProdutoDAO {
 
 	}
 
-	public static Boolean atualizar(Produto objPro, String codOriginal) {
+    /**
+     *
+     * @param objPro - Objeto do tipo Produto a ser atualizado
+     * @param codOriginal - String com o código original do produto a ser atualizado
+     * @return Boolean false se falhar e true se for bem sucedido
+     */
+    public static Boolean atualizar(Produto objPro, String codOriginal) {
 		try {
 			conexao = GerenciadorConexao.abrirConexao();
 
@@ -280,7 +326,12 @@ public class ProdutoDAO {
 		return status;
 	}
 
-	public Produto consultarProduto(int codProduto) {
+    /**
+     *
+     * @param codProduto - String com o código do produto a ser pesquisado
+     * @return Objeto do tipo Produto
+     */
+    public Produto consultarProduto(int codProduto) {
 		Produto produto = new Produto();
 		try {
 			conexao = GerenciadorConexao.abrirConexao();
