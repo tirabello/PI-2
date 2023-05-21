@@ -8,7 +8,7 @@ nbactions.xml
 nb-configuration.xml
 .vscode/
 target/
-!target/site/apidocs
+!target/site/apidocs/
 
 # Class Files #
 *.class
