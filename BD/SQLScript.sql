@@ -7,21 +7,44 @@ ALTER TABLE Cliente MODIFY Sexo VARCHAR(11);
 ALTER TABLE Cliente MODIFY CPF VARCHAR(14);
 ALTER TABLE Cliente MODIFY Telefone VARCHAR(16);
 
+CREATE VIEW Vendas(
+	NumVenda,
+	DataVenda,
+	NomeCliente,
+	QntItens,
+	VlrTotalVenda
+) AS
 SELECT
-	V.IDVenda AS 'NUM VENDA',
-	V.DataHora AS 'DATA VENDA',
-	C.Nome AS 'CLIENTE',
-	V.QntItens AS 'QUANTIDADE',
-	V.VlrTotal AS 'VALOR'
+	V.IDVenda,
+	V.DataHora,
+	C.Nome,
+	V.QntItens,
+	V.VlrTotal
 FROM Venda AS V
-	INNER JOIN Cliente AS C  USING(IDCliente);
+	INNER JOIN Cliente AS C USING(IDCliente);
 
+CREATE VIEW ItensVenda(
+	NumVenda,
+	NumItem,
+	Produto,
+	VlrUnitario,
+	QntVendida,
+	VlrTotalProd
+) AS
 SELECT
-	I.NumItem AS 'NUM ITEM',
-	P.Nome AS 'PRODUTO',
-	I.VlrUnitario AS 'PRECO UNI',
-	I.Quantidade AS 'QNT',
-	(I.VlrUnitario * I.Quantidade) AS 'VALOR'
+	I.IDVenda,
+	I.NumItem,
+	P.Nome,
+	I.VlrUnitario,
+	I.Quantidade,
+	(I.VlrUnitario * I.Quantidade)
 FROM ItemVenda AS I
-	INNER JOIN Produto AS P  USING(CodProduto)
-WHERE IDVenda = 7;
+	INNER JOIN Produto AS P USING(CodProduto);
+
+
+TRIGGER Venda_BI BEFORE INSERT ON ItemVenda
+
+CREATE TRIGGER tr_AtualizaEstoque AFTER INSERT ON ItemVenda
+	FOR EACH ROW
+		UPDATE Produto SET Estoque = Estoque - NEW.Quantidade WHERE CodProduto = NEW.CodProduto;
+	
