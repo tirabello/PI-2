@@ -10,11 +10,10 @@ import javax.swing.JOptionPane;
 
 import com.mycompany.projetopi2.dao.VendaDAO;
 import com.mycompany.projetopi2.models.ItemVenda;
-import com.mycompany.projetopi2.models.Venda;
+import com.mycompany.projetopi2.models.RelatorioAnalitico;
+import com.mycompany.projetopi2.models.RelatorioSintetico;
 import java.util.ArrayList;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
 
 /**
  *
@@ -28,31 +27,31 @@ public class REL_Sintetico extends javax.swing.JFrame {
     public REL_Sintetico() {
         initComponents();
         jPanel2.setVisible(false);
-    }
-    
+        carregarVendas(VendaDAO.buscarVendas(0));
 
-    private void carregarVendas(ArrayList<Venda> vendas) {
+    }
+
+    private void carregarVendas(ArrayList<RelatorioSintetico> vendas) {
         DefaultTableModel modeloTabela = (DefaultTableModel) tbl_Sintetico.getModel();
         modeloTabela.setNumRows(0);
-        
+
         double vlrTotal = 0;
 
-        for (Venda venda : vendas) {
+        for (RelatorioSintetico venda : vendas) {
             modeloTabela.addRow(new String[]{
-                String.valueOf(venda.getIdVenda()),
-                String.valueOf(venda.getDataHora()),
-                String.valueOf(venda.getIdCliente()),
-                String.valueOf(venda.getQntItens()),
-                String.valueOf(venda.getValorTotal())
+                String.valueOf(venda.getNumVenda()),
+                String.valueOf(venda.getDataVenda()),
+                String.valueOf(venda.getNomeCliente()),
+                String.valueOf(venda.getQtdProdutos()),
+                String.valueOf(venda.getVlrTotal())
             });
-            vlrTotal +=  venda.getValorTotal();
-            
-        }
-        lbl_ValorTotal.setText(String.valueOf(vlrTotal));
-        lbl_QntVendas.setText(String.valueOf(vendas.size()));
-        
-    }
+            vlrTotal += venda.getVlrTotal();
 
+        }
+        lbl_ValorTotal.setText(String.format("%.2f", vlrTotal));
+        lbl_QntVendas.setText(String.valueOf(vendas.size()));
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -254,12 +253,12 @@ public class REL_Sintetico extends javax.swing.JFrame {
             jPanel2.setVisible(true);
         } else {
             jPanel2.setVisible(false);
-            switch (cmb_Periodo.getSelectedItem().toString()){
+            switch (cmb_Periodo.getSelectedItem().toString()) {
                 case "HOJE":
                     carregarVendas(VendaDAO.buscarVendas(0));
                     break;
                 case "ONTEM":
-                    carregarVendas(VendaDAO.buscarVendas(1));    
+                    carregarVendas(VendaDAO.buscarVendas(1));
                     break;
                 case "7 DIAS":
                     carregarVendas(VendaDAO.buscarVendas(7));
@@ -283,10 +282,10 @@ public class REL_Sintetico extends javax.swing.JFrame {
         if (jdc_DataInicial.getDate() == null || jdc_DataFinal.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Selecione as datas para realizar a busca!");
             return;
-        }else if (jdc_DataInicial.getDate().after(jdc_DataFinal.getDate())) {
+        } else if (jdc_DataInicial.getDate().after(jdc_DataFinal.getDate())) {
             JOptionPane.showMessageDialog(this, "A data inicial não pode ser maior que a data final!");
             return;
-        }else{
+        } else {
 
             Date dataInicial = jdc_DataInicial.getDate();
             Date dataFinal = jdc_DataFinal.getDate();
@@ -295,14 +294,14 @@ public class REL_Sintetico extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_BuscarPeriodoPersonalizadoActionPerformed
 
-    private void exibirRelatorioAnalitico(){
+    private void exibirRelatorioAnalitico() {
         int linhaSelecionada = tbl_Sintetico.getSelectedRow();
         if (linhaSelecionada == -1) {
             JOptionPane.showMessageDialog(this, "Selecione uma venda para exibir o relatório!");
             return;
-        }else{
+        } else {
             int idVenda = Integer.parseInt(tbl_Sintetico.getValueAt(linhaSelecionada, 0).toString());
-            ArrayList<ItemVenda> itensVenda = VendaDAO.buscarItensVenda(idVenda);
+            ArrayList<RelatorioAnalitico> itensVenda = VendaDAO.buscarItensVenda(idVenda);
 
             REL_Analitico rel = new REL_Analitico(itensVenda);
             rel.lbl_DataCompra.setText(tbl_Sintetico.getValueAt(linhaSelecionada, 1).toString());

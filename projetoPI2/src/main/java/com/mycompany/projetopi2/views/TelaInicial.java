@@ -51,13 +51,25 @@ public class TelaInicial extends javax.swing.JFrame {
         int codProduto = Integer.parseInt(tbl_Produtos.getValueAt(linha, 0).toString());
         int qntMax = Integer.parseInt(tbl_Produtos.getValueAt(linha, 3).toString());
         if (qntMax > 0) {
-            spn_QuantProduto.setEnabled(true);
-            btn_AdicionarCarrinho.setEnabled(true);
-            btn_AdicionarCarrinho.setToolTipText("Colocar no carrinho");
 
-            
+            int qnt = 0;
+            for (int i = 0; i < tbl_Carrinho.getRowCount(); i++) {
+                if (tbl_Carrinho.getValueAt(i, 0).equals(tbl_Produtos.getValueAt(linha, 0))) {
+                    qnt += Integer.parseInt(tbl_Carrinho.getValueAt(i, 3).toString());
+                }
+            }
 
-            this.spn_QuantProduto.setModel(new javax.swing.SpinnerNumberModel(1, 1, qntMax, 1));
+            if (qntMax - qnt > 0) {
+                spn_QuantProduto.setEnabled(true);
+                btn_AdicionarCarrinho.setEnabled(true);
+                btn_AdicionarCarrinho.setToolTipText("Colocar no carrinho");
+                this.spn_QuantProduto.setModel(new javax.swing.SpinnerNumberModel(1, 1, qntMax - qnt, 1));
+            } else {
+                spn_QuantProduto.setEnabled(false);
+                btn_AdicionarCarrinho.setEnabled(false);
+                btn_AdicionarCarrinho.setToolTipText("Produto Indisponivel");
+            }
+
         } else {
             spn_QuantProduto.setEnabled(false);
             btn_AdicionarCarrinho.setEnabled(false);
@@ -664,7 +676,7 @@ public class TelaInicial extends javax.swing.JFrame {
             for (int i = 0; i < tbl_Carrinho.getRowCount(); i++) {
                 valorTotal += Double.parseDouble(tbl_Carrinho.getValueAt(i, 4).toString());
                 if (tbl_Carrinho.getValueAt(i, 0).equals(tbl_Produtos.getValueAt(linha, 0))) {
-                    qnt = Integer.parseInt(tbl_Carrinho.getValueAt(i, 3).toString());
+                    qnt += Integer.parseInt(tbl_Carrinho.getValueAt(i, 3).toString());
                 }
             }
 
@@ -674,7 +686,6 @@ public class TelaInicial extends javax.swing.JFrame {
             } else {
 
                 DefaultTableModel model = (DefaultTableModel) tbl_Carrinho.getModel();
-
 
                 String id = tbl_Produtos.getValueAt(linha, 0).toString();
                 String nome = tbl_Produtos.getValueAt(linha, 1).toString();
