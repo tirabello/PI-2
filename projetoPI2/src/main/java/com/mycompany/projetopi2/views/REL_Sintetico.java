@@ -6,6 +6,7 @@ package com.mycompany.projetopi2.views;
 
 import java.util.Date;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import com.mycompany.projetopi2.dao.VendaDAO;
@@ -28,6 +29,8 @@ public class REL_Sintetico extends javax.swing.JFrame {
         initComponents();
         jPanel2.setVisible(false);
         carregarVendas(VendaDAO.buscarVendas(0));
+        ImageIcon icone = new ImageIcon(getClass().getResource("/8673704_ic_fluent_receipt_cube_filled_icon.png"));
+        setIconImage(icone.getImage());
 
     }
 

@@ -9,6 +9,8 @@ import com.mycompany.projetopi2.models.Produto;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,7 +23,8 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
 
     public PRO_AdicionarProdutos() {
         initComponents();
-
+        ImageIcon icone = new ImageIcon(getClass().getResource("/8672681_ic_fluent_box_filled_icon.png"));
+        setIconImage(icone.getImage());
     }
 
     public PRO_AdicionarProdutos(Produto objPro) {
@@ -29,7 +32,8 @@ public class PRO_AdicionarProdutos extends javax.swing.JFrame {
 
         setTitle("Atualizar Produto");
         btn_InserirProduto.setText("Atualizar");
-
+        ImageIcon icone = new ImageIcon(getClass().getResource("/8672904_ic_fluent_box_edit_filled_icon.png"));
+        setIconImage(icone.getImage());
         txt_Nome.setText(objPro.getNome());
         txtCodigoProduto.setText(String.valueOf(objPro.getCodProduto()));
         txtValor.setText(String.valueOf(objPro.getValor()));

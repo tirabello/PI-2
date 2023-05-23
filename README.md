@@ -1,9 +1,30 @@
-# PI-2
+# PI-2: Sistema de Vendas - Farmácia
+## Descrição:
+> O projeto consiste em um sistema de vendas para uma farmácia, onde o usuário poderá cadastrar clientes, produtos e realizar vendas. O sistema também conta com um relatório de vendas, onde o usuário poderá consultar as vendas realizadas em um determinado período de tempo.
+>
+
+### Tecnologias Utilizadas:
+- [Java](https://www.java.com/pt-BR/)
+- [MySQL](https://www.mysql.com/)
+
+
+## Integrantes:
+- [Arthur Hyppolito]()
+- [José Ronaldo]()
+- [Leonardo Silva]()
+- [Rafael Veigas]()
+- [Tiago Rabello]()
+
+
+
 
 <details>
 	<summary>Sumario</summary>
 
-- [PI-2](#pi-2)
+- [PI-2: Sistema de Vendas - Farmácia](#pi-2-sistema-de-vendas---farmácia)
+	- [Descrição:](#descrição)
+		- [Tecnologias Utilizadas:](#tecnologias-utilizadas)
+	- [Integrantes:](#integrantes)
 	- [Tela de Inicio](#tela-de-inicio)
 	- [Cliente](#cliente)
 		- [Cadastro](#cadastro)

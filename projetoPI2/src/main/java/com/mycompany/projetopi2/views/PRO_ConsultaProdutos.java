@@ -7,6 +7,7 @@ package com.mycompany.projetopi2.views;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -24,6 +25,8 @@ public class PRO_ConsultaProdutos extends javax.swing.JFrame {
         initComponents();
         btn_AdicionarProduto.requestFocus();
         carregarProdutos(ProdutoDAO.listarProdutos());
+        ImageIcon icone = new ImageIcon(getClass().getResource("/8673694_ic_fluent_search_filled_icon.png"));
+        setIconImage(icone.getImage());
     }
 
     private static void carregarProdutos(ArrayList<Produto> produtos) {

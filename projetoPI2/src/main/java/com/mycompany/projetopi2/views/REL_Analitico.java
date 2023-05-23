@@ -6,6 +6,7 @@ package com.mycompany.projetopi2.views;
 
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 import com.mycompany.projetopi2.models.RelatorioAnalitico;
@@ -24,6 +25,9 @@ public class REL_Analitico extends javax.swing.JFrame {
 
     REL_Analitico(ArrayList<RelatorioAnalitico> itemVenda) {
         initComponents();
+
+        ImageIcon icone = new ImageIcon(getClass().getResource("/8673704_ic_fluent_receipt_cube_filled_icon.png"));
+        setIconImage(icone.getImage());
 
         DefaultTableModel dtm_Produtos = (DefaultTableModel) tbl_Analitico.getModel();
         dtm_Produtos.setNumRows(0);

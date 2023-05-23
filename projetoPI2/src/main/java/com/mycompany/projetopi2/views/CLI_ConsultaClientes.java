@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -32,12 +33,16 @@ public class CLI_ConsultaClientes extends javax.swing.JFrame {
     public CLI_ConsultaClientes() {
         initComponents();
         btn_Selecionado.setVisible(false);
+        ImageIcon icone = new ImageIcon(getClass().getResource("/8673477_ic_fluent_people_search_filled_icon.png"));
+        this.setIconImage(icone.getImage());
         carregarClientes();
         btn_AdicionarCliente.requestFocus();
     }
-
+    
     public CLI_ConsultaClientes(TelaInicial objTela) {
         initComponents();
+        ImageIcon icone = new ImageIcon(getClass().getResource("/8673477_ic_fluent_people_search_filled_icon.png"));
+        this.setIconImage(icone.getImage());
         btn_Selecionado.setVisible(true);
         btn_Selecionado.requestFocus();
         carregarClientes();

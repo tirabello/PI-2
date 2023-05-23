@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.mycompany.projetopi2"},{"l":"com.mycompany.projetopi2.dao"},{"l":"com.mycompany.projetopi2.models"},{"l":"com.mycompany.projetopi2.utils"},{"l":"com.mycompany.projetopi2.views"}]

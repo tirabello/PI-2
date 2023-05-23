@@ -44,7 +44,7 @@ public class VendaDAO {
 
         try {
             conexao = GerenciadorConexao.abrirConexao();
-            query = "INSERT INTO Venda (IDCliente, DataHora, QntItens, VlrTotal) VALUES (?, ?, ?, ?)";
+            query = "INSERT INTO Venda (IDCliente, DataVenda, QntItens, VlrTotal) VALUES (?, ?, ?, ?)";
 
             instrucaoSQL = conexao.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
             instrucaoSQL.setInt(1, venda.getIdCliente());

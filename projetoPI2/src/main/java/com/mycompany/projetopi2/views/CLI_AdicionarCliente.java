@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.Date;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
@@ -20,12 +21,15 @@ public class CLI_AdicionarCliente extends javax.swing.JFrame {
 
     public CLI_AdicionarCliente() {
         initComponents();
+        ImageIcon icone = new ImageIcon(getClass().getResource("/8673597_ic_fluent_person_add_filled_icon.png"));
+        this.setIconImage(icone.getImage());
     }
 
     public CLI_AdicionarCliente(Cliente objCli) {
         initComponents();
-
         setTitle("Atualizar Cliente");
+        ImageIcon icone = new ImageIcon(getClass().getResource("/8673546_ic_fluent_person_edit_filled_icon.png"));
+        this.setIconImage(icone.getImage());
         btn_InserirCliente.setText("Atualizar");
         // btn_InserirCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-editar-20.png")));
         btn_InserirCliente.setToolTipText("Atualizar Dados do Cliente");

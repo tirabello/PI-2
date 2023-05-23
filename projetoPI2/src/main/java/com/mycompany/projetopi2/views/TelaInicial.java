@@ -136,7 +136,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("FARMÁCIA");
+        setTitle("DROGASENAC");
 
         tbl_Produtos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -644,7 +644,17 @@ public class TelaInicial extends javax.swing.JFrame {
                 DefaultTableModel dtm_Produtos = (DefaultTableModel) tbl_Produtos.getModel();
                 dtm_Produtos.setRowCount(0);
 
-                lbl_ValorTotal.setText("0.0");
+                lbl_ValorTotal.setText("0.00");
+
+                // Limpar dados
+                lbl_ID.setText("");
+                lbl_Cliente.setText("");
+                lbl_Categoria.setText("");
+                lbl_Unidade.setText("");
+
+                // Objeto cliente recebe null
+                objCli = null;
+
             } else {
                 JOptionPane.showMessageDialog(this, "Erro ao salvar pedido!", "Erro!", JOptionPane.ERROR_MESSAGE);
             }
@@ -671,6 +681,8 @@ public class TelaInicial extends javax.swing.JFrame {
         int qnt = 0;
         if (linha == -1) {
             JOptionPane.showMessageDialog(this, "Não ha nenhum produto selecionado", "Selecione um produto!", JOptionPane.ERROR_MESSAGE);
+        }else if (Integer.parseInt(spn_QuantProduto.getValue().toString()) == 0) {
+            JOptionPane.showMessageDialog(this, "Quantidade invalida", "Quantidade invalida!", JOptionPane.ERROR_MESSAGE);
         } else {
             double valorTotal = 0;
             for (int i = 0; i < tbl_Carrinho.getRowCount(); i++) {
@@ -696,7 +708,11 @@ public class TelaInicial extends javax.swing.JFrame {
                 model.addRow(new String[]{id, nome, String.valueOf(preco), String.valueOf(quantidade), String.format("%.2f", subtotal)});
 
                 lbl_ValorTotal.setText(String.format("%.2f", valorTotal + subtotal));
+                
+                // desselcionar linha
+                tbl_Produtos.getSelectionModel().clearSelection();
                 spn_QuantProduto.setValue(0);
+
 
             }
         }

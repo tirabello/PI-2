@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS Venda(
 
 	IDVenda INT NOT NULL AUTO_INCREMENT,
 	IDCliente INT NOT NULL,
-	DataHora DATETIME NOT NULL,
+	DataVenda DATE NOT NULL,
 	QntItens INT NOT NULL,
 	VlrTotal DECIMAL(10,2) NOT NULL,
 
@@ -67,7 +67,7 @@ CREATE VIEW Vendas(
 ) AS
 SELECT
 	V.IDVenda,
-	V.DataHora,
+	V.DataVenda,
 	C.Nome,
 	V.QntItens,
 	V.VlrTotal
